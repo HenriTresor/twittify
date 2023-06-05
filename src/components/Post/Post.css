@@ -1,0 +1,42 @@
+.post-container{
+    margin-top: 1em;
+    border: 1px solid white;
+    padding: 1em;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+
+.post-container:hover{
+    background: rgba(128, 128, 128, 0.091);
+}
+
+.post-header{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 2em;
+}
+
+.post-reactions{
+    display: flex;
+    padding: 1em;
+    justify-content: space-evenly;
+}
+
+.post-reactions div{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    color: grey;
+    /* background: green; */
+    padding: 0.3em;
+    border-radius: 20px;
+    transition: all .3s ease-in;
+}
+
+.post-reactions div:hover{
+    background: rgba(128, 128, 128, 0.18);
+}
+.post-reactions div > *{
+    font-size: 0.9em;
+}

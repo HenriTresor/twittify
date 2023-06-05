@@ -1,10 +1,15 @@
 import React from 'react'
 import './App.css'
+import LeftAside from './components/Aside/LeftAside'
+import RightAside from './components/Aside/RightAside'
+import Body from './components/Body'
 
 const App = () => {
   return (
-    <div>
-      <h2>zdfbg</h2>
+    <div className='container'>
+      <LeftAside />
+      <Body />
+      <RightAside />
     </div>
   )
 }

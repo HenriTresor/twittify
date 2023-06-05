@@ -1,0 +1,15 @@
+.body-container{
+    text-align: left !important;
+    height: 200dvh;
+    flex-grow: 0.8;
+}
+
+.tabs-container{
+    /* padding: 1em; */
+    background: none;
+    backdrop-filter: blur(15px);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    border-bottom: 2px solid grey;
+}
