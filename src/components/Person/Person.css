@@ -1,0 +1,24 @@
+.person-container{
+    display: flex;
+        margin-top: 1em;
+    justify-content: space-between;
+    align-items: center;
+    transition: .3s linear;
+    padding: 0.4em;
+    border-radius: 20px;
+}
+
+.person-container:hover{
+    background: rgba(128, 128, 128, 0.4);;
+}
+.person-container  button{
+    background: whitesmoke;
+    color: black;
+    /* width: 150px; */
+    font-weight: bold;
+    font-size: 1em;
+    padding: 0.4em;
+    border-radius:15px ;
+    border: none;
+    cursor: pointer;
+}

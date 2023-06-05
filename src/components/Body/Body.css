@@ -1,15 +1,16 @@
 .body-container{
     text-align: left !important;
-    height: 200dvh;
+    /* height: 200dvh; */
     flex-grow: 0.8;
 }
 
 .tabs-container{
-    /* padding: 1em; */
-    background: none;
+    padding: 1em;
+    background: rgb(0,0,0,0.6);
     backdrop-filter: blur(15px);
     width: 100%;
     position: sticky;
     top: 0;
-    border-bottom: 2px solid grey;
+    border-bottom: 1px solid grey;
+    z-index: 9;
 }

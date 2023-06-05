@@ -3,6 +3,8 @@ import './Aside.css'
 import { 
     Search
 } from '@mui/icons-material'
+import { Typography } from '@mui/material'
+import Person from '../Person'
 
 const RightAside = () => {
   return (
@@ -14,7 +16,19 @@ const RightAside = () => {
           >
               <Search />
               <input type="text" placeholder='Search Twitter'/>
-         </div>
+         
+          </div>
+              <div className="box">
+                  <Typography variant='h5' fontWeight={'bolder'}>
+                      Who to follow
+              </Typography>
+              
+              <Person
+                  name={'Henri Tresor'}
+                  username={'@henri_tresor'}
+                  avatar={''}
+              />
+              </div>
       </div>
   )
 }

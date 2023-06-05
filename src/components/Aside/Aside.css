@@ -18,18 +18,20 @@
     width: 25%;
     padding: 1em;
     height: 100dvh;
-    flex-grow: 0.2;
+    flex-grow: 0.1;
  }
  .aside.left-aside{
-    border-right: 1px solid white;
+    border-right: 1px solid rgba(255, 255, 255, 0.449);
  }
  .aside.right-aside{
-    border-left: 1px solid white;
+    border-left: 1px solid rgba(255, 255, 255, 0.449);
  }
 
  .aside.aside.left-aside{
     display: flex;
     justify-content: center;
+    overflow-y: auto;
+    flex-direction: column;
  }
 
  .aside .nav-items li{
@@ -55,7 +57,7 @@
 
  .aside .nav-items button{
     margin: 0 auto;
-    padding: 1em;
+    padding: 0.7em;
     background: #1d9bf0;
     color: white;
     width: 100%;
@@ -68,7 +70,7 @@
  }
 
  .user-profile{
-    position: absolute;
+    position: sticky;
     bottom: 0;
     display: flex;
     align-items: center;
@@ -108,8 +110,31 @@
     color: white;
  }
 
- @media screen  and (max-width:800px){
+ @media screen  and (max-width:850px){
+    .aside  *{
+        font-size: 0.8em;
+    }
+ }
+ @media screen  and (max-width:850px){
     .aside.right-aside{
         display: none;
     }
+    .aside{
+        flex-grow: 0.5;
+        width: 10px;
+    }
+    .nav-items * {
+        text-align: center;
+    }
+ }
+@media screen and (max-width:400px){
+    .aside{
+        display: none;  
+    }
+}
+.box{
+    margin: 1.54em auto;
+    background: rgba(128, 128, 128, 0.4);
+    padding: 1em;
+    border-radius: 20px;
  }

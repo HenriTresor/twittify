@@ -21,9 +21,12 @@ const Post = ({
               <Avatar />
               <div>
                   <Typography>
-                      {author}  {author_uname} • {new Date(posted_on).toLocaleDateString()}
+                      {author}  
+                      <Typography variant='span' sx={{ml:1, }} color={'GrayText'}>
+                          {author_uname} • {new Date(posted_on).toLocaleDateString()}
+                      </Typography>
                   </Typography>
-                  <Typography>
+                  <Typography sx={{mt:3}}>
                       {post_content?.post_text}
                   </Typography>
               </div>

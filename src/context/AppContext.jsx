@@ -1,9 +1,11 @@
 import React, { useState, useEffect, createContext } from 'react'
 
-export const AppData = createContext(null)
+export const AppData = createContext({
+    windowSize:window.innerWidth
+})
 const AppContext = ({ children }) => {
 
-    const [windowSize, setWindowSize] = useState(0);
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
 
     const handleWindowSizeChange = (e) => {
         console.log('window size', window.innerWidth)

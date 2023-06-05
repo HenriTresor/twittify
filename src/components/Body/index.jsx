@@ -15,7 +15,7 @@ const Index = () => {
       className='body-container'
       >
           <div className='tabs-container'>
-              <Typography>
+              <Typography fontWeight={"bolder"} fontSize={19} color={'rgb(255,255,255,0.8)'}>
                   Home
               </Typography>
               <Stack direction={'row'} spacing={12} sx={{ mt: '2em' }}>
@@ -32,6 +32,24 @@ const Index = () => {
               </Stack>
           </div>
           
+          <Post
+              author={'henri tresor'}
+              author_uname={'@tresor_1'}
+              posted_on={Date.now()}
+              post_content={{post_text:'Nice to be back!'}}
+          />
+          <Post
+              author={'henri tresor'}
+              author_uname={'@tresor_1'}
+              posted_on={Date.now()}
+              post_content={{post_text:'Nice to be back!'}}
+          />
+          <Post
+              author={'henri tresor'}
+              author_uname={'@tresor_1'}
+              posted_on={Date.now()}
+              post_content={{post_text:'Nice to be back!'}}
+          />
           <Post
               author={'henri tresor'}
               author_uname={'@tresor_1'}
