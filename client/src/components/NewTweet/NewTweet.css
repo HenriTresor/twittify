@@ -48,3 +48,18 @@ textarea::-webkit-scrollbar{
     position: absolute;
     right: 1.5em;
  }
+
+ @media screen and (max-width: 350px) {
+    
+.new-tweet-container> div:nth-child(2){
+    /* padding: 1em; */
+    flex-direction: column;
+}
+.new-tweet-container >div> button{
+
+    position: relative;
+    width: 100%;
+    margin: 1em auto;
+ }
+
+ }

@@ -135,10 +135,18 @@
         display: flex;
         align-items: center;
     }
+    .aside{
+      width: 15%;
+      overflow-x: hidden;
+      flex-grow: 0.1;
+    }
  }
  @media screen  and (max-width:500px){
     .aside.left-aside{
         display: none !important;
+    }
+    .aside{
+      flex-grow: 0;
     }
  }
 .box{
