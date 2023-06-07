@@ -1,7 +1,7 @@
 import React from 'react'
 import './Post.css'
 import propTypes from 'prop-types'
-import { Avatar, Typography} from '@mui/material'
+import { Avatar, Typography, IconButton} from '@mui/material'
 import {
      Comment, Share, HeartBroken, BarChart
 } from '@mui/icons-material'
@@ -32,30 +32,30 @@ const Post = ({
               </div>
           </div>
           <div className="post-reactions">
-              <div>
+              <IconButton color='success' sx={{color:'grey', gap:1}}>
                   <Comment />
                   <Typography>
                       {post_comments?.length ? post_comments.length : 0}
                   </Typography>
-            </div>
-              <div>
+            </IconButton>
+              <IconButton color='info' sx={{ color: 'grey', gap: 1 }}>
                   <Share />
                   <Typography>
                       {post_retweets?.length ? post_retweets.length : 0}
                   </Typography>
-            </div>
-              <div>
+            </IconButton>
+              <IconButton color='info' sx={{ color: 'grey', gap: 1 }}>
                   <HeartBroken />
                   <Typography>
                       {post_likes?.length ? post_likes?.length : 0}
                   </Typography>
-            </div>
-              <div>
+            </IconButton>
+              <IconButton color='info' sx={{ color: 'grey', gap: 1 }}>
                   <BarChart />
                   <Typography>
                       {post_views?.length ? post_views?.length : 0}
                   </Typography>
-            </div>
+            </IconButton>
           </div>
       </div>
   )

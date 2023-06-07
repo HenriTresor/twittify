@@ -6,23 +6,22 @@ import Body from './components/Body'
 import { Route, Routes } from 'react-router-dom'
 
 const Homepage = () => {
-  
-
   return (
     <>
-      <LeftAside />
       <Body />
-      <RightAside />
     </>
   )
 }
+
 const App = () => {
   return (
     <>
       <div className='container'>
+        <LeftAside />
         <Routes>
-          <Route path='/' element={<Homepage />}/>
-      </Routes>
+          <Route path='/home' element={<Homepage />}/>
+        </Routes>
+        <RightAside />
       </div>
     </>
   )

@@ -17,6 +17,14 @@ const RightAside = () => {
               <Search />
               <input type="text" placeholder='Search Twitter'/>
          
+              
+          </div>
+
+          <div className='box'>
+              <Typography variant='h5' fontWeight={'bolder'}>
+                  Trends for you
+              </Typography>
+              none
           </div>
               <div className="box">
                   <Typography variant='h5' fontWeight={'bolder'}>
@@ -28,7 +36,28 @@ const RightAside = () => {
                   username={'@henri_tresor'}
                   avatar={''}
               />
-              </div>
+              <Person
+                  name={'Henri Tresor'}
+                  username={'@henri_tresor'}
+                  avatar={''}
+              />
+              <Person
+                  name={'Henri Tresor'}
+                  username={'@henri_tresor'}
+                  avatar={''}
+              />
+              <Person
+                  name={'Henri Tresor'}
+                  username={'@henri_tresor'}
+                  avatar={''}
+              />
+              <Person
+                  name={'Henri Tresor'}
+                  username={'@henri_tresor'}
+                  avatar={''}
+              />
+          </div>
+     
       </div>
   )
 }

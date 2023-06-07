@@ -15,10 +15,13 @@
  .aside{
     position: sticky;
     top: 0;
-    width: 25%;
     padding: 1em;
     height: 100dvh;
-    flex-grow: 0.1;
+    flex-grow: 1;
+    float: right !important;
+    clear: both !important;
+    width: 250px;
+    margin: 0 2em;
  }
  .aside.left-aside{
     border-right: 1px solid rgba(255, 255, 255, 0.449);
@@ -29,7 +32,7 @@
 
  .aside.aside.left-aside{
     display: flex;
-    /* justify-content: center; */
+    justify-content: space-between;
     overflow-y: auto;
     flex-direction: column;
  }
@@ -59,11 +62,11 @@
  }
 
  .aside .nav-items button{
-    margin: 0 auto;
+    margin-top:1.7em;
     padding: 0.7em;
     background: #1d9bf0;
     color: white;
-    width: 100%;
+    width: 200px;
     border: none;
     border-radius: 40px;
     font-weight: bold;
@@ -73,12 +76,12 @@
  }
 
  .user-profile{
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
     display: flex;
     align-items: center;
     /* gap: 1em; */
-    justify-content: start;
+    justify-content: space-between;
     gap: 2em;
     padding-bottom: 1em;
     /* width: 100%; */
@@ -86,7 +89,7 @@
     border-radius: 50px;
     padding: 0.5em;
     transition: all 0.5s;
-    margin-bottom: 1em;
+    margin: 2.3em 0;
  }
  .user-profile:hover{
     background: rgba(255, 255, 255, 0.095);
@@ -113,16 +116,24 @@
     color: white;
  }
 
- @media screen and (max-width:850px) {
+ @media screen and (max-width:920px) {
     .aside.right-aside{
         display: none;
+    }
+    .aside{
+      flex-grow: 0;
     }
  }
  @media screen and (max-width:700px) {
     .nav-items li span{
         display: none;
     }
-
+    .aside.left-aside button{
+      width: 100%;
+    }
+    .user-profile div:nth-child(2){
+      display: none;
+    }
     .aside.right-aside{
         display: none;
     }

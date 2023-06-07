@@ -1,7 +1,8 @@
 .body-container{
     text-align: left !important;
-    /* height: 200dvh; */
+    height: auto;
     flex-grow: 0.8;
+    padding-bottom: 10em;
 }
 
 .tabs-container{
@@ -13,4 +14,29 @@
     top: 0;
     border-bottom: 1px solid grey;
     z-index: 9;
+}
+
+.bottom-nav-container{
+    background: rgba(0, 0, 0, 0.674);
+    border-top: 3px solid #fff;
+    border-bottom: 2px solid #1d9bf0;
+    width: 100%;
+    height: auto;
+    padding: 1em;
+    backdrop-filter: blur(5px);
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    display: flex;
+    left: 0;
+    justify-content: space-between;
+}
+
+.bottom-nav-container button{
+    color: #0b90e9;
+}
+@media screen and (min-width:700px) , (orientation: landscape) {
+    .bottom-nav-container{
+        display: none;
+    }
 }

@@ -21,11 +21,7 @@ const LeftAside = () => {
             >
                 <ul className='nav-items'>
 
-                    <div>
-                        <Typography color={'lightblue'}>
-                            <Twitter />
-                        </Typography>
-                    </div>
+                   
                     <li>
                         <Home />
                         <span>Home</span>
@@ -64,26 +60,24 @@ const LeftAside = () => {
                 <div
                     className='user-profile'
                 >
-                    <Avatar
-                   
-                    />
-                    {
-                        windowSize > 850 && (
-                            <>
-                                <div style={{ textAlign: 'left' }}>
-                                    <Typography >
-                                       full name
-                                    </Typography>
-                                    <Typography variant='body3' color={'GrayText'}>
-                                        @username
-                                    </Typography>
+                  
+                    <div style={{ textAlign: 'left', display:'flex', alignItems:'center', gap:'1em' }}>
+                        <Avatar
+                        />
+                        <div>
+                            <Typography >
+                                full name
+                            </Typography>
+                            <Typography variant='body3' color={'GrayText'}>
+                                @username
+                            </Typography>
+                                  </div>
                                 </div>
-                                <IconButton color='info'>
-                                    <MoreOutlined />
-                                </IconButton>
-                            </>
-                        )
-                    }
+                                <div>
+                                    <IconButton color='info'>
+                                        <MoreOutlined />
+                                    </IconButton>
+                                </div>
                 </div>
             </div>
         )
