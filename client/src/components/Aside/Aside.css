@@ -23,12 +23,6 @@
     width: 250px;
     margin: 0 2em;
  }
- .aside.left-aside{
-    border-right: 1px solid rgba(255, 255, 255, 0.449);
- }
- .aside.right-aside{
-    border-left: 1px solid rgba(255, 255, 255, 0.449);
- }
 
  .aside.aside.left-aside{
     display: flex;
