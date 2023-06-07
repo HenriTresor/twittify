@@ -48,18 +48,10 @@ const Index = () => {
                   Home
               </Typography>
               </div>
-              <Stack direction={'row'} spacing={12} sx={{ mt: '2em' }}>
-                  <ListItem>
-                      <ListItemButton>
-                          For you
-                      </ListItemButton>
-                </ListItem>
-                  <ListItem>
-                     <ListItemButton>
-                          Following
-                     </ListItemButton>
-                </ListItem>
-              </Stack>
+              <div style={{display:'flex', marginTop:'2em'}}>
+                 <button>For you</button>
+                 <button>Following</button>
+              </div>
           </div>
           
           <NewTweet />

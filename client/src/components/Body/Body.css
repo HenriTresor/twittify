@@ -1,19 +1,35 @@
 .body-container{
     text-align: left !important;
     height: auto;
-    flex-grow: 0.8;
+    flex-grow: 1;
     padding-bottom: 10em;
 }
 
 .tabs-container{
     padding: 1em;
-    background: rgb(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.116);
     backdrop-filter: blur(15px);
     width: 100%;
     position: sticky;
     top: 0;
     border-bottom: 1px solid grey;
     z-index: 9;
+}
+.tabs-container button{
+    width: 100%;
+    float: left;
+    padding: 1em;
+    background: none;
+    color: rgb(192, 190, 190);
+    border: none ;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: all .5s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.tabs-container button:active{
+    background: #d9d9d966;
 }
 
 .bottom-nav-container{
