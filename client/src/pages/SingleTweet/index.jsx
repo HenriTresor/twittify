@@ -1,21 +1,30 @@
 import React from 'react'
-import { ArrowBack, MoreHoriz, CommentBank, ShareSharp, HeartBroken, Bookmark, Download } from '@mui/icons-material'
+import { ArrowBack, MoreHoriz, CommentBank, ShareSharp, HeartBroken, Bookmark, Download, Photo, GifBoxOutlined, EmojiEmotions, RedoRounded } from '@mui/icons-material'
 import { Typography, Avatar, IconButton } from '@mui/material'
 import '../../NewTweet.css'
 import { iconButtonStyles } from '../../components/Post'
 import './SingleTweet.css'
+import { useNavigate } from 'react-router-dom'
+import Post from '../../components/Post'
 
 const divStyles = {
     display: 'flex', justifyContent: 'start', gap: '1em', borderBottom: '1px solid gray', borderTop: '1px solid gray', width: '100%', padding: '1em'
 }
 
 const SingleTweet = () => {
+    const navigate = useNavigate()
     return (
         <div
             className='body-container'
         >
             <div className="single-tweet-header">
-                <ArrowBack />
+                <IconButton color='inherit'
+                    onClick={() => {
+                    navigate(-1)
+                }}
+                >
+                    <ArrowBack />
+                </IconButton>
                 <Typography variant='h6' fontWeight={'bolder'}>
                     Tweet
                 </Typography>
@@ -34,7 +43,9 @@ const SingleTweet = () => {
                             </Typography>
                         </div>
                     </div>
-                    <MoreHoriz />
+                    <IconButton color='inherit'>
+                        <MoreHoriz />
+                    </IconButton>
                 </div>
 
                 <div>
@@ -63,11 +74,11 @@ const SingleTweet = () => {
                 <div
                     style={{ ...divStyles, justifyContent: 'space-between' }}
                 >
-                    <IconButton sx={{...iconButtonStyles}} color='inherit'>
+                    <IconButton sx={{ ...iconButtonStyles }} color='inherit'>
                         <CommentBank />
                     </IconButton>
                     <IconButton sx={iconButtonStyles} color='inherit'>
-                        <ShareSharp />
+                        <RedoRounded />
                     </IconButton>
 
                     <IconButton sx={iconButtonStyles} color='inherit'>
@@ -78,7 +89,7 @@ const SingleTweet = () => {
                     </IconButton>
 
                     <IconButton sx={iconButtonStyles} color='inherit'>
-                        <Download />
+                        <ShareSharp />
                     </IconButton>
                 </div>
                 <div className="new-tweet-container">
@@ -91,12 +102,33 @@ const SingleTweet = () => {
                             type="text"></textarea>
                     </div>
                     <div>
+                        <div>
+                            <IconButton color='info'>
+                                <Photo />
+                            </IconButton>
+                            <IconButton color='info'>
+                                <GifBoxOutlined />
+                            </IconButton>
+
+                            <IconButton color='info'>
+                                <EmojiEmotions />
+                            </IconButton>
+
+                        </div>
                         <button>
-                            Tweet
+                            Reply
                         </button>
-                   </div>
+                    </div>
                 </div>
             </div>
+
+            <Post
+                author={'henri tresor'}
+                author_uname={'tresor_1'}
+                posted_on={Date.now()}
+                _id={'4848484848488546574'}
+                post_content={{ post_text: 'True!' }}
+            />
         </div>
     )
 }

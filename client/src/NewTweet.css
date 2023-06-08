@@ -22,8 +22,10 @@
     background: none;
     color: white;
     border: none;
-    outline: none;
+    outline:1px solid gray;
+    margin-left: 1em;
     padding: 1em;
+    border-radius: 20px;
     font-weight: 500;
     resize: vertical;
     font-size: 1.2em;

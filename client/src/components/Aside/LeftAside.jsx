@@ -5,7 +5,7 @@ import {
     Home, Explore,
     Notifications, MessageRounded,
     ListRounded, BookmarkRounded, Add,
-    Twitter, PersonRounded, MoreOutlined,
+    Twitter, PersonRounded, MoreHoriz,
 } from '@mui/icons-material'
 import { Avatar, Typography, IconButton } from '@mui/material'
 import { AppData } from '../../context/AppContext'
@@ -48,7 +48,7 @@ const LeftAside = () => {
                         <PersonRounded />
                         <span>Profile</span></li>
                     <li>
-                        <MoreOutlined />
+                        <MoreHoriz />
                         <span>More</span> </li>
                     <IconButton style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1em' }}>
                         <Add />
@@ -75,7 +75,7 @@ const LeftAside = () => {
                                 </div>
                                 <div>
                                     <IconButton color='info'>
-                                        <MoreOutlined />
+                                        <MoreHoriz />
                                     </IconButton>
                                 </div>
                 </div>
