@@ -12,7 +12,7 @@
 .new-tweet-container> div{
     display: flex;
     width: 100%;
-    /* padding: 1em; */
+    padding: 0.9em;
     margin: 0.03em 0;
     align-items: center;
     justify-content: space-between;
@@ -26,7 +26,7 @@
     padding: 1em;
     font-weight: 500;
     resize: vertical;
-    font-size: 1.4em;
+    font-size: 1.2em;
     letter-spacing: 1.2px;
 }
 textarea::-webkit-scrollbar{
@@ -60,6 +60,6 @@ textarea::-webkit-scrollbar{
     position: relative;
     width: 100%;
     margin: 1em auto;
- }p
+ }
 
  }

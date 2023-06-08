@@ -1,7 +1,7 @@
 import React from 'react'
-import './NewTweet.css'
 import { Avatar, IconButton, TextField } from '@mui/material'
 import { Photo, GifBoxOutlined, Poll, EmojiEmotions, CalendarToday, LocationOn } from '@mui/icons-material'
+import '../../NewTweet.css'
 
 const NewTweet = () => {
   return (

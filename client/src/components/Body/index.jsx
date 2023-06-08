@@ -9,6 +9,7 @@ import {
 } from '@mui/icons-material'
 import Post from '../Post'
 import NewTweet from '../NewTweet'
+import { Link } from 'react-router-dom'
 
 
 const Index = () => {
@@ -32,27 +33,28 @@ const Index = () => {
             </div>
 
             <NewTweet />
+                <Post
+                    author={'henri tresor'}
+                    author_uname={'tresor_1'}
+                posted_on={Date.now()}
+                _id={'48484848484884'}
+                    post_content={{ post_text: 'Nice to be back!' }}
+                />
             <Post
                 author={'henri tresor'}
-                author_uname={'@tresor_1'}
+                author_uname={'tresor_1'}
                 posted_on={Date.now()}
                 post_content={{ post_text: 'Nice to be back!' }}
             />
             <Post
                 author={'henri tresor'}
-                author_uname={'@tresor_1'}
+                author_uname={'tresor_1'}
                 posted_on={Date.now()}
                 post_content={{ post_text: 'Nice to be back!' }}
             />
             <Post
                 author={'henri tresor'}
-                author_uname={'@tresor_1'}
-                posted_on={Date.now()}
-                post_content={{ post_text: 'Nice to be back!' }}
-            />
-            <Post
-                author={'henri tresor'}
-                author_uname={'@tresor_1'}
+                author_uname={'tresor_1'}
                 posted_on={Date.now()}
                 post_content={{ post_text: 'Nice to be back!' }}
             />

@@ -1,7 +1,7 @@
 .body-container{
     text-align: left !important;
     height: auto;
-    flex-grow: 1;
+    flex-grow: 3.5;
     border-left: 1px solid grey;
     border-right: 1px solid grey;
     padding-bottom: 10em;

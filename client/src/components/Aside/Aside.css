@@ -92,7 +92,7 @@
  .search-box{
     display: flex;
     width: 100%;
-    background: rgba(128, 128, 128, 0.4);
+    background: rgba(128, 128, 128, 0.249);
     padding: 0.8em;
     border-radius: 30px;
     align-items: center;
@@ -134,7 +134,6 @@
     .aside{
       width: 15%;
       overflow-x: hidden;
-      flex-grow: 0.1;
     }
  }
  @media screen  and (max-width:500px){
@@ -147,7 +146,7 @@
  }
 .box{
     margin: 1.54em auto;
-    background: rgba(128, 128, 128, 0.4);
+    background: rgba(128, 128, 128, 0.17);
     padding: 1em;
     border-radius: 20px;
  }

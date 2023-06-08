@@ -19,7 +19,14 @@ html{
     /* align-items: center; */
 }
 
-
+a,
+a:visited,
+a:focus,
+a:hover
+{
+    text-decoration: none;
+    color: white;
+}
 .bottom-nav-container{
     background: rgba(0, 0, 0, 0.674);
     border-top: 3px solid #fff;

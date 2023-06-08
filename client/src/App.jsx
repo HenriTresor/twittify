@@ -6,6 +6,7 @@ import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import NotFound from './pages/404/404'
 import BottomNav from './components/BottomNav'
 import { Homepage } from './pages/Homepage/Homepage'
+import SingleTweet from './pages/SingleTweet'
 
 const App = () => {
 
@@ -25,7 +26,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/home' element={<Homepage />} />
-          <Route path='/:username/status/:postId' element={<NotFound />} />
+          <Route path='/:username/status/:postId' element={<SingleTweet />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <RightAside />
