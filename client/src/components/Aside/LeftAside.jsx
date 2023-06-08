@@ -53,7 +53,7 @@ const LeftAside = () => {
                     <IconButton style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1em' }}>
                         <Add />
 
-                        {windowSize > 850 && 'Tweet'}
+                        {windowSize > 930 && 'Tweet'}
                     </IconButton>
                 </ul>
 

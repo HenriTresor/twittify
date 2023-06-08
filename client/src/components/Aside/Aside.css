@@ -117,9 +117,7 @@
     .aside{
       flex-grow: 0;
     }
- }
- @media screen and (max-width:700px) {
-    .nav-items li span{
+     .nav-items li span{
         display: none;
     }
     .aside.left-aside button{
@@ -128,12 +126,10 @@
     .user-profile div:nth-child(2){
       display: none;
     }
-    .aside.right-aside{
-        display: none;
-    }
+
     .aside.left-aside{
         display: flex;
-        align-items: center;
+        align-items: end;
     }
     .aside{
       width: 15%;

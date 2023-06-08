@@ -18,3 +18,29 @@ html{
     margin: 0 auto
     /* align-items: center; */
 }
+
+
+.bottom-nav-container{
+    background: rgba(0, 0, 0, 0.674);
+    border-top: 3px solid #fff;
+    border-bottom: 2px solid #1d9bf0;
+    width: 100%;
+    height: auto;
+    padding: 1em;
+    backdrop-filter: blur(5px);
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    display: flex;
+    left: 0;
+    justify-content: space-between;
+}
+
+.bottom-nav-container button{
+    color: #0b90e9;
+}
+@media screen and (min-width:500px) , (orientation: landscape) {
+    .bottom-nav-container{
+        display: none;
+    }
+}
