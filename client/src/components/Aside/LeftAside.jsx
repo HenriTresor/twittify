@@ -9,6 +9,7 @@ import {
 } from '@mui/icons-material'
 import { Avatar, Typography, IconButton } from '@mui/material'
 import { AppData } from '../../context/AppContext'
+import { Link } from 'react-router-dom'
 
 const LeftAside = () => {
 
@@ -22,10 +23,12 @@ const LeftAside = () => {
                 <ul className='nav-items'>
 
                    
-                    <li>
-                        <Home />
-                        <span>Home</span>
-                    </li>
+                    <Link to='/home'>
+                        <li>
+                            <Home />
+                            <span>Home</span>
+                        </li>
+                    </Link>
                     <li>
                         <Explore />
                         <span>Explore</span></li>

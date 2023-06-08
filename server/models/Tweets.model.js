@@ -37,7 +37,13 @@ const TweetSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'users'
         }
-    ]
+    ],
+    type: {
+        type: String,
+        required: true,
+        enum: ['reply', 'actual-tweet'],
+        default: 'actual-tweet',
+    }
 
 },
     {

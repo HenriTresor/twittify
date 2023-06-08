@@ -1,6 +1,7 @@
 import React from 'react'
 import { Typography, Box } from '@mui/material'
 import { Twitter } from '@mui/icons-material'
+import { Link } from 'react-router-dom'
 
 const NotFound = () => {
   return (
@@ -19,6 +20,9 @@ const NotFound = () => {
               <Typography variant='h5'>
                   Page not found
               </Typography>
+              <Link to={'/home'}>
+                  Go Home
+              </Link>
          </div>
       </div>
   )
