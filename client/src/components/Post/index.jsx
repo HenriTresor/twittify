@@ -13,7 +13,7 @@ export let iconButtonStyles = {
 const Post = ({
     avatar,
     author, author_uname,
-    posted_on, post_content,
+    createdAt, post_content,
     post_comments,
     post_likes, post_views, post_retweets, _id
 }) => {
@@ -24,9 +24,9 @@ const Post = ({
             <div className='post-header'>
                 <Avatar />
                 <Typography>
-                    {author}
+                    {author?.fullName}
                     <Typography variant='span' sx={{ ml: 1, }} color={'GrayText'}>
-                        {author_uname} • {new Date(posted_on).toLocaleDateString()}
+                        {author?.username} • {new Date(createdAt).toLocaleDateString()}
                     </Typography>
                 </Typography>
 

@@ -5,12 +5,14 @@ import errorHandler from './middlewares/errorHandler.js'
 import userRouter from './routes/User.route.js'
 import AuthRouter from './routes/Auth.route.js'
 import TweetRouter from './routes/Tweets.route.js'
+import cors from 'cors'
 
 const app = express()
 const server = http.createServer(app)
 const PORT = process.env.PORT || 4000
 const mongoURI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/twitter'
 
+app.use(cors())
 app.use(express.json())
 
 connectDB(mongoURI)

@@ -1,6 +1,7 @@
 import TweetsModel from '../models/Tweets.model.js'
 import Tweet from '../models/Tweets.model.js'
 import errorResponse from '../utils/errorResponse.js'
+import { checkUser } from '../utils/user.functions.js'
 
 export const createTweet = async (req, res, next) => {
     try {
@@ -28,18 +29,20 @@ export const createTweet = async (req, res, next) => {
         })
 
     } catch (error) {
+        console.log('error creating new tweet', error.message)
         next(errorResponse(500, 'unexpected error occurred'))
     }
 }
 export const getTweets = async (req, res, next) => {
     try {
 
-        let tweets = await TweetsModel.find({})
+        let tweets = await TweetsModel.find({}).populate('author')
         res.status(200).json({
-            status: false,
+            status: true,
             tweets
         })
     } catch (error) {
+        console.log('eror getting tweets', error.message)
         next(errorResponse(500, 'unexpected error occurred'))
     }
 }
