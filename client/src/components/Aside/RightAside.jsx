@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Aside.css'
 import { 
     Search
 } from '@mui/icons-material'
 import { Typography } from '@mui/material'
 import Person from '../Person'
+import useFetch from '../../hooks/useFetch'
+import serverLink from '../../utils/server.link'
 
 const RightAside = () => {
+
+    const [people, setPeople] = useState([])
+    const { } = useFetch(`${serverLink}/api/v1/users/${4499}`)
   return (
       <div
       className='aside right-aside'

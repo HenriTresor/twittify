@@ -5,14 +5,14 @@ import { Avatar, Typography, IconButton } from '@mui/material'
 import {
     Comment, Share, HeartBroken, BarChart, RedoRounded
 } from '@mui/icons-material'
+import moment from 'moment'
 import { Link } from 'react-router-dom'
 
 export let iconButtonStyles = {
     color: 'grey', gap: 1
 }
 const Post = ({
-    avatar,
-    author, author_uname,
+    author,
     createdAt, post_content,
     post_comments,
     post_likes, post_views, post_retweets, _id
@@ -25,14 +25,14 @@ const Post = ({
                 <Avatar />
                 <Typography>
                     {author?.fullName}
-                    <Typography variant='span' sx={{ ml: 1, }} color={'GrayText'}>
-                        {author?.username} • {new Date(createdAt).toLocaleDateString()}
+                    <Typography variant='body2' sx={{ ml: 1, }} color={'GrayText'}>
+                        {author?.username} • {moment(createdAt).fromNow()}
                     </Typography>
                 </Typography>
 
             </div>
             <div className='post-body'>
-                <Link to={`/${author_uname}/status/${_id}`}>
+                <Link to={`/${author?.username?.split('@')[1]}/status/${_id}`}>
 
                     <Typography sx={{ mt: 3 }}>
                         {post_content?.post_text}
@@ -43,31 +43,31 @@ const Post = ({
                 <IconButton color='success' sx={iconButtonStyles}>
                     <Comment />
                     <Typography>
-                        {post_comments?.length ? post_comments.length : 0}
+                        {post_comments?.length} 
                     </Typography>
                 </IconButton>
                 <IconButton color='info' sx={iconButtonStyles}>
                     <RedoRounded />
                     <Typography>
-                        {post_retweets?.length ? post_retweets.length : 0}
+                        {post_retweets?.length}
                     </Typography>
                 </IconButton>
                 <IconButton color='info' sx={iconButtonStyles}>
                     <HeartBroken />
                     <Typography>
-                        {post_likes?.length ? post_likes?.length : 0}
+                        {post_likes?.length}
                     </Typography>
                 </IconButton>
                 <IconButton color='info' sx={iconButtonStyles}>
                     <BarChart />
                     <Typography>
-                        {post_views?.length ? post_views?.length : 0}
+                        {post_views?.length}
                     </Typography>
                 </IconButton>
                 <IconButton color='info' sx={iconButtonStyles}>
                     <Share />
                     <Typography>
-                        {post_views?.length ? post_views?.length : 0}
+                        {post_views?.length}
                     </Typography>
                 </IconButton>
             </div>

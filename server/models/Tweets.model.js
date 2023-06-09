@@ -16,8 +16,14 @@ const TweetSchema = new Schema({
     },
     post_comments: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'users'
+            commentor: {
+                type: Schema.Types.ObjectId,
+                ref: 'users'
+            },
+            comment: {
+                type: String,
+                required: true
+            }
         }
     ],
     post_likes: [

@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowBack, MoreHoriz, CommentBank, ShareSharp, HeartBroken, Bookmark, Download, Photo, GifBoxOutlined, EmojiEmotions, RedoRounded } from '@mui/icons-material'
-import { Typography, Avatar, IconButton } from '@mui/material'
+import { Typography, Avatar, IconButton, Box } from '@mui/material'
 import '../../NewTweet.css'
 import { iconButtonStyles } from '../../components/Post'
 import './SingleTweet.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Post from '../../components/Post'
+import useFetch from '../../hooks/useFetch'
+import moment from 'moment'
+import serverLink from '../../utils/server.link'
 
 const divStyles = {
     display: 'flex', justifyContent: 'start', gap: '1em', borderBottom: '1px solid gray', borderTop: '1px solid gray', width: '100%', padding: '1em'
@@ -13,6 +16,14 @@ const divStyles = {
 
 const SingleTweet = () => {
     const navigate = useNavigate()
+    const { postId } = useParams()
+    console.log(postId)
+    const [post, setPost] = useState({})
+    const { data, error, isLoading } = useFetch(`${serverLink}/api/v1/tweets/${postId}`)
+    console.log(data, error, isLoading)    
+    useEffect(() => {
+            setPost(data?.tweet)
+    }, [data])
     return (
         <div
             className='body-container'
@@ -20,8 +31,8 @@ const SingleTweet = () => {
             <div className="single-tweet-header">
                 <IconButton color='inherit'
                     onClick={() => {
-                    navigate(-1)
-                }}
+                        navigate(-1)
+                    }}
                 >
                     <ArrowBack />
                 </IconButton>
@@ -36,10 +47,10 @@ const SingleTweet = () => {
                         <Avatar />
                         <div>
                             <Typography>
-                                Full name
+                                {post?.author?.fullName}
                             </Typography>
-                            <Typography color={'GrayText'}>
-                                @username
+                            <Typography color={'GrayText'} variant='body2'>
+                                {post?.author?.username}
                             </Typography>
                         </div>
                     </div>
@@ -50,26 +61,26 @@ const SingleTweet = () => {
 
                 <div>
                     <Typography >
-                        Nice To be back
+                        {post?.post_content?.post_text}
                     </Typography>
                 </div>
 
                 <div style={{ margin: '1em 0' }}>
                     <Typography color={'GrayText'} variant='body2'>
-                        6:28 PM • Jun 7, 2023 • <Typography variant='span' color={'white'}>6,324</Typography> views
+                        {moment(post?.createdAt).format('LT')} • {moment(post?.createdAt).format('ll')} • <Typography variant='span' color={'white'}>{post?.post_views?.length }</Typography> views
                     </Typography>
                 </div>
 
                 <div style={divStyles}>
                     <Typography>
-                        28 <Typography variant='span' color={'GrayText'}>Retweets</Typography>
+                        {post?.post_retweets?.length} <Typography variant='span' color={'GrayText'}>Retweets</Typography>
                     </Typography>
                     <Typography>
-                        74 <Typography variant='span' color={'GrayText'}>Likes</Typography>
+                        {post?.post_likes?.length} <Typography variant='span' color={'GrayText'}>Likes</Typography>
                     </Typography>
-                    <Typography>
-                        53 <Typography variant='span' color={'GrayText'}>Bookmarks</Typography>
-                    </Typography>
+                    {/* <Typography>
+                        {post?.post_boo} <Typography variant='span' color={'GrayText'}>Bookmarks</Typography>
+                    </Typography> */}
                 </div>
                 <div
                     style={{ ...divStyles, justifyContent: 'space-between' }}
@@ -122,13 +133,27 @@ const SingleTweet = () => {
                 </div>
             </div>
 
-            <Post
+            {/* <Post
                 author={'henri tresor'}
                 author_uname={'tresor_1'}
                 posted_on={Date.now()}
                 _id={'4848484848488546574'}
                 post_content={{ post_text: 'True!' }}
-            />
+            /> */}
+
+            {
+                post?.post_comments?.length === 0 ? (
+                    <Box sx={{p:2, display:'grid', placeContent:'center'}}>
+                        <Typography variant='h5'>
+                            No replies, Yet
+                        </Typography>
+                    </Box>
+                ) :
+            
+                post?.post_comments?.map(comment => (
+                    <Post {...comment} />
+                ))
+            }
         </div>
     )
 }

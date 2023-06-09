@@ -51,6 +51,7 @@ export const getTweet = async (req, res, next) => {
 
         let { id } = req.params
         let tweet = await TweetsModel.findById(id)
+            .populate("author")
         if (!tweet) return next(errorResponse(404, `tweet with ${id} id was not found`))
         res.status(200).json({ status: true, tweet })
     } catch (error) {
