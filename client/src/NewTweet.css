@@ -1,0 +1,67 @@
+
+.new-tweet-container{
+    padding: 1em;
+    width: 100%;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: end;
+    border-bottom: 1px solid grey;
+    position: relative;
+}
+
+.new-tweet-container> div{
+    display: flex;
+    width: 100%;
+    padding: 0.9em;
+    margin: 0.03em 0;
+    align-items: center;
+    justify-content: space-between;
+}
+.new-tweet-container textarea{
+    width: 100%;
+    background: none;
+    color: white;
+    border: none;
+    outline:1px solid gray;
+    margin-left: 1em;
+    padding: 1em;
+    border-radius: 20px;
+    font-weight: 500;
+    resize: vertical;
+    font-size: 1.2em;
+    letter-spacing: 1.2px;
+}
+textarea::-webkit-scrollbar{
+    display: none;
+}
+.new-tweet-container >div> button{
+
+    margin: 0 auto;
+    padding: 0.67em;
+    background: #1d9bf0;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 2px;
+    cursor: pointer;
+    float: right;
+    position: absolute;
+    right: 1.5em;
+ }
+
+ @media screen and (max-width: 350px) {
+    
+.new-tweet-container> div:nth-child(2){
+    /* padding: 1em; */
+    flex-direction: column;
+}
+.new-tweet-container >div> button{
+
+    position: relative;
+    width: 100%;
+    margin: 1em auto;
+ }
+
+ }
