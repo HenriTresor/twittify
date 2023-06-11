@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { Suspense, lazy, useEffect } from 'react'
+import React, { Suspense, lazy, useEffect, useState } from 'react'
 import './App.css'
 import LeftAside from './components/Aside/LeftAside'
 import RightAside from './components/Aside/RightAside'
@@ -8,12 +8,14 @@ import BottomNav from './components/BottomNav'
 import Loading from './components/Loading'
 import axios from 'axios'
 import serverLink from './utils/server.link'
-import Login from './pages/registration/Login'
 // import Homepage from './pages/Homepage/Homepage'
 // import NotFound from './pages/404/404'
 // import SingleTweet from './pages/SingleTweet'
 import { useSelector } from 'react-redux'
 import { Typography } from '@mui/material'
+import RegModal from './components/Modal'
+import Login from './components/Modal/Login'
+import Signup from './components/Modal/Signup'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -39,6 +41,8 @@ const buttonStyles = {
 
 const App = () => {
 
+  const [isOpen, setIsOpen ] = useState(false)
+  const [whichModal, setWhichModal] = useState('login')
   const { isLoggedIn } = useSelector(state => state.auth)
   const { pathname } = useLocation()
   const navigate = useNavigate()
@@ -103,7 +107,10 @@ const App = () => {
             </div>
             <div>
               <button
-
+                onClick={() => {
+                  setIsOpen(true)
+                  setWhichModal('login')
+                }}
                 style={{
                   ...buttonStyles,
                   background: 'none',
@@ -113,6 +120,10 @@ const App = () => {
                 login
               </button>
               <button
+                onClick={() => {
+                  setIsOpen(true)
+                  setWhichModal('signup')
+                }}
                 style={buttonStyles}
               >
                 signup
@@ -132,7 +143,11 @@ const App = () => {
         </Routes>
       </Suspense>
       <RightAside />
-
+      <RegModal isOpen={isOpen} setIsOpen={setIsOpen}>
+        {
+          whichModal === 'login' ? <Login /> : <Signup />
+        }
+      </RegModal>
     </div>
   )
 }
