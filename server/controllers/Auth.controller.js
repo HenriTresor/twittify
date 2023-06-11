@@ -50,4 +50,18 @@ const loginUser = async (req, res, next) => {
 const logoutUser = async (req, res, next) => {
 
 }
+
+export const getUserProfile = async (req, res, next) => {
+    try {
+        
+        if (req.user) {
+            
+        }
+
+        next(errorResponse(401, 'you are not logged in'));
+    } catch (error) {
+        console.log('error getting user profile', error.message)
+        next(errorResponse(500, 'unexpected error occurred'));
+    }
+}
 export { loginUser, logoutUser }

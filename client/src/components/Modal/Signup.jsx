@@ -5,8 +5,13 @@ import { Google, Twitter } from "@mui/icons-material"
 import { useState } from "react"
 import axios from "axios"
 import serverLink from "../../utils/server.link"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import {login } from '../../redux/Slices/AuthSlice'
 
 const Signup = ({ setWhichModal }) => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [inputValues, setInputValues] = useState({
     email: '',
     fullName: '',
@@ -25,17 +30,22 @@ const Signup = ({ setWhichModal }) => {
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
-      const res = await axios.post(`${serverLink}/api/v1/users`, inputValues)
+      const res = await axios.post(`${serverLink}/api/v1/users`, inputValues, {
+
+      })
       let data = await res.data
       setIsLoading(false)
       if (!data.status) {
         return setError(prev => ({ status: true, message: data.message }))
       }
+      document.cookie = `access_token=${data?.access_token}`
+      dispatch(login({user: data?.user}))
+      navigate('/home')
     } catch (error) {
       setIsLoading(false)
       console.log('erro', error)
-      return setError(prev => ({ status: true, message: error.response.data.message }))
       alert('error occured')
+      return setError(prev => ({ status: true, message: error.response?.data.message }))
     }
   }
   return (
@@ -76,7 +86,7 @@ const Signup = ({ setWhichModal }) => {
           <TextField
             //   color='white'
             sx={{ color: 'white' }}
-            onChange={(e)=>handleChange(e)}
+            onChange={(e) => handleChange(e)}
             label='email address'
             value={inputValues.email}
             name="email"

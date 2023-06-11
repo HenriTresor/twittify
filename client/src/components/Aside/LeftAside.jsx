@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux'
 
 const LeftAside = () => {
 
-    const {isLoggedIn} = useSelector(state => state.auth)
+    const {isLoggedIn, user} = useSelector(state => state.auth)
     const { windowSize } = useContext(AppData)
 
     if (windowSize) {
@@ -79,10 +79,10 @@ const LeftAside = () => {
                                 />
                                 <div>
                                     <Typography >
-                                        full name
+                                        {user?.fullName}
                                     </Typography>
                                     <Typography variant='body3' color={'GrayText'}>
-                                        @username
+                                        @{user?.username}
                                     </Typography>
                                 </div>
                             </div>

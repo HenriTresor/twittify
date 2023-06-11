@@ -2,6 +2,7 @@ import User from "../models/User.model.js";
 import errorResponse from "../utils/errorResponse.js";
 import UserValidObject from "../validators/User.joi.js";
 import createToken from "../utils/createToken.js";
+import { hash } from "bcrypt";
 
 const createUser = async (req, res, next) => {
     try {
@@ -18,11 +19,12 @@ const createUser = async (req, res, next) => {
         if (user) return next(errorResponse(400, 'user already exists'));
         // create user
 
+        const hashedPwd = await hash(value.password, 10)
         let newUser = new User({
             fullName: value.fullName,
             email: value.email,
             username: `${value.fullName.split(' ').join('_')}`,
-            password: value.password
+            password: hashedPwd
         })
 
         await newUser.save()
@@ -31,6 +33,7 @@ const createUser = async (req, res, next) => {
 
         const token = await createToken(newUser._id)
 
+        res.header('Access-Control-Allow-Origin', 'http://localhost:5173')
         res.cookie('access_token', token, {
             maxAge: 60 * 60 * 3600 * 24 * 7,
             httpOnly: true,
