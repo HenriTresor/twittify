@@ -13,11 +13,13 @@ import useFetch from '../../hooks/useFetch'
 import serverLink from '../../utils/server.link'
 import Loading from '../Loading'
 import Error from '../Error'
-
+import { useSelector } from 'react-redux'
 
 const Index = () => {
     const [tweets, setTweets] = useState([])
     const { data, isLoading } = useFetch(`${serverLink}/api/v1/tweets`)
+    const { isLoggedIn } = useSelector(state => state.auth)
+    
 
     useEffect(() => {
         setTweets(data?.tweets)
@@ -35,13 +37,20 @@ const Index = () => {
                         Home
                     </Typography>
                 </div>
-                <div style={{ display: 'flex', marginTop: '2em' }}>
-                    <button>For you</button>
-                    <button>Following</button>
-                </div>
+                {
+                    isLoggedIn && (
+                        <>
+                           
+                            <div style={{ display: 'flex', marginTop: '2em' }}>
+                                <button>For you</button>
+                                <button>Following</button>
+                            </div>
+                        </>
+                    )
+                }
             </div>
 
-            <NewTweet />
+            {isLoggedIn && <NewTweet />}
             {/* <Post
                 author={'henri tresor'}
                 author_uname={'tresor_1'}

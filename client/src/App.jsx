@@ -8,9 +8,12 @@ import BottomNav from './components/BottomNav'
 import Loading from './components/Loading'
 import axios from 'axios'
 import serverLink from './utils/server.link'
+import Login from './pages/registration/Login'
 // import Homepage from './pages/Homepage/Homepage'
 // import NotFound from './pages/404/404'
 // import SingleTweet from './pages/SingleTweet'
+import { useSelector } from 'react-redux'
+import { Typography } from '@mui/material'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -22,12 +25,21 @@ const axiosInstance = axios.create({
 });
 
 // Set CORS headers
-axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = '*'; 
+axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axiosInstance.defaults.headers.common['Access-Control-Allow-Credentials'] = 'true';
 
+const buttonStyles = {
+  padding: '0.4em 1em',
+  fontWeight: "bold",
+  margin: '0 0.4em',
+  borderRadius: '1em',
+  border: 'none',
+  cursor:'pointer'
+}
 
 const App = () => {
 
+  const { isLoggedIn } = useSelector(state => state.auth)
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
@@ -41,7 +53,7 @@ const App = () => {
     async function requestLogin() {
       try {
         const res = await axiosInstance.get(`${serverLink}/api/v1/auth/google`, {
-          
+
         })
         // const data = await res.json();
         console.log('user profile', res)
@@ -66,17 +78,61 @@ const App = () => {
   // }, [])
   return (
     <div className='container'>
+      {
+        !isLoggedIn && (
+          <div
+            style={{
+              position: 'fixed',
+              bottom: '0',
+              width: '100%',
+              left: '0',
+              backgroundColor: '#1d98f0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-evenly',
+              padding: '1em'
+            }}
+          >
+            <div>
+              <Typography variant='h6' fontWeight={'bolder'}>
+                Don&apos;t miss what&apos;s happening
+              </Typography>
+              <Typography variant='body2'>
+                People on Twitter are the first to know
+              </Typography>
+            </div>
+            <div>
+              <button
+
+                style={{
+                  ...buttonStyles,
+                  background: 'none',
+                  border: '1px solid white',
+                  color:'white'
+                }}>
+                login
+              </button>
+              <button
+                style={buttonStyles}
+              >
+                signup
+              </button>
+            </div>
+          </div>
+        )
+      }
       <BottomNav />
       <LeftAside />
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path='/' element={<Homepage />} />
-          <Route path='/home' element={<Homepage />} />
+          <Route path='/home' exact element={<Homepage />} />
           <Route path='/:username/status/:postId' element={<SingleTweet />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>
       <RightAside />
+
     </div>
   )
 }
