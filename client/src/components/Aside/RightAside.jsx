@@ -12,7 +12,7 @@ import Error from '../Error'
 import { useSelector } from 'react-redux'
 import { buttonStyles } from './buttonStyles'
 
-const RightAside = () => {
+const RightAside = ({gettingProfile}) => {
 
     const { isLoggedIn } = useSelector(state => state.auth)
     // const [people, setPeople] = useState([])
@@ -22,36 +22,39 @@ const RightAside = () => {
         <div
             className='aside right-aside'
         >
-            <div
-                className='search-box'
-            >
-                <Search />
-                <input type="text" placeholder='Search Twitter' />
-
-
-            </div>
-
             {
-                isLoggedIn ? (
+                gettingProfile ? <Loading /> : (
                     <>
-                        <div className='box'>
-                            <Typography variant='h5' fontWeight={'bolder'}>
-                                Trends for you
-                            </Typography>
-                            {
-                                isLoading ? <Loading />
-                                    : error.status === null ? <Error />
-                                        : data?.users?.map(user => (
-                                            <Person {...user} key={user?._id} />
-                                        ))
-                            }
-                        </div>
-                        <div className="box">
-                            <Typography variant='h5' fontWeight={'bolder'}>
-                                Who to follow
-                            </Typography>
+                        <div
+                            className='search-box'
+                        >
+                            <Search />
+                            <input type="text" placeholder='Search Twitter' />
 
-                            {/* <Person
+
+                        </div>
+
+                        {
+                            isLoggedIn ? (
+                                <>
+                                    <div className='box'>
+                                        <Typography variant='h5' fontWeight={'bolder'}>
+                                            Trends for you
+                                        </Typography>
+                                        {
+                                            isLoading ? <Loading />
+                                                : error.status === null ? <Error />
+                                                    : data?.users?.map(user => (
+                                                        <Person {...user} key={user?._id} />
+                                                    ))
+                                        }
+                                    </div>
+                                    <div className="box">
+                                        <Typography variant='h5' fontWeight={'bolder'}>
+                                            Who to follow
+                                        </Typography>
+
+                                        {/* <Person
                   name={'Henri Tresor'}
                   username={'@henri_tresor'}
                   avatar={''}
@@ -77,31 +80,34 @@ const RightAside = () => {
                   avatar={''}
               /> */}
 
-                            {
-                                isLoading ? <Loading />
-                                    : error.status === null ? <Error />
-                                        : data?.users?.length === 0 ? 'no new users'
-                                            : data?.users?.map(user => (
-                                                <Person {...user} key={user?._id} />
-                                            ))
-                            }
-                        </div>
+                                        {
+                                            isLoading ? <Loading />
+                                                : error.status === null ? <Error />
+                                                    : data?.users?.length === 0 ? 'no new users'
+                                                        : data?.users?.map(user => (
+                                                            <Person {...user} key={user?._id} />
+                                                        ))
+                                        }
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="box">
+                                    <Typography fontWeight={'bolder'}>
+                                        New to Twitter?
+                                    </Typography>
+                                    <Typography variant='body2' color={'GrayText'} fontSize={12}>
+                                        Signup now to get your own personalized timeline!
+                                    </Typography>
+                                    <button style={buttonStyles}>
+                                        Create account
+                                    </button>
+                                    <Typography color={'GrayText'}>
+                                        By signing up you agree to our terms of service
+                                    </Typography>
+                                </div>
+                            )
+                        }
                     </>
-                ) : (
-                    <div className="box">
-                        <Typography fontWeight={'bolder'}>
-                            New to Twitter?
-                        </Typography>
-                        <Typography variant='body2' color={'GrayText'} fontSize={12}>
-                            Signup now to get your own personalized timeline!
-                        </Typography>
-                        <button style={buttonStyles}>
-                            Create account
-                        </button>
-                        <Typography color={'GrayText'}>
-                            By signing up you agree to our terms of service
-                        </Typography>
-                    </div>
                 )
             }
 

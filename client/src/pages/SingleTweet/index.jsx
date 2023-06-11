@@ -13,12 +13,15 @@ import serverLink from '../../utils/server.link'
 import Loading from '../../components/Loading'
 import Error from '../../components/Error'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { findIfLiked, likeTweet } from '../../utils/function'
 
 const divStyles = {
     display: 'flex', justifyContent: 'start', gap: '1em', borderBottom: '1px solid gray', borderTop: '1px solid gray', width: '100%', padding: '1em'
 }
 
 const SingleTweet = () => {
+    const { user } = useSelector(state => state.auth)
     const navigate = useNavigate()
     const { postId } = useParams()
     const [isReplying, setIsReplying] = useState(false)
@@ -39,7 +42,7 @@ const SingleTweet = () => {
         setIsReplying(true)
         try {
             let reply = {
-                author: '6482d847038cc4982fde6df4',
+                author: user._id,
                 reply_content,
                 tweetId: post?._id,
                 time: moment().format()
@@ -131,7 +134,15 @@ const SingleTweet = () => {
                                     <RedoRounded />
                                 </IconButton>
 
-                                <IconButton sx={iconButtonStyles} color='inherit'>
+                                <IconButton
+
+                                    sx={{ ...iconButtonStyles, color: findIfLiked(post, user) ? 'green' : 'grey', border: findIfLiked(post, user) ? '1px solid green' : 'none' }}
+                                    onClick={() => {
+                                        !findIfLiked(post, user) ?
+                                            likeTweet({ tweetId: post._id, likerId: user?._id }) && setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] }))
+                                            : setPost(prev => ({ ...prev, post_likes: prev?.post_likes?.filter(post => post?._id !== post?._id) })) && findIfLiked(post, user)
+                                    }}
+                                >
                                     <HeartBroken />
                                 </IconButton>
                                 <IconButton sx={iconButtonStyles} color='inherit'>
@@ -192,7 +203,7 @@ const SingleTweet = () => {
 
                                 post?.post_comments?.map(comment => {
                                     console.log('comment', comment)
-                                    return <Post {...comment} key={ comment?.time} />
+                                    return <Post {...comment} key={comment?.time} />
                                 })
                         }
                     </>

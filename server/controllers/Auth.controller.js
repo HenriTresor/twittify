@@ -53,11 +53,23 @@ const logoutUser = async (req, res, next) => {
 
 export const getUserProfile = async (req, res, next) => {
     try {
-        
-        if (req.user) {
-            
-        }
 
+        if (req.userId) {
+            let user = await User.findOne({
+                $or: [
+                    { _id: req.userId },
+
+                    { googleId: req.userId }
+                ]
+            })
+            if (!user) return next(errorResponse(403, 'user was not found'));
+            res.status(200).json({
+                status: true,
+                user
+            })
+
+            return
+        }
         next(errorResponse(401, 'you are not logged in'));
     } catch (error) {
         console.log('error getting user profile', error.message)

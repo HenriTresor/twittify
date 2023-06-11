@@ -58,7 +58,7 @@ export const getTweet = async (req, res, next) => {
                 model: 'users'
             }
         })
-            .populate("author")
+            .populate("author").populate('post_likes')
         if (!tweet) return next(errorResponse(404, `tweet with ${id} id was not found`))
         res.status(200).json({ status: true, tweet })
     } catch (error) {
@@ -121,9 +121,7 @@ export const LikeTweet = async (req, res, next) => {
 
         // check if does'nt alredy like the tweet
 
-        let check = await tweet?.post_likes?.find(like => like === likerId)
-
-        console.log(check)
+        let check = tweet?.post_likes?.find(like => like.toString() === likerId)
         if(check) return next(errorResponse(409, 'user already likes the tweet')) 
         // add like
 

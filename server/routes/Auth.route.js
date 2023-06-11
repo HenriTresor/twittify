@@ -3,7 +3,8 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import passport from "passport";
 import { config } from "dotenv";
 import cors from "cors";
-import { loginUser } from "../controllers/Auth.controller.js";
+import { getUserProfile, loginUser } from "../controllers/Auth.controller.js";
+import verifyToken from "../middlewares/verifyToken.js";
 
 config()
 
@@ -48,7 +49,7 @@ router.get('/google/callback', passport.authenticate('google', {
     failureRedirect: '/api/v1/auth/google'
 }))
 
-router.get('/profile')
+router.get('/profile', verifyToken,getUserProfile)
 
 router.post('/login', loginUser)
 export default router

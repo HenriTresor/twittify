@@ -16,6 +16,9 @@ import { Typography } from '@mui/material'
 import RegModal from './components/Modal'
 import Login from './components/Modal/Login'
 import Signup from './components/Modal/Signup'
+import { getCookie, getUserProfile } from './utils/function'
+import { login, logout } from './redux/Slices/AuthSlice'
+import { useDispatch } from 'react-redux'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -46,6 +49,8 @@ const App = () => {
   const { isLoggedIn } = useSelector(state => state.auth)
   const { pathname } = useLocation()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [gettingProfile, setGettingProfile] = useState(false)
 
   useEffect(() => {
     if (pathname === '/') {
@@ -53,33 +58,32 @@ const App = () => {
     }
   }, [])
 
-  useEffect(() => {
-    async function requestLogin() {
-      try {
-        const res = await axiosInstance.get(`${serverLink}/api/v1/auth/google`, {
-
-        })
-        // const data = await res.json();
-        console.log('user profile', res)
-      } catch (error) {
-        console.log('error requesting login', error.stack)
-      }
-    }
-
-    requestLogin()
-  }, [])
   // useEffect(() => {
-  //   async function getUser() {
-  //     try {
-  //       const res = await axios.get(`${serverLink}/api/v1/auth/profile`)
-  //       console.log('user profile', res.data)
-  //     } catch (error) {
-  //       console.log('error fetching user:', error.message)
-  //     }
+  //   const token = getCookie('access_token')
+  //   console.log('token ',token)
+  //   if (token) {
+  //     dispatch(login({ user: {} }))
+  //     setGettingProfile(true)
   //   }
+  // },[])
+  useEffect(() => {
+   let isCancelled = true
+    if (isCancelled) {
+      const func = async () => {
+        setGettingProfile(true)
+        const user = await getUserProfile()
+        console.log('user', user)
+        setGettingProfile(false)
+        if (user.status) {
+          return dispatch(login({ user: user.user }))
+        }
+        dispatch(logout())
+      }
+      func()
+    }
+   return () => isCancelled = false
+  },[])
 
-  //   getUser()
-  // }, [])
   return (
     <div className='container'>
       {
@@ -133,7 +137,7 @@ const App = () => {
         )
       }
       <BottomNav />
-      <LeftAside />
+      <LeftAside gettingProfile={gettingProfile} />
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path='/' element={<Homepage />} />
@@ -142,7 +146,7 @@ const App = () => {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>
-      <RightAside />
+      <RightAside gettingProfile={gettingProfile} />
       <RegModal isOpen={isOpen} setIsOpen={setIsOpen} setWhichModal={setWhichModal}>
         {
           whichModal === 'login' ? <Login setWhichModal={setWhichModal} /> : <Signup setWhichModal={setWhichModal}  />

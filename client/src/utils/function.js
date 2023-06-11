@@ -24,7 +24,30 @@ function getCookie(name) {
     return null;
 }
 
+export async function getUserProfile() {
+    try {
+        const res = await axios.get(`${serverLink}/api/v1/auth/profile`, {
+            headers: {
+                'Authorization': `Bearer ${getCookie('access_token')}`
+            }
+        })
 
+        return res.data
+    } catch (error) {
+        console.log('error getting user profile', error.message)
+        return {
+            error: error.message
+        }
+    }
+}
+
+export const findIfLiked = (post, user) => {
+    return post?.post_likes?.find(like => like?._id === user?._id)
+}
+
+export const handleLiking = () => {
+    
+}
 export {
     likeTweet, getCookie
 }

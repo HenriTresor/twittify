@@ -9,6 +9,7 @@ import moment from 'moment'
 import { Link } from 'react-router-dom'
 // import { LikeTweet } from '../../../../server/controllers/Tweets.controller'
 import { likeTweet } from '../../utils/function'
+import { useSelector } from 'react-redux'
 
 export let iconButtonStyles = {
     color: 'grey', gap: 1
@@ -17,14 +18,15 @@ const Post = ({
     author, commentor,
     createdAt, post_content,
     post_comments,
-    post_likes, post_views, post_retweets, _id,reply_content, time
+    post_likes, post_views, post_retweets, _id, reply_content, time
 }) => {
+    const { user } = useSelector(state => state.auth)
     return (
         <div
             className='post-container'
         >
             <div className='post-header'>
-                <Avatar src={ author?.avatar} />
+                <Avatar src={author?.avatar} />
                 <Typography>
                     {author?.fullName || commentor?.fullName}
                     <Typography variant='body2' sx={{ ml: 1, }} color={'GrayText'}>
@@ -38,8 +40,8 @@ const Post = ({
                     <Typography sx={{ mt: 3 }}>
                         {post_content?.post_text || reply_content?.reply_text}
                     </Typography>
-                    </Link>
-                
+                </Link>
+
             </div>
             {
                 !commentor && (
@@ -57,8 +59,11 @@ const Post = ({
                             </Typography>
                         </IconButton>
                         <IconButton
-                            onClick={() => likeTweet({ tweetId: _id, likerId: '6482d847038cc4982fde6df4'})
-                            }
+                            onClick={() => {
+                                likeTweet({ tweetId: _id, likerId: user?._id })
+                                
+                            }}
+
                             color='info' sx={iconButtonStyles}>
                             <HeartBroken />
                             <Typography>
@@ -79,7 +84,7 @@ const Post = ({
                         </IconButton>
                     </div>
                 )
-           }
+            }
         </div>
     )
 }
