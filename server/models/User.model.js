@@ -3,18 +3,22 @@ import { hash } from "bcrypt";
 
 const UserSchema = new Schema(
     {
-
+        googleId:{
+            type:String
+        },
+        avatar: {
+            type:String
+        },
         fullName: { type: String, required: true, trim: true },
-        email: { type: String, required: true, unique: true, trim: true, lowercase: true },
+        email: { type: String, unique: true, trim: true, lowercase: true },
         username: {
             type: String,
             required: true
         },
-        password: { type: String, required: true },
-        followers: [
+        password: { type: String },
+        followers:[
             {
-                type: Schema.Types.ObjectId,
-                ref: 'users'
+                type:Schema.Types.ObjectId
             }
         ],
         followees: [
@@ -29,14 +33,14 @@ const UserSchema = new Schema(
     }
 )
 
-UserSchema.pre('save', async function () {
-    try {
-        const hashedPwd = await hash(this.password, 10)
-        this.password = hashedPwd
-    } catch (error) {
-        console.log('error hashing password', error.message)
-    }
-})
+// UserSchema.pre('save', async function () {
+//     try {
+//         const hashedPwd = await hash(this.password, 10)
+//         this.password = hashedPwd
+//     } catch (error) {
+//         console.log('error hashing password', error.message)
+//     }
+// })
 
 const User = model('users', UserSchema)
 

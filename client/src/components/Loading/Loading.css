@@ -1,0 +1,26 @@
+.loader{
+    width: 100%;
+    height: auto;
+    padding: 2em;
+    display: grid;
+    place-content: center;
+}
+
+.spinner{
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: 5px solid #1d9cf049;
+    border-radius: 50%;
+    border-bottom: 5px solid #1d9bf0;
+    animation: loader 1s infinite linear;
+}
+
+@keyframes loader {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}

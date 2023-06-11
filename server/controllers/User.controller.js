@@ -21,7 +21,7 @@ const createUser = async (req, res, next) => {
         let newUser = new User({
             fullName: value.fullName,
             email: value.email,
-            username: `@${value.fullName.split(' ').join('_')}`,
+            username: `${value.fullName.split(' ').join('_')}`,
             password: value.password
         })
 

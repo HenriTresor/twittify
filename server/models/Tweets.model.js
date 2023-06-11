@@ -20,9 +20,16 @@ const TweetSchema = new Schema({
                 type: Schema.Types.ObjectId,
                 ref: 'users'
             },
-            comment: {
-                type: String,
-                required: true
+            reply_content: {
+                reply_text: {
+                    type: String,
+                },
+                reply_image: {
+                    type: String
+                }
+            },
+            time: {
+                type: Date,
             }
         }
     ],

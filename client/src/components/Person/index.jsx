@@ -4,16 +4,16 @@ import {Avatar, Typography, IconButton}  from '@mui/material'
 import {Add } from '@mui/icons-material'
 import { AppData } from '../../context/AppContext'
 
-const Person = ({ name, username, avatar }) => {
+const Person = ({ fullName, username, avatar }) => {
     
     const { windowSize} = React.useContext(AppData)
   return (
       <div className='person-container'>
           <div style={{display:'flex', alignItems:'center', gap:2}}>
-          <Avatar sizes='small' />
+              <Avatar sizes='small' src={avatar} />
               <div>
                   <Typography variant='body2'> 
-                      {name}
+                      {fullName}
                   </Typography>
                   <Typography variant='body2' color={'grayText'}>
                       {username}

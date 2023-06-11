@@ -18,6 +18,17 @@ html{
     margin: 0 auto
     /* align-items: center; */
 }
+<<<<<<< HEAD
+=======
+.body-container{
+    text-align: left !important;
+    height: auto;
+    flex-grow: 3.5;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    padding-bottom: 10em;
+}
+>>>>>>> test
 
 a,
 a:visited,

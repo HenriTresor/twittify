@@ -1,11 +1,16 @@
 {
+<<<<<<< HEAD
   "name": "twitter-clone",
+=======
+  "name": "client",
+>>>>>>> test
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+<<<<<<< HEAD
     "preview": "vite preview"
   },
   "dependencies": {
@@ -15,12 +20,23 @@
     "@flaticon/flaticon-uicons": "^2.0.1",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.3",
+=======
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.4",
+>>>>>>> test
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.7",
+<<<<<<< HEAD
     "react-router-dom": "^6.11.2"
   },
   "devDependencies": {
@@ -28,5 +44,18 @@
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
     "vite": "^4.2.0"
+=======
+    "react-router-dom": "^6.12.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "vite": "^4.3.9"
+>>>>>>> test
   }
 }
