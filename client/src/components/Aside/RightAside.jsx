@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-import React, { useState } from 'react'
-import './Aside.css'
-import { 
-=======
 // import React, { useEffect, useState } from 'react'
 import './Aside.css'
 import {
->>>>>>> test
     Search
 } from '@mui/icons-material'
 import { Typography } from '@mui/material'

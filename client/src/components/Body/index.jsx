@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Body.css'
 import {
-<<<<<<< HEAD
-    Typography, Avatar, Stack, Box, ListItem, ListItemButton
-=======
     Typography, 
->>>>>>> test
 } from '@mui/material'
 
 import {
@@ -13,16 +9,6 @@ import {
 } from '@mui/icons-material'
 import Post from '../Post'
 import NewTweet from '../NewTweet'
-<<<<<<< HEAD
-import { Link } from 'react-router-dom'
-import useFetch from '../../hooks/useFetch'
-import serverLink from '../../utils/server.link'
-
-
-const Index = () => {
-    const [tweets, setTweets] = useState([])
-    const { data, error, isLoading } = useFetch(`${serverLink}/api/v1/tweets`)
-=======
 import useFetch from '../../hooks/useFetch'
 import serverLink from '../../utils/server.link'
 import Loading from '../Loading'
@@ -34,7 +20,6 @@ const Index = () => {
     const { data, isLoading } = useFetch(`${serverLink}/api/v1/tweets`)
     const { isLoggedIn } = useSelector(state => state.auth)
     
->>>>>>> test
 
     useEffect(() => {
         setTweets(data?.tweets)
@@ -52,15 +37,6 @@ const Index = () => {
                         Home
                     </Typography>
                 </div>
-<<<<<<< HEAD
-                <div style={{ display: 'flex', marginTop: '2em' }}>
-                    <button>For you</button>
-                    <button>Following</button>
-                </div>
-            </div>
-
-            <NewTweet />
-=======
                 {
                     isLoggedIn && (
                         <>
@@ -75,7 +51,6 @@ const Index = () => {
             </div>
 
             {isLoggedIn && <NewTweet />}
->>>>>>> test
             {/* <Post
                 author={'henri tresor'}
                 author_uname={'tresor_1'}
@@ -105,11 +80,6 @@ const Index = () => {
             {
                 !isLoading ? (
                     tweets?.map(tweet => (
-<<<<<<< HEAD
-                        <Post {...tweet} />
-                    ))
-                ) : ('loading...')
-=======
 
                         <Post {...tweet} key={tweet?._id} />
 
@@ -118,14 +88,9 @@ const Index = () => {
             }
             {
                 data === null && <Error />
->>>>>>> test
             }
         </div>
     )
 }
 
-<<<<<<< HEAD
-export default Index
-=======
 export default React.memo(Index)
->>>>>>> test

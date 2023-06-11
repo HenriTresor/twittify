@@ -3,7 +3,7 @@ import { Typography, TextField } from "@mui/material"
 import { buttonStyles } from "../Aside/buttonStyles"
 import { Google, Twitter } from "@mui/icons-material"
 
-const Login = () => {
+const Login = ({ setWhichModal }) => {
   return (
       <div>
           <Typography color={'#1d98f0'}>
@@ -51,6 +51,13 @@ const Login = () => {
                       Sign in
                   </button>
               </div>
+              <Typography variant='p' fontSize={13} color={'GrayText'}>
+                  Don&apos;t have an account yet? <Typography
+                      onClick={() => setWhichModal('signup')}
+                      variant='span' color={'#1d98f0'} sx={{ cursor: 'pointer' }}>
+                      create one!
+                  </Typography>
+              </Typography>
           </div>
     </div>
   )

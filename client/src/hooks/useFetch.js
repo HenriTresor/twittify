@@ -6,23 +6,15 @@ const useFetch = (uri) => {
     const [data, setData] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState({
-<<<<<<< HEAD
-        status: true,
-        error: null
-=======
         status: false,
         message: '' 
->>>>>>> test
     })
 
     const fetch = async () => {
         setIsLoading(true)
         try {
             const res = await axios.get(uri);
-<<<<<<< HEAD
-=======
             console.log(res)
->>>>>>> test
             setIsLoading(false)
             setData(res.data)
         } catch (error) {
@@ -30,11 +22,7 @@ const useFetch = (uri) => {
             setData(null)
             setError({
                 status: true,
-<<<<<<< HEAD
-                error
-=======
                 message: error.response.data.message
->>>>>>> test
             })
         }
     }

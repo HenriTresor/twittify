@@ -1,50 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-import { Avatar, IconButton, TextField } from '@mui/material'
-import { Photo, GifBoxOutlined, Poll, EmojiEmotions, CalendarToday, LocationOn } from '@mui/icons-material'
-import '../../NewTweet.css'
-
-const NewTweet = () => {
-  return (
-      <div
-      className='new-tweet-container'
-      >
-          <div>
-              <Avatar />
-              <textarea
-                 
-                  placeholder='What is happening?!'
-                    
-                  type="text"></textarea>
-          </div>
-          <div>
-              <div>
-                  <IconButton color='info'>
-                      <Photo />
-                  </IconButton>
-                  <IconButton color='info'>
-                      <GifBoxOutlined />
-                  </IconButton>
-                  <IconButton color='info'>
-                      <Poll />
-                  </IconButton>
-                  <IconButton color='info'>
-                      <EmojiEmotions />
-                  </IconButton>
-                  <IconButton color='info'>
-                      <CalendarToday />
-                  </IconButton>
-                  <IconButton color='info'>
-                      <LocationOn />
-                  </IconButton>
-              </div>
-              <button>
-                  Tweet
-              </button>
-          </div>
-      </div>
-  )
-=======
 import React, { useState } from 'react'
 import { Avatar, IconButton, TextField, CircularProgress } from '@mui/material'
 import { Photo, GifBoxOutlined, Poll, EmojiEmotions, CalendarToday, LocationOn } from '@mui/icons-material'
@@ -128,7 +81,6 @@ const NewTweet = () => {
             </div>
         </div>
     )
->>>>>>> test
 }
 
 export default NewTweet

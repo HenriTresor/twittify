@@ -1,22 +1,9 @@
-<<<<<<< HEAD
-import React, { useEffect } from 'react'
-=======
 /* eslint-disable no-unused-vars */
 import React, { Suspense, lazy, useEffect, useState } from 'react'
->>>>>>> test
 import './App.css'
 import LeftAside from './components/Aside/LeftAside'
 import RightAside from './components/Aside/RightAside'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
-<<<<<<< HEAD
-import NotFound from './pages/404/404'
-import BottomNav from './components/BottomNav'
-import { Homepage } from './pages/Homepage/Homepage'
-import SingleTweet from './pages/SingleTweet'
-
-const App = () => {
-
-=======
 import BottomNav from './components/BottomNav'
 import Loading from './components/Loading'
 import axios from 'axios'
@@ -57,7 +44,6 @@ const App = () => {
   const [isOpen, setIsOpen ] = useState(false)
   const [whichModal, setWhichModal] = useState('login')
   const { isLoggedIn } = useSelector(state => state.auth)
->>>>>>> test
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
@@ -66,22 +52,6 @@ const App = () => {
       navigate('/home')
     }
   }, [])
-<<<<<<< HEAD
-  return (
-    <>
-      <div className='container'>
-        <BottomNav />
-        <LeftAside />
-        <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route path='/home' element={<Homepage />} />
-          <Route path='/:username/status/:postId' element={<SingleTweet />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-        <RightAside />
-      </div>
-    </>
-=======
 
   useEffect(() => {
     async function requestLogin() {
@@ -173,13 +143,12 @@ const App = () => {
         </Routes>
       </Suspense>
       <RightAside />
-      <RegModal isOpen={isOpen} setIsOpen={setIsOpen}>
+      <RegModal isOpen={isOpen} setIsOpen={setIsOpen} setWhichModal={setWhichModal}>
         {
-          whichModal === 'login' ? <Login /> : <Signup />
+          whichModal === 'login' ? <Login setWhichModal={setWhichModal} /> : <Signup setWhichModal={setWhichModal}  />
         }
       </RegModal>
     </div>
->>>>>>> test
   )
 }
 
