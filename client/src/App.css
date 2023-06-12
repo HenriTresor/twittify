@@ -6,7 +6,7 @@
 }
 
 html{
-    background:rgba(0, 0, 0, 0.959) ;
+    background:rgba(0, 0, 0, 0.989) ;
     color: white;
 }
 
@@ -25,6 +25,14 @@ html{
     border-left: 1px solid grey;
     border-right: 1px solid grey;
     padding-bottom: 10em;
+}
+
+.single-tweet-header{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap:1em;
+    padding: 1em;
 }
 
 .EmojiPickerReact{

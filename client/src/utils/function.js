@@ -46,7 +46,7 @@ export const findIfLiked = (post, user) => {
 }
 
 export const handleLiking = () => {
-    
+
 }
 export {
     likeTweet, getCookie

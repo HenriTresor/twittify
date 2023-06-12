@@ -20,6 +20,7 @@ import { getCookie, getUserProfile } from './utils/function'
 import { login, logout } from './redux/Slices/AuthSlice'
 import { useDispatch } from 'react-redux'
 import NewTweet from './components/NewTweet'
+import Profile from './pages/profile'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -147,6 +148,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/home' exact element={<Homepage />} />
+          <Route path='/:username' exact element={<Profile />} />
           <Route path='/:username/status/:postId' element={<SingleTweet />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

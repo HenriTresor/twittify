@@ -1,10 +1,4 @@
-.single-tweet-header{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap:1em;
-    padding: 1em;
-}
+
 .single-tweet-body >div{
 padding: 1em;
 }

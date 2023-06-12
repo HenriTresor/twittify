@@ -3,22 +3,24 @@ import { hash } from "bcrypt";
 
 const UserSchema = new Schema(
     {
-        googleId:{
-            type:String
+        googleId: {
+            type: String
         },
         avatar: {
-            type:String
+            type: String
         },
         fullName: { type: String, required: true, trim: true },
         email: { type: String, unique: true, trim: true, lowercase: true },
         username: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
+
         password: { type: String },
-        followers:[
+        followers: [
             {
-                type:Schema.Types.ObjectId
+                type: Schema.Types.ObjectId
             }
         ],
         followees: [
@@ -26,7 +28,10 @@ const UserSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'users'
             }
-        ]
+        ],
+        bio: {
+            type: String
+        }
     },
     {
         timestamps: true

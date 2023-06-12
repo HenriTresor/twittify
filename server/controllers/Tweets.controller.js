@@ -7,7 +7,7 @@ import { ObjectId } from 'mongoose'
 export const createTweet = async (req, res, next) => {
     try {
 
-        let { author, post_content, type } = req.body
+        let { author, post_content, type, audience } = req.body
         if (!author || post_content === null) return next(errorResponse(400, 'please provide the required data'))
 
         // check if author exists
@@ -19,7 +19,8 @@ export const createTweet = async (req, res, next) => {
         let newTweet = new TweetsModel({
             author,
             post_content,
-            type
+            type,
+            audience
         })
 
         await newTweet.save()
