@@ -12,24 +12,47 @@
 .new-tweet-container> div{
     display: flex;
     width: 100%;
-    padding: 0.9em;
+    padding: 0.2em;
     margin: 0.03em 0;
     align-items: center;
     justify-content: space-between;
+}
+
+.EmojiPickerReact{
+    position: absolute !important;
+    /* z-index:  !important; */
+    top: 13em;
+    right: 0;
+    height: 350px !important;
+    z-index: 2;
+}
+
+select{
+    padding: 0.2em 1em;
+    font-weight: bolder;
+    background: none;
+    color: #1d98f0;
+    border-radius: 10px;
+}
+select{
+    background: black;
+    color: white;
 }
 .new-tweet-container textarea{
     width: 100%;
     background: none;
     color: white;
     border: none;
-    outline:1px solid gray;
+    outline:none;
     margin-left: 1em;
-    padding: 1em;
-    border-radius: 20px;
+    padding: 0.2em;
     font-weight: 500;
     resize: vertical;
     font-size: 1.2em;
     letter-spacing: 1.2px;
+}
+.new-tweet-container textarea::-webkit-resizer{
+    /* display: none; */
 }
 textarea::-webkit-scrollbar{
     display: none;

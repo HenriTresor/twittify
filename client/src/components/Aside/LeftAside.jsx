@@ -23,7 +23,7 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
             <div
                 className='left-aside aside'
             >
-                {
+                    {
                     gettingProfile ? <Loading /> : (
                         <>
                             <ul className='nav-items'>

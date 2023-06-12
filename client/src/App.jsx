@@ -138,7 +138,7 @@ const App = () => {
         )
       }
       <BottomNav />
-      <LeftAside
+    <LeftAside
         setWhichModal={setWhichModal}
         gettingProfile={gettingProfile}
         setIsOpen={setIsOpen}
