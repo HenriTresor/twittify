@@ -16,9 +16,14 @@
     /* position: relative; */
     width: auto;
     display: grid;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
     place-items: center;
     background: black;
     padding: 1em 2em;
+    /* max-width: 45dvw; */
+    min-width: 45dvw;
     border-radius: 10px;
     place-content: center;
     box-shadow:  0px 0px 30px rgba(128, 128, 128, 0.298);
@@ -48,5 +53,12 @@
     border-bottom: 1px solid white;
     /* border-radius: 10px; */
     margin: 1em 0;
+    width: 100%;
     outline: none;
+}
+
+@media screen and (max-width: 768px) {
+    .modal> div {
+        width: 100%;
+    }
 }

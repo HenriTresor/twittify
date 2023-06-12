@@ -13,7 +13,6 @@ import { useSelector } from 'react-redux'
 import { getUser, getUserTweets } from '../../utils/function'
 
 const Profile = () => {
-    const location = useLocation()
     const { user: currentUser } = useSelector(state => state.auth)
     const { username } = useParams()
     const [user, setUser] = useState({})

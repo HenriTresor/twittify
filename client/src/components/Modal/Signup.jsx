@@ -91,7 +91,17 @@ const Signup = ({ setWhichModal, setIsOpen }) => {
         <hr style={{ width: '100px' }} />
       </div>
 
+      
       <div>
+        {
+          inputValues.fullName !== '' && (
+            <Typography variant="body2" color={'GrayText'}>
+              your
+              username will look like this,
+              @{inputValues.fullName?.toLowerCase()?.split(' ')?.join('_')} <br/>, you can update it later
+            </Typography>
+          )
+        }
         <div className="input_container">
           <TextField
             //   color='white'
@@ -102,6 +112,7 @@ const Signup = ({ setWhichModal, setIsOpen }) => {
             name="email"
           />
         </div>
+        
         <div className="input_container">
           <TextField
             //   color='white'
@@ -111,6 +122,7 @@ const Signup = ({ setWhichModal, setIsOpen }) => {
             sx={{ color: 'white' }}
             label='full name'
           />
+         
         </div>
         <div className="input_container">
           <TextField

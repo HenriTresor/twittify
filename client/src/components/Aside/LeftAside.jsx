@@ -56,9 +56,11 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                             <li>
                                                 <Twitter />
                                                 <span>Twitter blue</span></li>
-                                            <li>
-                                                <PersonRounded />
-                                                <span>Profile</span></li>
+                                            <Link to={`/${user?.username}`}>
+                                                <li>
+                                                    <PersonRounded />
+                                                    <span>Profile</span></li>
+                                            </Link>
                                             <li>
                                                 <MoreHoriz />
                                                 <span>More</span> </li>

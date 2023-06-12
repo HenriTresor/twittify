@@ -23,7 +23,7 @@ const createUser = async (req, res, next) => {
         let newUser = new User({
             fullName: value.fullName,
             email: value.email,
-            username: `${value.fullName.split(' ').join('_')}`,
+            username: `${value.fullName.toLowerCase().split(' ').join('_')}`,
             password: hashedPwd
         })
 
