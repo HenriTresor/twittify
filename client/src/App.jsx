@@ -155,9 +155,9 @@ const App = () => {
       <RegModal isOpen={isOpen} setIsOpen={setIsOpen} setWhichModal={setWhichModal}>
         {
           whichModal === 'login'
-            ? <Login setWhichModal={setWhichModal} />
-            : whichModal === 'signup' ? <Signup setWhichModal={setWhichModal} />
-              : whichModal === 'new-tweet' ? <NewTweet /> : ''
+            ? <Login setWhichModal={setWhichModal} setIsOpen={setIsOpen} />
+            : whichModal === 'signup' ? <Signup setWhichModal={setWhichModal} setIsOpen={setIsOpen} />
+              : whichModal === 'new-tweet' ? <NewTweet setIsOpen={setIsOpen} /> : ''
         }
       </RegModal>
     </div>

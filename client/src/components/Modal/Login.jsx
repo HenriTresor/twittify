@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import {login } from '../../redux/Slices/AuthSlice'
 
-const Login = ({ setWhichModal }) => {
+const Login = ({ setWhichModal, setIsOpen }) => {
 
      const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -52,6 +52,7 @@ const Login = ({ setWhichModal }) => {
       document.cookie = `access_token=${data?.access_token}`
       dispatch(login({user: data?.user}))
       navigate('/home')
+      setIsOpen(false)
     } catch (error) {
       setIsLoading(false)
       console.log('erro', error)

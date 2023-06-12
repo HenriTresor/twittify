@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux'
 import EmojiPicker from 'emoji-picker-react'
 import { Select, MenuItem, FormControl } from '@mui/material'
 
-const NewTweet = () => {
+const NewTweet = ({setIsOpen}) => {
 
     const { user } = useSelector(state => state.auth)
     let [post_content, setPost_content] = useState({
@@ -41,6 +41,7 @@ const NewTweet = () => {
             console.log('tweetin response', res)
             if (res.data.status) {
                 navigate(`/${res.data.newTweet.author?.username}/status/${res.data.newTweet._id}`)
+                setIsOpen(false)
                 return
             }
             alert(res.response.data.message)
