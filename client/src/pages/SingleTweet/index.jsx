@@ -136,7 +136,11 @@ const SingleTweet = () => {
 
                                 <IconButton
 
-                                    sx={{ ...iconButtonStyles, color: findIfLiked(post, user) ? 'green' : 'grey', border: findIfLiked(post, user) ? '1px solid green' : 'none' }}
+                                    sx={
+                                        {
+                                            ...iconButtonStyles,
+                                            color: findIfLiked(post, user) ? 'green' : 'grey', border: findIfLiked(post, user) ? '1px solid green' : 'none'
+                                        }}
                                     onClick={() => {
                                         !findIfLiked(post, user) ?
                                             likeTweet({ tweetId: post._id, likerId: user?._id }) && setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] }))

@@ -19,6 +19,7 @@ import Signup from './components/Modal/Signup'
 import { getCookie, getUserProfile } from './utils/function'
 import { login, logout } from './redux/Slices/AuthSlice'
 import { useDispatch } from 'react-redux'
+import NewTweet from './components/NewTweet'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -137,7 +138,11 @@ const App = () => {
         )
       }
       <BottomNav />
-      <LeftAside gettingProfile={gettingProfile} />
+      <LeftAside
+        setWhichModal={setWhichModal}
+        gettingProfile={gettingProfile}
+        setIsOpen={setIsOpen}
+      />
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path='/' element={<Homepage />} />
@@ -149,7 +154,10 @@ const App = () => {
       <RightAside gettingProfile={gettingProfile} />
       <RegModal isOpen={isOpen} setIsOpen={setIsOpen} setWhichModal={setWhichModal}>
         {
-          whichModal === 'login' ? <Login setWhichModal={setWhichModal} /> : <Signup setWhichModal={setWhichModal}  />
+          whichModal === 'login'
+            ? <Login setWhichModal={setWhichModal} />
+            : whichModal === 'signup' ? <Signup setWhichModal={setWhichModal} />
+              : whichModal === 'new-tweet' ? <NewTweet /> : ''
         }
       </RegModal>
     </div>

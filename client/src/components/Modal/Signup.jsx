@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 // import React from 'react'
 import { Typography, TextField, Snackbar } from "@mui/material"
 import { buttonStyles } from "../Aside/buttonStyles"
@@ -45,7 +47,10 @@ const Signup = ({ setWhichModal }) => {
       setIsLoading(false)
       console.log('erro', error)
       alert('error occured')
-      return setError(prev => ({ status: true, message: error.response?.data.message }))
+      return setError(prev => ({
+        status: true,
+        message: error.response?.data.message
+      }))
     }
   }
   return (
@@ -56,7 +61,10 @@ const Signup = ({ setWhichModal }) => {
         }}
         open={error.status}
         message={error.message}
-        onClose={() => setError(prev => ({ ...prev, status: false }))}
+        onClose={() => setError(prev => ({
+          ...prev,
+          status: false
+        }))}
         autoHideDuration={7000}
       />
       <Typography color={'#1d98f0'}>
@@ -67,7 +75,8 @@ const Signup = ({ setWhichModal }) => {
       </Typography>
       <button style={{
         ...buttonStyles,
-        padding: '0.2em', display: 'flex', alignItems: 'center', justifyContent: "center", gap: '1em'
+        padding: '0.2em', display: 'flex',
+        alignItems: 'center', justifyContent: "center", gap: '1em'
       }}> <Google />Sign up with Google</button>
       <div style={{
         display: "flex",

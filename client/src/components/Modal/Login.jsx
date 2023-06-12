@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 // import React from 'react'
 import { Typography, TextField, Snackbar } from "@mui/material"
 import { buttonStyles } from "../Aside/buttonStyles"
@@ -24,7 +26,10 @@ const Login = ({ setWhichModal }) => {
   })
 
   const handleChange = (e) => {
-    setInputValues(prev => ({ ...prev, [e.target.name]: e.target.value }))
+    setInputValues(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
     }
 
     
@@ -39,7 +44,10 @@ const Login = ({ setWhichModal }) => {
       console.log('data', data)
       setIsLoading(false)
       if (!data.status) {
-        return setError(prev => ({ status: true, message: data.message }))
+        return setError(prev => ({
+          status: true,
+          message: data.message
+        }))
       }
       document.cookie = `access_token=${data?.access_token}`
       dispatch(login({user: data?.user}))
@@ -47,7 +55,10 @@ const Login = ({ setWhichModal }) => {
     } catch (error) {
       setIsLoading(false)
       console.log('erro', error)
-      return setError(prev => ({ status: true, message: error.response?.data.message }))
+      return setError(prev => ({
+        status: true,
+        message: error.response?.data.message
+      }))
     }
   }
     

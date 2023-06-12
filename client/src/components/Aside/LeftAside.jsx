@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Loading from '../Loading'
 
-const LeftAside = ({ gettingProfile }) => {
+const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
 
     const { isLoggedIn, user } = useSelector(state => state.auth)
     const { windowSize } = useContext(AppData)
@@ -62,7 +62,12 @@ const LeftAside = ({ gettingProfile }) => {
                                             <li>
                                                 <MoreHoriz />
                                                 <span>More</span> </li>
-                                            <IconButton style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1em' }}>
+                                            <IconButton
+                                                onClick={() => {
+                                                    setIsOpen(true)
+                                                    setWhichModal('new-tweet')
+                                            }}
+                                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1em' }}>
                                                 <Add />
 
                                                 {windowSize > 930 && 'Tweet'}
