@@ -123,7 +123,7 @@ export const LikeTweet = async (req, res, next) => {
         // check if does'nt alredy like the tweet
 
         let check = tweet?.post_likes?.find(like => like.toString() === likerId)
-        if(check) return next(errorResponse(409, 'user already likes the tweet')) 
+        if (check) return next(errorResponse(409, 'user already likes the tweet'))
         // add like
 
         await TweetsModel.findByIdAndUpdate(tweetId, {
@@ -136,6 +136,29 @@ export const LikeTweet = async (req, res, next) => {
         res.status(201).json({ status: true, message: 'like added successfully' })
     } catch (error) {
         console.log("error liking tweet", error.message)
+        next(errorResponse(500, 'unexpected error occurred'))
+    }
+}
+
+export const getTweetsByUser = async (req, res, next) => {
+    try {
+
+        let { id } = req.params
+
+        // check user
+
+        let user = await checkUser(id)
+        if (!user) return next(errorResponse(404, `user with ${id} id was not found`))
+
+        //
+
+        let userTweets = await TweetsModel.find({ author: id }).populate('post_likes')
+        res.status(200).json({
+            status: true,
+            tweets: userTweets
+        })
+    } catch (error) {
+        console.log('error gettingTweetsByUser', error.message)
         next(errorResponse(500, 'unexpected error occurred'))
     }
 }

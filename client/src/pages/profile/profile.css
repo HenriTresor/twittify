@@ -40,3 +40,8 @@
 .user-bio{
     margin: 1em 0;
 }
+
+.user-metadata  *{
+    color: grey;
+    font-size: 0.9em;
+}

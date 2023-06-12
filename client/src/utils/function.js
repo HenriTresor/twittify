@@ -48,6 +48,19 @@ export const findIfLiked = (post, user) => {
 export const handleLiking = () => {
 
 }
+
+export const getUserTweets = async (id) => {
+    try {
+        
+        const res = await axios.get(`${serverLink}/api/v1/tweets/user/${id}`)
+        return res.data
+    } catch (error) {
+        console.log('error getting userTweets', error.message)
+        return {
+            error:error.message
+        }
+    }
+}
 export {
     likeTweet, getCookie
 }

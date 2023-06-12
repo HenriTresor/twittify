@@ -4,7 +4,8 @@ import {
     createReply,
     createTweet,
     getTweet,
-    getTweets
+    getTweets,
+    getTweetsByUser
 } from '../controllers/Tweets.controller.js'
 
 const router = Router()
@@ -14,5 +15,6 @@ router.get('/', getTweets)
 router.get('/:id', getTweet)
 router.put('/reply', createReply)
 router.put('/like', LikeTweet)
+router.get('/user/:id', getTweetsByUser)
 
 export default router
