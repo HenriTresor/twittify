@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './profile.css'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import serverLink from '../../utils/server.link'
 import Loading from '../../components/Loading'
@@ -10,20 +10,40 @@ import { ArrowBack, CalendarMonth } from '@mui/icons-material'
 import { buttonStyles } from '../../components/Aside/buttonStyles'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
-import { getUserTweets } from '../../utils/function'
+import { getUser, getUserTweets } from '../../utils/function'
 
 const Profile = () => {
+    const location = useLocation()
     const { user: currentUser } = useSelector(state => state.auth)
     const { username } = useParams()
     const [user, setUser] = useState({})
     const navigate = useNavigate()
-    const { data, isLoading, error } = useFetch(`${serverLink}/api/v1/users/${username}`)
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState({
+        status: false,
+        message: null
+    })
     const [userTweets, setUserTweets] = useState([])
+
     useEffect(() => {
-        if (data?.status) {
-            setUser(data?.user)
+        console.log(username)
+        async function getProfile() {
+            setIsLoading(true)
+            const data = username && await getUser(username)
+            setIsLoading(false)
+            if (data?.status) {
+                console.log('d', data)
+                setUser(data.user)
+                return
+            }
+            setError({
+                status: true,
+                message: data?.message
+            })
         }
-    }, [data])
+        username !== undefined &&  getProfile()
+    }, [username])
+
 
     useEffect(() => {
         let isCancelled = true
@@ -62,7 +82,7 @@ const Profile = () => {
                                         <Typography color={'GrayText'}>
                                             {userTweets?.length || 0} Tweets
                                         </Typography>
-                                  </div>
+                                    </div>
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '3em' }}>
                                     <div className='user-photos-container'>

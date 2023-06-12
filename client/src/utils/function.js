@@ -49,15 +49,27 @@ export const handleLiking = () => {
 
 }
 
+export const getUser = async (username) => {
+    try {
+
+        const res = await axios.get(`${serverLink}/api/v1/users/${username}`)
+        return res.data
+    } catch (error) {
+        console.log('error getting user profile', error.message)
+        return {
+            error: error.message
+        }
+    }
+}
 export const getUserTweets = async (id) => {
     try {
-        
+
         const res = await axios.get(`${serverLink}/api/v1/tweets/user/${id}`)
         return res.data
     } catch (error) {
         console.log('error getting userTweets', error.message)
         return {
-            error:error.message
+            error: error.message
         }
     }
 }

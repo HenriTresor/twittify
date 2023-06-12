@@ -100,7 +100,7 @@ const App = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-evenly',
-              padding: '1em'
+              padding: '1em',zIndex:'99999'
             }}
           >
             <div>
