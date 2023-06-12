@@ -100,7 +100,9 @@ const App = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-evenly',
-              padding: '1em',zIndex:'99999'
+              padding: '0.7em', zIndex: '99999', alignContent: 'center',
+              borderTopLeftRadius:'10px',
+              borderTopRightRadius:'10px',
             }}
           >
             <div>
@@ -111,7 +113,7 @@ const App = () => {
                 People on Twitter are the first to know
               </Typography>
             </div>
-            <div>
+            <div> 
               <button
                 onClick={() => {
                   setIsOpen(true)
@@ -121,7 +123,7 @@ const App = () => {
                   ...buttonStyles,
                   background: 'none',
                   border: '1px solid white',
-                  color:'white'
+                  color:'white', marginBottom:22
                 }}>
                 login
               </button>

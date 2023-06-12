@@ -53,14 +53,14 @@ const TweetSchema = new Schema({
     ],
     type: {
         type: String,
+        enum: ['reply', 'actual-tweet', 'retweeted'],
         required: true,
-        enum: ['reply', 'actual-tweet'],
         default: 'actual-tweet',
     },
     audience: {
         type: String,
         enum: ['everyone', 'circle'],
-        default:'everyone'
+        default: 'everyone'
     }
 
 },

@@ -88,7 +88,11 @@ const SingleTweet = () => {
 
                         <div className="single-tweet-body">
                             <div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.2em' }}>
+                                <div
+                                    onClick={() => {
+                                        navigate(`/${post?.author?.username}`)
+                                    }}
+                                    style={{ display: 'flex', cursor:'pointer',alignItems: 'center', gap: '1.2em' }}>
                                     <Avatar />
                                     <div>
                                         <Typography>
@@ -127,7 +131,7 @@ const SingleTweet = () => {
                                     {post?.post_comments?.length} <Typography variant='span' color={'GrayText'}>Comments</Typography>
                                 </Typography>
                                 <Typography sx={{display:'flex', gap:1}}>
-                                    {post?.audience === 'everyone' ? <Public /> : <GroupRounded />} <Typography variant='span' color={'GrayText'}> { post?.audience}</Typography>
+                                    {post?.audience === 'everyone' ? <Public /> : <GroupRounded />} 
                                 </Typography>
                             </div>
                             <div

@@ -9,3 +9,8 @@ export const buttonStyles = {
     border: 'none',
     cursor: 'pointer',
 };
+
+export let iconButtonStyles = {
+    color: 'grey', gap: 1
+}
+

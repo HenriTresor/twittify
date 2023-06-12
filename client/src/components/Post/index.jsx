@@ -1,32 +1,37 @@
 // import React from 'react'
 import './Post.css'
-import propTypes from 'prop-types'
 import { Avatar, Typography, IconButton } from '@mui/material'
 import {
     Comment,
     Share, Public, GroupRounded, HeartBroken, BarChart, RedoRounded
 } from '@mui/icons-material'
 import moment from 'moment'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // import { LikeTweet } from '../../../../server/controllers/Tweets.controller'
 import { likeTweet } from '../../utils/function'
 import { useSelector } from 'react-redux'
+import propTypes from 'prop-types'
+import { iconButtonStyles } from '../Aside/buttonStyles'
 
-export let iconButtonStyles = {
-    color: 'grey', gap: 1
-}
+
 const Post = ({
     author, commentor,
     createdAt, post_content,
     post_comments,audience,
-    post_likes, post_views, post_retweets, _id, reply_content, time
+    post_likes, post_views, post_retweets, _id, reply_content,
+    time
 }) => {
+    const navigate = useNavigate()
     const { user } = useSelector(state => state.auth)
     return (
         <div
             className='post-container'
         >
-            <div className='post-header'>
+            <div
+                onClick={() => {
+                    navigate(`/${author?.username || commentor?.username}`)
+                }}
+                className='post-header'>
                 <Avatar src={author?.avatar} />
                 <Typography>
                     {author?.fullName || commentor?.fullName}
@@ -94,19 +99,20 @@ const Post = ({
     )
 }
 
-Post.prototype = {
-    avatar: propTypes.string.isRequired,
-    author: propTypes.string.isRequired,
-    author_uname: propTypes.string.isRequired,
-    posted_on: propTypes.string.isRequired,
-    post_content: {
-        post_text: propTypes.string,
-        post_image: propTypes.string
-    },
+Post.propTypes = {
+    avatar: propTypes.string,
+    author: propTypes.object.isRequired,
+    post_content: propTypes.object,
     post_comments: propTypes.array,
     post_retweets: propTypes.array,
     post_likes: propTypes.array,
-    post_views: propTypes.array
+    post_views: propTypes.array,
+    createdAt: propTypes.string,
+    commentor: propTypes.object,
+    audience: propTypes.string,
+    time: propTypes.string,
+    _id: propTypes.string,
+    reply_content: propTypes.object,
 }
 
 export default Post
