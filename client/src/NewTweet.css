@@ -18,14 +18,7 @@
     justify-content: space-between;
 }
 
-.EmojiPickerReact{
-    position: absolute !important;
-    /* z-index:  !important; */
-    top: 13em;
-    right: 0;
-    height: 350px !important;
-    z-index: 2;
-}
+
 
 select{
     padding: 0.2em 1em;

@@ -3,7 +3,8 @@ import './Post.css'
 import propTypes from 'prop-types'
 import { Avatar, Typography, IconButton } from '@mui/material'
 import {
-    Comment, Share, HeartBroken, BarChart, RedoRounded
+    Comment,
+    Share, Public, GroupRounded, HeartBroken, BarChart, RedoRounded
 } from '@mui/icons-material'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
@@ -17,7 +18,7 @@ export let iconButtonStyles = {
 const Post = ({
     author, commentor,
     createdAt, post_content,
-    post_comments,
+    post_comments,audience,
     post_likes, post_views, post_retweets, _id, reply_content, time
 }) => {
     const { user } = useSelector(state => state.auth)
@@ -29,8 +30,12 @@ const Post = ({
                 <Avatar src={author?.avatar} />
                 <Typography>
                     {author?.fullName || commentor?.fullName}
-                    <Typography variant='body2' sx={{ ml: 1, }} color={'GrayText'}>
-                        @{author?.username || commentor?.username} • {moment(createdAt || time).fromNow()}
+                    <Typography variant='body2' sx={{ ml: 1, display:'flex', alignItems:'center'}} color={'GrayText'}>
+                        @{author?.username || commentor?.username} • {moment(createdAt || time).fromNow()} • {
+                            !commentor && (
+                                <Typography sx={{ display: 'flex', alignItems: 'center', }}> {audience === 'everyone' ? <Public /> : <GroupRounded />}</Typography>
+                            )
+                        }
                     </Typography>
                 </Typography>
 

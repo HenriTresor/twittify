@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react'
-import { ArrowBack, MoreHoriz, CommentBank, ShareSharp, HeartBroken, Bookmark, Photo, GifBoxOutlined, EmojiEmotions, RedoRounded, } from '@mui/icons-material'
+import { ArrowBack, MoreHoriz, Public, GroupRounded, CommentBank, ShareSharp, HeartBroken, Bookmark, Photo, GifBoxOutlined, EmojiEmotions, RedoRounded, } from '@mui/icons-material'
 import { Typography, Avatar, IconButton, Box, Snackbar } from '@mui/material'
 import '../../NewTweet.css'
 import { iconButtonStyles } from '../../components/Post'
@@ -15,6 +15,7 @@ import Error from '../../components/Error'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { findIfLiked, likeTweet } from '../../utils/function'
+import EmojiPicker from 'emoji-picker-react'
 
 const divStyles = {
     display: 'flex', justifyContent: 'start', gap: '1em', borderBottom: '1px solid gray', borderTop: '1px solid gray', width: '100%', padding: '1em'
@@ -23,6 +24,7 @@ const divStyles = {
 const SingleTweet = () => {
     const { user } = useSelector(state => state.auth)
     const navigate = useNavigate()
+    const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
     const { postId } = useParams()
     const [isReplying, setIsReplying] = useState(false)
     const [reply_content, setReply_content] = useState({
@@ -60,6 +62,7 @@ const SingleTweet = () => {
         <div
             className='body-container'
         >
+           
             <Snackbar
                 open={SnackbarMsg}
                 onClose={() => setSnackbarMsg(null)}
@@ -123,6 +126,9 @@ const SingleTweet = () => {
                                 <Typography>
                                     {post?.post_comments?.length} <Typography variant='span' color={'GrayText'}>Comments</Typography>
                                 </Typography>
+                                <Typography sx={{display:'flex', gap:1}}>
+                                    {post?.audience === 'everyone' ? <Public /> : <GroupRounded />} <Typography variant='span' color={'GrayText'}> { post?.audience}</Typography>
+                                </Typography>
                             </div>
                             <div
                                 style={{ ...divStyles, justifyContent: 'space-between' }}
@@ -158,10 +164,25 @@ const SingleTweet = () => {
                                 </IconButton>
                             </div>
                             <div className="new-tweet-container">
+                                {
+                                    isEmojiPickerOpen && (
+                                        <div className='emoji-picker'>
+                                            <EmojiPicker
+                                                lazyLoadEmojis={true}
+                                                theme='dark'
+                                                previewConfig={{
+                                                    showPreview: true
+                                                }}
+                                                emojiStyle='facebook'
+                                                onEmojiClick={(e) => setReply_content(prev => ({ ...prev, reply_text: prev.reply_text + e.emoji }))}
+                                            />
+                                        </div>
+                                    )
+                                }
                                 <div>
                                     <Avatar />
                                     <textarea
-
+                                            value={reply_content.reply_text}
                                         placeholder='Tweet Your reply!'
                                         onChange={(e) => setReply_content({ ...reply_content, reply_text: e.target.value })}
                                         type="text"></textarea>
@@ -175,7 +196,9 @@ const SingleTweet = () => {
                                             <GifBoxOutlined />
                                         </IconButton>
 
-                                        <IconButton color='info'>
+                                        <IconButton
+                                        onClick={()=>setIsEmojiPickerOpen(!isEmojiPickerOpen)}
+                                            color='info'>
                                             <EmojiEmotions />
                                         </IconButton>
 

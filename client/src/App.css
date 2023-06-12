@@ -27,6 +27,15 @@ html{
     padding-bottom: 10em;
 }
 
+.EmojiPickerReact{
+    position: absolute !important;
+    /* z-index:  !important; */
+    top: 13em;
+    right: 0;
+    height: 350px !important;
+    z-index: 2;
+}
+
 a,
 a:visited,
 a:focus,
