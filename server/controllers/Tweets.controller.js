@@ -38,7 +38,10 @@ export const createTweet = async (req, res, next) => {
 export const getTweets = async (req, res, next) => {
     try {
 
-        let tweets = await TweetsModel.find({}).populate('author').sort({ createdAt: -1 })
+        let tweets = await TweetsModel.find({})
+            .populate('author')
+            .populate('post_likes')
+            .sort({ createdAt: -1 })
         res.status(200).json({
             status: true,
             tweets

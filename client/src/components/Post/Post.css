@@ -25,9 +25,12 @@
     justify-content: space-evenly;
 }
 .post-reactions div > *{
-    font-size: 0.9em;
+    font-size:0.9em;
 }
 
+.post-reactions button  *{
+    font-size: 0.8em;
+}
 .post-body{
     margin-left: 3.2em;
 }

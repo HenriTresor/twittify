@@ -135,15 +135,9 @@ const SingleTweet = () => {
                                 </Typography>
                             </div>
                             <div
-                                style={{ ...divStyles, justifyContent: 'space-between' }}
+                                className='post-reactions'
+                                style={{ ...divStyles, justifyContent: 'space-evenly' }}
                             >
-                                <IconButton sx={{ ...iconButtonStyles }} color='inherit'>
-                                    <CommentBank />
-                                </IconButton>
-                                <IconButton sx={iconButtonStyles} color='inherit'>
-                                    <RedoRounded />
-                                </IconButton>
-
                                 <IconButton
 
                                     sx={
@@ -151,21 +145,22 @@ const SingleTweet = () => {
                                             ...iconButtonStyles,
                                             color: findIfLiked(post, user) ? 'green' : 'grey', border: findIfLiked(post, user) ? '1px solid green' : 'none'
                                         }}
-                                    onClick={() => {
-                                        !findIfLiked(post, user) ?
-                                            likeTweet({ tweetId: post._id, likerId: user?._id }) && setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] }))
-                                            : setPost(prev => ({ ...prev, post_likes: prev?.post_likes?.filter(post => post?._id !== post?._id) })) && findIfLiked(post, user)
+                                    onClick={async () => {
+                                        await likeTweet({ tweetId: post._id, likerId: user?._id })
+                                        findIfLiked(post, user) ? setPost(prev => ({ ...prev, post_likes: prev.post_likes?.filter(like => like?.username !== user?.username) }))
+                                            : setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] }))
                                     }}
                                 >
                                     <HeartBroken />
                                 </IconButton>
+                                <IconButton sx={{ ...iconButtonStyles }} color='inherit'>
+                                    <CommentBank />
+                                </IconButton>
                                 <IconButton sx={iconButtonStyles} color='inherit'>
-                                    <Bookmark />
+                                    <RedoRounded />
                                 </IconButton>
 
-                                <IconButton sx={iconButtonStyles} color='inherit'>
-                                    <ShareSharp />
-                                </IconButton>
+                              
                             </div>
                             {
                                 user && (
@@ -243,7 +238,7 @@ const SingleTweet = () => {
 
                                 post?.post_comments?.map(comment => {
                                     console.log('comment', comment)
-                                    return <Post {...comment} key={comment?.time} />
+                                    return <Post {...comment}  key={comment?.time} />
                                 })
                         }
                     </>

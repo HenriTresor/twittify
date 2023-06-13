@@ -11,6 +11,6 @@ export const buttonStyles = {
 };
 
 export let iconButtonStyles = {
-    color: 'grey', gap: 1
+    color: 'grey', gap: 1,
 }
 

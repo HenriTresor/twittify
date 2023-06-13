@@ -8,21 +8,31 @@ import {
 import moment from 'moment'
 import { Link, useNavigate } from 'react-router-dom'
 // import { LikeTweet } from '../../../../server/controllers/Tweets.controller'
-import { likeTweet } from '../../utils/function'
+import { findIfLiked, likeTweet } from '../../utils/function'
 import { useSelector } from 'react-redux'
 import propTypes from 'prop-types'
 import { iconButtonStyles } from '../Aside/buttonStyles'
+import { useState } from 'react'
 
 
 const Post = ({
     author, commentor,
     createdAt, post_content,
-    post_comments,audience,
-    post_likes, post_views, post_retweets, _id, reply_content,
+    post_comments, audience,
+    post_likes, post_retweets, _id, reply_content,
     time
 }) => {
     const navigate = useNavigate()
+    const [post, setPost] = useState({
+        author: author,
+        createdAt: createdAt,
+        _id: _id,
+        post_content: post_content,
+        post_likes: post_likes,
+
+    })
     const { user } = useSelector(state => state.auth)
+    console.log('post likes', user)
     return (
         <div
             className='post-container'
@@ -35,7 +45,7 @@ const Post = ({
                 <Avatar src={author?.avatar} />
                 <Typography>
                     {author?.fullName || commentor?.fullName}
-                    <Typography variant='body2' sx={{ ml: 1, display:'flex', alignItems:'center'}} color={'GrayText'}>
+                    <Typography variant='body2' sx={{ ml: 1, display: 'flex', alignItems: 'center' }} color={'GrayText'}>
                         @{author?.username || commentor?.username} • {moment(createdAt || time).fromNow()} • {
                             !commentor && (
                                 <Typography sx={{ display: 'flex', alignItems: 'center', }}> {audience === 'everyone' ? <Public /> : <GroupRounded />}</Typography>
@@ -56,7 +66,28 @@ const Post = ({
             {
                 !commentor && (
                     <div className="post-reactions">
-                        <IconButton color='info' sx={iconButtonStyles}>
+                        <IconButton
+
+                            onClick={async () => {
+                                await likeTweet({ tweetId: _id, likerId: user?._id })
+                                findIfLiked(post, user) ? setPost(prev => ({ ...prev, post_likes: prev.post_likes?.filter(like => like?.username !== user?.username) }))
+                                    : setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] }))
+                            }}
+
+                            sx={{
+                                ...iconButtonStyles, color: findIfLiked(post, user) ? 'green' : 'grey',
+                                border: 'none', p:'0'
+                            }}>
+                            <HeartBroken />
+                            <Typography>
+                                {post?.post_likes?.length}
+                            </Typography>
+                        </IconButton>
+                        <IconButton color='info'
+                            onClick={() => {
+                                navigate(`/${author?.username}/status/${post?._id}`)
+                            }}
+                            sx={iconButtonStyles}>
                             <Comment />
                             <Typography>
                                 {post_comments?.length}
@@ -68,30 +99,8 @@ const Post = ({
                                 {post_retweets?.length}
                             </Typography>
                         </IconButton>
-                        <IconButton
-                            onClick={() => {
-                                likeTweet({ tweetId: _id, likerId: user?._id })
-                                
-                            }}
-
-                            color='info' sx={iconButtonStyles}>
-                            <HeartBroken />
-                            <Typography>
-                                {post_likes?.length}
-                            </Typography>
-                        </IconButton>
-                        <IconButton color='info' sx={iconButtonStyles}>
-                            <BarChart />
-                            <Typography>
-                                {post_views?.length}
-                            </Typography>
-                        </IconButton>
-                        <IconButton color='info' sx={iconButtonStyles}>
-                            <Share />
-                            <Typography>
-                                {post_views?.length}
-                            </Typography>
-                        </IconButton>
+                       
+                        
                     </div>
                 )
             }
@@ -106,7 +115,6 @@ Post.propTypes = {
     post_comments: propTypes.array,
     post_retweets: propTypes.array,
     post_likes: propTypes.array,
-    post_views: propTypes.array,
     createdAt: propTypes.string,
     commentor: propTypes.object,
     audience: propTypes.string,
