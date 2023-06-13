@@ -15,7 +15,7 @@ import { getUser, getUserTweets } from '../../utils/function'
 const Profile = () => {
     const { user: currentUser } = useSelector(state => state.auth)
     const { username } = useParams()
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(null)
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState({
@@ -49,10 +49,10 @@ const Profile = () => {
         async function getTweets() {
             const res = await getUserTweets(user?._id)
             console.log('user tweets', res)
-            setUserTweets(res.tweets)
+            setUserTweets(res?.tweets)
         }
-        getTweets()
-        if (isCancelled && user._id) {
+        if (isCancelled) {
+            getTweets()
         }
         return () => isCancelled = false
     }, [user])
@@ -60,29 +60,32 @@ const Profile = () => {
         <div
             className='body-container'
         >
+
+            <div className="single-tweet-header">
+                <IconButton color='inherit'
+                    onClick={() => {
+                        navigate(-1)
+                    }}
+                >
+                    <ArrowBack />
+                </IconButton>
+                <div>
+                    <Typography variant='h6' fontWeight={'bolder'}>
+                        {user ? user?.fullName : 'Profile'}
+                    </Typography>
+                    <Typography color={'GrayText'}>
+                        {user && userTweets?.length === 1 ? 1 + ' Tweet' : userTweets?.length + ' Tweets'
+                            
+                            }
+                    </Typography>
+                </div>
+            </div>
             {
                 isLoading ? <Loading />
                     : error.status
                         ? <Error />
-                        : (
+                        : user !== null ? (
                             <>
-                                <div className="single-tweet-header">
-                                    <IconButton color='inherit'
-                                        onClick={() => {
-                                            navigate(-1)
-                                        }}
-                                    >
-                                        <ArrowBack />
-                                    </IconButton>
-                                    <div>
-                                        <Typography variant='h5' fontWeight={'bolder'}>
-                                            {user.fullName}
-                                        </Typography>
-                                        <Typography color={'GrayText'}>
-                                            {userTweets?.length || 0} Tweets
-                                        </Typography>
-                                    </div>
-                                </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '3em' }}>
                                     <div className='user-photos-container'>
                                         <div>
@@ -96,9 +99,31 @@ const Profile = () => {
                                                 id='user-photo'
                                             />
                                         </div>
-                                        <button
-                                            style={{ ...buttonStyles, width: 'auto', background: 'none', color: 'white', outline: '1px solid white', padding: '0.7em' }}
-                                        >Edit profile</button>
+                                        {
+                                            currentUser && (
+                                                <>
+                                                    {
+                                                        currentUser?._id === user?._id ? (
+                                                            <button
+                                                                style={{
+                                                                    ...buttonStyles, width: 'auto',
+                                                                    background: 'none', color: 'white', outline: '1px solid white', padding: '0.7em'
+                                                                }}
+                                                            >Edit profile
+                                                            </button>
+                                                        ) : (
+                                                            <button
+                                                                style={{
+                                                                    ...buttonStyles, width: 'auto', background: 'white', color: 'black',
+                                                                    padding: '0.7em'
+                                                                }}
+                                                            >Follow
+                                                            </button>
+                                                        )
+                                                }
+                                                </>
+                                            )
+                            }
                                     </div>
 
                                     <div className='user-information'>
@@ -129,7 +154,7 @@ const Profile = () => {
                                     </div>
                                 </div>
                             </>
-                        )
+                        ) : ''
             }
         </div>
     )

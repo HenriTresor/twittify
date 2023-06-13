@@ -123,7 +123,17 @@ export const LikeTweet = async (req, res, next) => {
         // check if does'nt alredy like the tweet
 
         let check = tweet?.post_likes?.find(like => like.toString() === likerId)
-        if (check) return next(errorResponse(409, 'user already likes the tweet'))
+        if (check) {
+            await TweetsModel.findByIdAndUpdate(tweetId, {
+                $pull: {
+                    post_likes: likerId
+                }
+            })
+            return res.status(200).json({
+                status: false,
+                message: 'unliked tweet successfully'
+            })
+        }
         // add like
 
         await TweetsModel.findByIdAndUpdate(tweetId, {

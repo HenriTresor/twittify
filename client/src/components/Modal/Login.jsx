@@ -9,11 +9,14 @@ import axios from "axios"
 import serverLink from "../../utils/server.link"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import {login } from '../../redux/Slices/AuthSlice'
+import { login } from '../../redux/Slices/AuthSlice'
+import { useLocation } from "react-router-dom"
+import LoginBlurry from "../LoadingBlurry"
 
 const Login = ({ setWhichModal, setIsOpen }) => {
 
-     const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [inputValues, setInputValues] = useState({
     email: '',
@@ -30,9 +33,9 @@ const Login = ({ setWhichModal, setIsOpen }) => {
       ...prev,
       [e.target.name]: e.target.value
     }))
-    }
+  }
 
-    
+
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
@@ -50,8 +53,8 @@ const Login = ({ setWhichModal, setIsOpen }) => {
         }))
       }
       document.cookie = `access_token=${data?.access_token}`
-      dispatch(login({user: data?.user}))
-      navigate('/home')
+      dispatch(login({ user: data?.user }))
+      navigate(`${pathname}`)
       setIsOpen(false)
     } catch (error) {
       setIsLoading(false)
@@ -62,10 +65,13 @@ const Login = ({ setWhichModal, setIsOpen }) => {
       }))
     }
   }
-    
+
   return (
-      <div>
-           <Snackbar
+    <div>
+      {
+        isLoading && <LoginBlurry />
+      }
+      <Snackbar
         sx={{
           zIndex: 9999999999999999n
         }}
@@ -74,67 +80,67 @@ const Login = ({ setWhichModal, setIsOpen }) => {
         onClose={() => setError(prev => ({ ...prev, status: false }))}
         autoHideDuration={7000}
       />
-          <Typography color={'#1d98f0'}>
-              <Twitter />
-          </Typography>
-          <Typography variant='h6' letterSpacing={1} fontWeight={'bold'}>
-              Signin to Twitter
-          </Typography>
-          <button style={{
-              ...buttonStyles,
-              padding: '0.2em', display: 'flex', alignItems: 'center', justifyContent: "center", gap: '1em'
-          }}> <Google /> Sign in with Google</button>
+      <Typography color={'#1d98f0'}>
+        <Twitter />
+      </Typography>
+      <Typography variant='h6' letterSpacing={1} fontWeight={'bold'}>
+        Signin to Twitter
+      </Typography>
+      <button style={{
+        ...buttonStyles,
+        padding: '0.2em', display: 'flex', alignItems: 'center', justifyContent: "center", gap: '1em'
+      }}> <Google /> Sign in with Google</button>
 
-          <div style={{
-              display: "flex",
-              alignItems: 'center',
-              justifyContent: "center",
-          }}>
-              <hr style={{ width: '100px' }} />
-              <Typography sx={{m:'0 0.2em'}}>
-                  or
-                </Typography>
-               <hr style={{ width: '100px' }} />
-          </div>
+      <div style={{
+        display: "flex",
+        alignItems: 'center',
+        justifyContent: "center",
+      }}>
+        <hr style={{ width: '100px' }} />
+        <Typography sx={{ m: '0 0.2em' }}>
+          or
+        </Typography>
+        <hr style={{ width: '100px' }} />
+      </div>
 
-          <div>
-              <div className="input_container">
-                  <TextField 
-                //   color='white'
-                      sx={{ color: 'white' }}
+      <div>
+        <div className="input_container">
+          <TextField
+            //   color='white'
+            sx={{ color: 'white' }}
             onChange={(e) => handleChange(e)}
-                      label='email address'
-                      name="email"
-                      value={inputValues.email}
-                  />
-              </div>
-              <div className="input_container">
-                  <TextField 
-                //   color='white'
-                      fullWidth
+            label='email address'
+            name="email"
+            value={inputValues.email}
+          />
+        </div>
+        <div className="input_container">
+          <TextField
+            //   color='white'
+            fullWidth
             onChange={(e) => handleChange(e)}
-                      sx={{ color: 'white' }}
-                      name="password"
-                      value={inputValues.password}
-                      label='password'
-                  />
-              </div>
+            sx={{ color: 'white' }}
+            name="password"
+            value={inputValues.password}
+            label='password'
+          />
+        </div>
 
-              <div>
-                  <button
-                      onClick={handleSubmit}
-                      style={buttonStyles}>
-                      Sign in
-                  </button>
-              </div>
-              <Typography variant='p' fontSize={13} color={'GrayText'}>
-                  Don&apos;t have an account yet? <Typography
-                      onClick={() => setWhichModal('signup')}
-                      variant='span' color={'#1d98f0'} sx={{ cursor: 'pointer' }}>
-                      create one!
-                  </Typography>
-              </Typography>
-          </div>
+        <div>
+          <button
+            onClick={handleSubmit}
+            style={buttonStyles}>
+            Sign in
+          </button>
+        </div>
+        <Typography variant='p' fontSize={13} color={'GrayText'}>
+          Don&apos;t have an account yet? <Typography
+            onClick={() => setWhichModal('signup')}
+            variant='span' color={'#1d98f0'} sx={{ cursor: 'pointer' }}>
+            create one!
+          </Typography>
+        </Typography>
+      </div>
     </div>
   )
 }

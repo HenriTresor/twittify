@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { ArrowBack, MoreHoriz, Public, GroupRounded, CommentBank, ShareSharp, HeartBroken, Bookmark, Photo, GifBoxOutlined, EmojiEmotions, RedoRounded, } from '@mui/icons-material'
 import { Typography, Avatar, IconButton, Box, Snackbar } from '@mui/material'
 import '../../NewTweet.css'
-import { iconButtonStyles } from '../../components/Post'
 import './SingleTweet.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import Post from '../../components/Post'
@@ -16,6 +15,7 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { findIfLiked, likeTweet } from '../../utils/function'
 import EmojiPicker from 'emoji-picker-react'
+import { iconButtonStyles } from '../../components/Aside/buttonStyles'
 
 const divStyles = {
     display: 'flex', justifyContent: 'start', gap: '1em', borderBottom: '1px solid gray', borderTop: '1px solid gray', width: '100%', padding: '1em'
@@ -44,7 +44,7 @@ const SingleTweet = () => {
         setIsReplying(true)
         try {
             let reply = {
-                author: user._id,
+                author: user?._id,
                 reply_content,
                 tweetId: post?._id,
                 time: moment().format()
@@ -167,53 +167,59 @@ const SingleTweet = () => {
                                     <ShareSharp />
                                 </IconButton>
                             </div>
-                            <div className="new-tweet-container">
-                                {
-                                    isEmojiPickerOpen && (
-                                        <div className='emoji-picker'>
-                                            <EmojiPicker
-                                                lazyLoadEmojis={true}
-                                                theme='dark'
-                                                previewConfig={{
-                                                    showPreview: true
-                                                }}
-                                                emojiStyle='facebook'
-                                                onEmojiClick={(e) => setReply_content(prev => ({ ...prev, reply_text: prev.reply_text + e.emoji }))}
-                                            />
+                            {
+                                user && (
+                                    <>
+                                        <div className="new-tweet-container">
+                                            {
+                                                isEmojiPickerOpen && (
+                                                    <div className='emoji-picker'>
+                                                        <EmojiPicker
+                                                            lazyLoadEmojis={true}
+                                                            theme='dark'
+                                                            previewConfig={{
+                                                                showPreview: true
+                                                            }}
+                                                            emojiStyle='facebook'
+                                                            onEmojiClick={(e) => setReply_content(prev => ({ ...prev, reply_text: prev.reply_text + e.emoji }))}
+                                                        />
+                                                    </div>
+                                                )
+                                            }
+                                            <div>
+                                                <Avatar />
+                                                <textarea
+                                                    value={reply_content.reply_text}
+                                                    placeholder='Tweet Your reply!'
+                                                    onChange={(e) => setReply_content({ ...reply_content, reply_text: e.target.value })}
+                                                    type="text"></textarea>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <IconButton color='info'>
+                                                        <Photo />
+                                                    </IconButton>
+                                                    <IconButton color='info'>
+                                                        <GifBoxOutlined />
+                                                    </IconButton>
+
+                                                    <IconButton
+                                                        onClick={() => setIsEmojiPickerOpen(!isEmojiPickerOpen)}
+                                                        color='info'>
+                                                        <EmojiEmotions />
+                                                    </IconButton>
+
+                                                </div>
+                                                <button disabled={isReplying} onClick={createReply}>
+                                                    {
+                                                        isReplying ? '...' : 'reply'
+                                                    }
+                                                </button>
+                                            </div>  
                                         </div>
-                                    )
-                                }
-                                <div>
-                                    <Avatar />
-                                    <textarea
-                                            value={reply_content.reply_text}
-                                        placeholder='Tweet Your reply!'
-                                        onChange={(e) => setReply_content({ ...reply_content, reply_text: e.target.value })}
-                                        type="text"></textarea>
-                                </div>
-                                <div>
-                                    <div>
-                                        <IconButton color='info'>
-                                            <Photo />
-                                        </IconButton>
-                                        <IconButton color='info'>
-                                            <GifBoxOutlined />
-                                        </IconButton>
-
-                                        <IconButton
-                                        onClick={()=>setIsEmojiPickerOpen(!isEmojiPickerOpen)}
-                                            color='info'>
-                                            <EmojiEmotions />
-                                        </IconButton>
-
-                                    </div>
-                                    <button disabled={isReplying} onClick={createReply}>
-                                        {
-                                            isReplying ? '...' : 'reply'
-                                        }
-                                    </button>
-                                </div>
-                            </div>
+                                    </>
+                                )
+                          }
                         </div>
                         {/* <Post
                 author={'henri tresor'}
@@ -222,6 +228,9 @@ const SingleTweet = () => {
                 _id={'4848484848488546574'}
                 post_content={{ post_text: 'True!' }}
             /> */}
+                        <Typography sx={{m:'1em 0.2em'}} variant='h6' component={'h1'}>
+                            Recent Replies
+                    </Typography>
 
                         {
                             post?.post_comments?.length === 0 ? (

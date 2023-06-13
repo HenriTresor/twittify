@@ -21,7 +21,7 @@ const useFetch = (uri) => {
             setData(null)
             setError({
                 status: true,
-                message: error.response.data.message
+                message: error?.response?.data?.message
             })
         }
     }
