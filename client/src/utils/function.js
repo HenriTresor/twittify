@@ -46,7 +46,8 @@ export const findIfLiked = (post, user) => {
 }
 
 export const findIfFollows = (currentUser, user) => {
-    return currentUser?.followees?.find(followee => followee?._id === user?._id)
+    // console.log('inside findIfFollows function', currentUser, user)
+    return user?.followers?.find(follower => follower?._id === currentUser?._id)
 }
 export const handleLiking = () => {
 

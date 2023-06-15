@@ -20,7 +20,8 @@ const UserSchema = new Schema(
         password: { type: String },
         followers: [
             {
-                type: Schema.Types.ObjectId
+                type: Schema.Types.ObjectId,
+                ref: 'users'
             }
         ],
         followees: [

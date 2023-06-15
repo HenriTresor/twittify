@@ -20,16 +20,12 @@ const Profile = () => {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(true)
     const [tweetsLoading, setTweetsLoading] = useState(false)
-    const [SnackbarMsg, setSnackbarMsg] = useState(null)
-    const [error, setError] = useState({
+     const [error, setError] = useState({
         status: false,
         message: null
     })
     const [userTweets, setUserTweets] = useState([])
 
-    useEffect(() => {
-        console.log('find if following', findIfFollows(currentUser, user))
-    }, [user, currentUser])
     useEffect(() => {
         console.log(username)
         async function getProfile() {
@@ -67,12 +63,6 @@ const Profile = () => {
         <div
             className='body-container'
         >
-            <Snackbar
-                message={SnackbarMsg}
-                open={SnackbarMsg}
-                autoHideDuration={7000}
-                onClose={() => setSnackbarMsg(null)}
-            />
             <div className="single-tweet-header">
                 <IconButton color='inherit'
                     onClick={() => {
@@ -119,7 +109,7 @@ const Profile = () => {
                                                         currentUser?._id === user?._id ? (
                                                             <button
                                                                 style={{
-                                                                    ...buttonStyles, width: 'auto',
+                                                                    ...buttonStyles, width: '100px',
                                                                     background: 'none', color: 'white', outline: '1px solid white', padding: '0.7em'
                                                                 }}
                                                             >Edit profile
@@ -131,14 +121,22 @@ const Profile = () => {
                                                                         followerId: currentUser?._id,
                                                                         followedId: user?._id
                                                                     })
-                                                                    setSnackbarMsg(res.message || res.error)
+                                                                    setUser(prev => ({
+                                                                        ...prev, followers: !findIfFollows(currentUser, user)
+                                                                            ? [...prev.followers, currentUser]
+                                                                            : prev.followers.filter(follower => follower?._id !== currentUser?._id)
+                                                                    }))
+                                                                  
                                                                 }}
                                                                 style={{
-                                                                    ...buttonStyles, width: 'auto', background: 'white', color: 'black',
+                                                                    ...buttonStyles, width: '100px',
+                                                                    background: !findIfFollows(currentUser, user) ? 'white' : 'black',
+                                                                    color: !findIfFollows(currentUser, user) ? 'black' : 'red',
+                                                                    outline: !findIfFollows(currentUser, user) ? '' : '1px solid red',
                                                                     padding: '0.7em'
                                                                 }}
                                                             >{
-                                                                    findIfFollows(currentUser, user) ? 'following' : 'follow'
+                                                                    findIfFollows(currentUser, user) ? 'unfollow' : 'follow'
                                                                 }
                                                             </button>
                                                         )

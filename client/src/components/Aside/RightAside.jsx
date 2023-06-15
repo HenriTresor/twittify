@@ -11,6 +11,7 @@ import Loading from '../Loading'
 import Error from '../Error'
 import { useSelector } from 'react-redux'
 import { buttonStyles } from './buttonStyles'
+import { findIfFollows } from '../../utils/function'
 
 const RightAside = ({ gettingProfile }) => {
 
@@ -49,7 +50,7 @@ const RightAside = ({ gettingProfile }) => {
                                                 : error.status === null ? <Error />
                                                     : data?.users?.length === 0 ? 'no new users'
                                                         : data?.users?.map(user => (
-                                                            user?._id !== currentUser?._id ?
+                                                            user?._id !== currentUser?._id && !findIfFollows(currentUser, user) ?
                                                                 <Person {...user} key={user?._id} />
                                                                 : null
                                                         ))

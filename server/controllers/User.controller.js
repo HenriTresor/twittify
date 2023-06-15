@@ -72,7 +72,11 @@ const getUser = async (req, res, next) => {
     try {
         let { username } = req.params
         if (!username) return res.status(400).json({ status: false, message: 'user id is required' });
-        let user = await User.findOne({ username }).select('-password').populate('followers').populate('followees')
+        let user = await User.findOne({ username })
+            .select('-password')
+            .populate('followers')
+            .populate('followees')
+        console.log('user ', user)
         if (!user) return res.status(404).json({ status: false, message: 'user was not found' });
         return res.status(200).json({ status: true, user })
 
@@ -109,7 +113,7 @@ export const handleFollowUser = async (req, res, next) => {
                 }
             })
 
-            return res.status(200).json({status:true, message:'follow was removed successfully'})
+            return res.status(200).json({ status: true, message: 'follow was removed successfully' })
 
         }
         // update followers and followees
