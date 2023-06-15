@@ -5,12 +5,12 @@ import useFetch from '../../hooks/useFetch'
 import serverLink from '../../utils/server.link'
 import Loading from '../../components/Loading'
 import Error from '../../components/Error'
-import { Avatar, IconButton, Typography } from '@mui/material'
+import { Avatar, IconButton, Snackbar, Typography } from '@mui/material'
 import { ArrowBack, CalendarMonth } from '@mui/icons-material'
 import { buttonStyles } from '../../components/Aside/buttonStyles'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
-import { getUser, getUserTweets } from '../../utils/function'
+import { findIfFollows, followUser, getUser, getUserTweets } from '../../utils/function'
 import Post from '../../components/Post'
 
 const Profile = () => {
@@ -20,12 +20,16 @@ const Profile = () => {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(true)
     const [tweetsLoading, setTweetsLoading] = useState(false)
+    const [SnackbarMsg, setSnackbarMsg] = useState(null)
     const [error, setError] = useState({
         status: false,
         message: null
     })
     const [userTweets, setUserTweets] = useState([])
 
+    useEffect(() => {
+        console.log('find if following', findIfFollows(currentUser, user))
+    }, [user, currentUser])
     useEffect(() => {
         console.log(username)
         async function getProfile() {
@@ -63,7 +67,12 @@ const Profile = () => {
         <div
             className='body-container'
         >
-
+            <Snackbar
+                message={SnackbarMsg}
+                open={SnackbarMsg}
+                autoHideDuration={7000}
+                onClose={() => setSnackbarMsg(null)}
+            />
             <div className="single-tweet-header">
                 <IconButton color='inherit'
                     onClick={() => {
@@ -117,11 +126,20 @@ const Profile = () => {
                                                             </button>
                                                         ) : (
                                                             <button
+                                                                onClick={async () => {
+                                                                    const res = await followUser({
+                                                                        followerId: currentUser?._id,
+                                                                        followedId: user?._id
+                                                                    })
+                                                                    setSnackbarMsg(res.message || res.error)
+                                                                }}
                                                                 style={{
                                                                     ...buttonStyles, width: 'auto', background: 'white', color: 'black',
                                                                     padding: '0.7em'
                                                                 }}
-                                                            >Follow
+                                                            >{
+                                                                    findIfFollows(currentUser, user) ? 'following' : 'follow'
+                                                                }
                                                             </button>
                                                         )
                                                     }

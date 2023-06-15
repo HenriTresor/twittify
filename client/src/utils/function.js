@@ -8,7 +8,7 @@ let likeTweet = async (body) => {
     } catch (error) {
         console.log(error)
         return {
-            error
+            error: error.response.data.message || error.message
         }
     }
 }
@@ -36,7 +36,7 @@ export async function getUserProfile() {
     } catch (error) {
         console.log('error getting user profile', error.message)
         return {
-            error: error.message
+            error: error.response.data.message || error.message
         }
     }
 }
@@ -45,6 +45,9 @@ export const findIfLiked = (post, user) => {
     return post?.post_likes?.find(like => like?._id === user?._id)
 }
 
+export const findIfFollows = (currentUser, user) => {
+    return currentUser?.followees?.find(followee => followee?._id === user?._id)
+}
 export const handleLiking = () => {
 
 }
@@ -57,7 +60,7 @@ export const getUser = async (username) => {
     } catch (error) {
         console.log('error getting user profile', error.message)
         return {
-            error: error.message
+            error: error.response?.data?.message || error.message
         }
     }
 }
@@ -69,7 +72,20 @@ export const getUserTweets = async (id) => {
     } catch (error) {
         console.log('error getting userTweets', error.message)
         return {
-            error: error.message
+            error: error.response.data.message || error.message
+        }
+    }
+}
+
+export const followUser = async (body) => {
+    try {
+
+        const res = await axios.put(`${serverLink}/api/v1/users/follow`, body)
+        return res.data
+    } catch (error) {
+        console.log('erro following user', error)
+        return {
+            error: error.response.data.message || error.message
         }
     }
 }

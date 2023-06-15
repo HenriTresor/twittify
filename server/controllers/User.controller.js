@@ -4,6 +4,7 @@ import UserValidObject from "../validators/User.joi.js";
 import createToken from "../utils/createToken.js";
 import { hash } from "bcrypt";
 import _ from 'lodash'
+import { checkUser } from "../utils/functions.js";
 
 const createUser = async (req, res, next) => {
     try {
@@ -81,6 +82,57 @@ const getUser = async (req, res, next) => {
     }
 }
 
+
+export const handleFollowUser = async (req, res, next) => {
+    try {
+
+        let { followerId, followedId } = req.body
+        if (!followedId || !followerId) return next(errorResponse(500, 'please provide follower id and followee id'))
+
+        // check if both users exist
+
+        let follower = await checkUser(followerId)
+        let followed = await checkUser(followedId)
+        if (!follower || !followed) return next(errorResponse(404, 'one of the users was not found, please check the data you provided'))
+
+        // check if follower does not already follows followed
+        let check = followed.followers?.find(follower => follower._id.toString() === followerId)
+        if (check) {
+            await User.findByIdAndUpdate(followedId, {
+                $pull: {
+                    followers: followerId
+                }
+            })
+            await User.findByIdAndUpdate(followerId, {
+                $pull: {
+                    followees: followedId
+                }
+            })
+
+            return res.status(200).json({status:true, message:'follow was removed successfully'})
+
+        }
+        // update followers and followees
+        await User.findByIdAndUpdate(followedId, {
+            $push: {
+                followers: followerId
+            }
+        })
+        await User.findByIdAndUpdate(followerId, {
+            $push: {
+                followees: followedId
+            }
+        })
+        res.status(201).json({
+            status: true,
+            message: `${followerId} has followed ${followedId} successfully`
+        })
+
+    } catch (error) {
+        console.log('error following user', error.message);
+        next(errorResponse(500, 'unexpected error occurred'));
+    }
+}
 export {
     createUser,
     getAllUsers,
