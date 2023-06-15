@@ -36,9 +36,9 @@ const NewTweet = ({setIsOpen}) => {
                 audience
             }
 
+            console.log('tweetin response', user)
             const res = await axios.post(`${serverLink}/api/v1/tweets`, tweet)
             setIsPosting(false)
-            console.log('tweetin response', res)
             if (res.data.status) {
                 navigate(`/${res.data.newTweet.author?.username}/status/${res.data.newTweet._id}`)
                 setIsOpen(false)

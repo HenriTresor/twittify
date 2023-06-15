@@ -8,8 +8,8 @@ export const createTweet = async (req, res, next) => {
     try {
 
         let { author, post_content, type, audience } = req.body
+        console.log(req.body)
         if (!author || post_content === null) return next(errorResponse(400, 'please provide the required data'))
-
         // check if author exists
         let user = await checkUser(author)
         if (!user) return next(errorResponse(404, `user with ${author} id was not found`))

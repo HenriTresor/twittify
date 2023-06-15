@@ -2,6 +2,7 @@ import { compare } from "bcrypt"
 import User from "../models/User.model.js"
 import errorResponse from "../utils/errorResponse.js"
 import createToken from "../utils/createToken.js"
+import _ from "lodash"
 
 const loginUser = async (req, res, next) => {
 
@@ -31,13 +32,7 @@ const loginUser = async (req, res, next) => {
 
         res.status(200).json({
             status: true,
-            user: {
-                email: user.email,
-                username: user.username,
-                fullName: user.fullName,
-                followers: user.followers,
-                followees: user.followees
-            },
+            user: _.omit(user, 'password'),
             access_token: token
         })
     } catch (error) {
@@ -61,7 +56,7 @@ export const getUserProfile = async (req, res, next) => {
 
                     { googleId: req.userId }
                 ]
-            })
+            }).select('-password')
             if (!user) return next(errorResponse(403, 'user was not found'));
             res.status(200).json({
                 status: true,

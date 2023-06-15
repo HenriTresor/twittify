@@ -3,6 +3,7 @@ import errorResponse from "../utils/errorResponse.js";
 import UserValidObject from "../validators/User.joi.js";
 import createToken from "../utils/createToken.js";
 import { hash } from "bcrypt";
+import _ from 'lodash'
 
 const createUser = async (req, res, next) => {
     try {
@@ -43,13 +44,7 @@ const createUser = async (req, res, next) => {
         res.status(200).json({
 
             status: true,
-            user: {
-                email: newUser.email,
-                username: newUser.username,
-                fullName: newUser.fullName,
-                followers: newUser.followers,
-                followees: newUser.followees
-            },
+            user: _.omit(newUser, 'password'),
             access_token: token
         })
     } catch (error) {
