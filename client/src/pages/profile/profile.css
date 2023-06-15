@@ -25,12 +25,12 @@
     position: absolute;
     top: 6em;
 }
-.user-photos-container> button{
-    /* float: right; */
-    /* clear: both; */
-    position: absolute;
-    right: 1.5em
-    /* margin-right: 111em; */
+.user-photos-container button{
+    float: right;
+    clear: both;
+    top: 0;
+    right: 1.5em;
+    z-index: 9999;
 }
 
 .user-information{
@@ -44,4 +44,9 @@
 .user-metadata  *{
     color: grey;
     font-size: 0.9em;
+}
+
+.user-activities-container{
+    /* padding: em; */
+    margin: 2em 0.5em ;
 }

@@ -165,7 +165,8 @@ export const getTweetsByUser = async (req, res, next) => {
 
         //
 
-        let userTweets = await TweetsModel.find({ author: id }).populate('post_likes')
+        let userTweets = await TweetsModel.find({ author: id })
+            .populate('author')
         res.status(200).json({
             status: true,
             tweets: userTweets

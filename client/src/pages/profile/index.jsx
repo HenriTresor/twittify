@@ -11,6 +11,7 @@ import { buttonStyles } from '../../components/Aside/buttonStyles'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { getUser, getUserTweets } from '../../utils/function'
+import Post from '../../components/Post'
 
 const Profile = () => {
     const { user: currentUser } = useSelector(state => state.auth)
@@ -18,6 +19,7 @@ const Profile = () => {
     const [user, setUser] = useState(null)
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(true)
+    const [tweetsLoading, setTweetsLoading] = useState(false)
     const [error, setError] = useState({
         status: false,
         message: null
@@ -40,15 +42,16 @@ const Profile = () => {
                 message: data?.message
             })
         }
-        username !== undefined &&  getProfile()
+        username !== undefined && getProfile()
     }, [username])
 
 
     useEffect(() => {
         let isCancelled = true
         async function getTweets() {
+            setTweetsLoading(true)
             const res = await getUserTweets(user?._id)
-            console.log('user tweets', res)
+            setTweetsLoading(false)
             setUserTweets(res?.tweets)
         }
         if (isCancelled) {
@@ -74,9 +77,10 @@ const Profile = () => {
                         {user ? user?.fullName : 'Profile'}
                     </Typography>
                     <Typography color={'GrayText'}>
-                        {user && userTweets?.length === 1 ? 1 + ' Tweet' : userTweets?.length + ' Tweets'
-                            
-                            }
+                        {
+
+                            userTweets?.length !== undefined && (userTweets?.length === 1 && userTweets?.length + ' tweet' || userTweets?.length + ' tweets')
+                        }
                     </Typography>
                 </div>
             </div>
@@ -120,10 +124,10 @@ const Profile = () => {
                                                             >Follow
                                                             </button>
                                                         )
-                                                }
+                                                    }
                                                 </>
                                             )
-                            }
+                                        }
                                     </div>
 
                                     <div className='user-information'>
@@ -135,7 +139,7 @@ const Profile = () => {
                                         </Typography>
                                         <div className="user-bio">
                                             <Typography>
-                                                {user.bio ? user.bio : user.username === currentUser?.username ? `@${currentUser?.username}, add a short bio about yourself...` : ''}
+                                                {user.bio ? user.bio : user.username === currentUser?.username ? `@${currentUser?.username}, add a short bio...` : ''}
                                             </Typography>
                                         </div>
                                         <div className='user-metadata'>
@@ -156,6 +160,18 @@ const Profile = () => {
                             </>
                         ) : ''
             }
+            <div
+                className='user-activities-container'
+            >
+                <Typography>
+                    {user?.fullName}&apos;s Recent Tweets
+                </Typography>
+                {
+                    tweetsLoading ? <Loading /> : userTweets?.map((tweet) => (
+                        <Post {...tweet} key={tweet?._id} />
+                    ))
+                }
+            </div>
         </div>
     )
 }

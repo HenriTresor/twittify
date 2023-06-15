@@ -33,6 +33,11 @@ html{
     justify-content: start;
     gap:1em;
     padding: 1em;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: black;
+    border-bottom: 1px solid grey;
 }
 
 .EmojiPickerReact{
