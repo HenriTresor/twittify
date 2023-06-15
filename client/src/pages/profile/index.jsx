@@ -27,13 +27,13 @@ const Profile = () => {
     const [userTweets, setUserTweets] = useState([])
 
     useEffect(() => {
-        console.log(username)
+       
         async function getProfile() {
             setIsLoading(true)
             const data = username && await getUser(username)
             setIsLoading(false)
             if (data?.status) {
-                console.log('d', data)
+              
                 setUser(data.user)
                 return
             }

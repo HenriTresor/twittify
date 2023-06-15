@@ -9,7 +9,6 @@ export default async (req, res, next) => {
         let decodedToken = await verify(authToken, 'my-secret-key')
         if (!decodedToken) throw new Error('access token is not valid')
         req.userId = decodedToken.id
-        // console.log(decodedToken)
         next()
     } catch (error) {
         console.log('error loggin in', error.message)

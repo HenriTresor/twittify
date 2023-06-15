@@ -36,7 +36,7 @@ const NewTweet = ({setIsOpen}) => {
                 audience
             }
 
-            console.log('tweetin response', user)
+
             const res = await axios.post(`${serverLink}/api/v1/tweets`, tweet)
             setIsPosting(false)
             if (res.data.status) {
@@ -48,7 +48,7 @@ const NewTweet = ({setIsOpen}) => {
         } catch (error) {
             setIsPosting(false)
             alert('error: ' + error.response.data.message)
-            console.log(error)
+          
         }
     }
     return (

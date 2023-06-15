@@ -76,7 +76,7 @@ const getUser = async (req, res, next) => {
             .select('-password')
             .populate('followers')
             .populate('followees')
-        console.log('user ', user)
+       
         if (!user) return res.status(404).json({ status: false, message: 'user was not found' });
         return res.status(200).json({ status: true, user })
 

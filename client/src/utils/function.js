@@ -6,7 +6,7 @@ let likeTweet = async (body) => {
         let res = await axios.put(`${serverLink}/api/v1/tweets/like`, body)
         return res
     } catch (error) {
-        console.log(error)
+      
         return {
             error: error.response.data.message || error.message
         }

@@ -18,7 +18,6 @@ const RightAside = ({ gettingProfile }) => {
     const { isLoggedIn, user: currentUser } = useSelector(state => state.auth)
     // const [people, setPeople] = useState([])
     const { data, isLoading, error } = useFetch(`${serverLink}/api/v1/users?currentUserId=${'647ee9c92dccdbe82c53328e'}`)
-    // console.log(data)
     return (
         <div
             className='aside right-aside'

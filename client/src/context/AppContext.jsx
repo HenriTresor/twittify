@@ -8,7 +8,7 @@ const AppContext = ({ children }) => {
     const [windowSize, setWindowSize] = useState(window.innerWidth);
 
     const handleWindowSizeChange = (e) => {
-        // console.log('window size', window.innerWidth)
+     
         setWindowSize(() => {
             return window.innerWidth
         })

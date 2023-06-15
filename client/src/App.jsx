@@ -56,21 +56,12 @@ const App = () => {
     }
   }, [])
 
-  // useEffect(() => {
-  //   const token = getCookie('access_token')
-  //   console.log('token ',token)
-  //   if (token) {
-  //     dispatch(login({ user: {} }))
-  //     setGettingProfile(true)
-  //   }
-  // },[])
   useEffect(() => {
    let isCancelled = true
     if (isCancelled) {
       const func = async () => {
         setGettingProfile(true)
         const user = await getUserProfile()
-        console.log('user', user)
         setGettingProfile(false)
         if (user.status) {
           return dispatch(login({ user: user.user }))

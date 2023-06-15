@@ -32,7 +32,6 @@ const Post = ({
 
     })
     const { user } = useSelector(state => state.auth)
-    console.log('post likes', user)
     return (
         <div
             className='post-container'

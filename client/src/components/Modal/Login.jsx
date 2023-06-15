@@ -44,7 +44,6 @@ const Login = ({ setWhichModal, setIsOpen }) => {
       })
 
       let data = await res.data
-      console.log('data', data)
       setIsLoading(false)
       if (!data.status) {
         return setError(prev => ({
@@ -58,7 +57,6 @@ const Login = ({ setWhichModal, setIsOpen }) => {
       setIsOpen(false)
     } catch (error) {
       setIsLoading(false)
-      console.log('erro', error)
       return setError(prev => ({
         status: true,
         message: error.response?.data.message

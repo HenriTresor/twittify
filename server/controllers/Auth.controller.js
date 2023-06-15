@@ -15,7 +15,7 @@ const loginUser = async (req, res, next) => {
 
         let user = await User.findOne({ email }).populate('followers').populate('followees')
         if (!user) return next(errorResponse(404, `user with email ${email} was not found`))
-        console.log(user)
+
         // compare passwords
 
         const isPasswordMatch = await compare(password, user.password)

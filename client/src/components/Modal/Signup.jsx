@@ -46,7 +46,6 @@ const Signup = ({ setWhichModal, setIsOpen }) => {
       setIsOpen(false)
     } catch (error) {
       setIsLoading(false)
-      console.log('erro', error)
       alert('error occured')
       return setError(prev => ({
         status: true,

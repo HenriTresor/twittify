@@ -8,7 +8,6 @@ export const createTweet = async (req, res, next) => {
     try {
 
         let { author, post_content, type, audience } = req.body
-        console.log(req.body)
         if (!author || post_content === null) return next(errorResponse(400, 'please provide the required data'))
         // check if author exists
         let user = await checkUser(author)
@@ -116,7 +115,7 @@ export const LikeTweet = async (req, res, next) => {
         // check user
         let user = await checkUser(likerId)
         if (!user) return next(errorResponse(404, 'user not found'))
-        // console.log(user)
+      
 
         // check tweet
 
@@ -145,7 +144,7 @@ export const LikeTweet = async (req, res, next) => {
             }
         })
 
-        // console.log('likedd')
+      
         res.status(201).json({ status: true, message: 'like added successfully' })
     } catch (error) {
         console.log("error liking tweet", error.message)
