@@ -31,7 +31,17 @@ const Post = ({
         post_likes: post_likes,
 
     })
-    const { user } = useSelector(state => state.auth)
+    const { user, isLoggedIn } = useSelector(state => state.auth)
+
+    const handleLiking = async () => {
+        if (isLoggedIn) {
+            await likeTweet({ tweetId: _id, likerId: user?._id })
+            findIfLiked(post, user) ? setPost(prev => ({ ...prev, post_likes: prev.post_likes?.filter(like => like?.username !== user?.username) }))
+                : setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] })) 
+            return
+        }
+        alert('you have to login first to react to this tweet')
+    }
     return (
         <div
             className='post-container'
@@ -67,15 +77,11 @@ const Post = ({
                     <div className="post-reactions">
                         <IconButton
 
-                            onClick={async () => {
-                                await likeTweet({ tweetId: _id, likerId: user?._id })
-                                findIfLiked(post, user) ? setPost(prev => ({ ...prev, post_likes: prev.post_likes?.filter(like => like?.username !== user?.username) }))
-                                    : setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] }))
-                            }}
+                            onClick={handleLiking}
 
                             sx={{
                                 ...iconButtonStyles, color: findIfLiked(post, user) ? 'green' : 'grey',
-                                border: 'none', p:'0'
+                                border: 'none', p: '0'
                             }}>
                             <HeartBroken />
                             <Typography>
@@ -98,8 +104,8 @@ const Post = ({
                                 {post_retweets?.length}
                             </Typography>
                         </IconButton>
-                       
-                        
+
+
                     </div>
                 )
             }

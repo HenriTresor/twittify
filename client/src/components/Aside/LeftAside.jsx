@@ -49,14 +49,9 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                                 <MessageRounded />
                                                 <span>Messages</span> </li>
                                             <li>
-                                                <ListRounded />
-                                                <span>Lists</span></li>
-                                            <li>
                                                 <BookmarkRounded />
                                                 <span>bookmarks</span> </li>
-                                            <li>
-                                                <Twitter />
-                                                <span>Twitter blue</span></li>
+                                          
                                             <Link to={`/${user?.username}`}>
                                                 <li>
                                                     <PersonRounded />

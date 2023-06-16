@@ -22,6 +22,8 @@ import { Add } from '@mui/icons-material'
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
 const SingleTweet = lazy(() => import('./pages/SingleTweet'))
+const Messages = lazy(() => import('./pages/Messages'))
+const Notifications = lazy(()=>import('./pages/Notifications'))
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:4000', // Replace with your backend server URL
@@ -76,21 +78,25 @@ const App = () => {
 
   return (
     <div className='container'>
-      <Fab
-        id='fab'
-        onClick={() => {
-          setIsOpen(true)
-          setWhichModal('new-tweet')
-        }}
-        placeholder='gg'
-        color='info'
-        size=''
-        variant='circular'
-        sx={{ position: 'fixed', bottom: '6em', right: '1em' }}
+      {
+        isLoggedIn && (
+          <Fab
+            id='fab'
+            onClick={() => {
+              setIsOpen(true)
+              setWhichModal('new-tweet')
+            }}
+            placeholder='gg'
+            color='info'
+            size=''
+            variant='circular'
+            sx={{ position: 'fixed', bottom: '6em', right: '1em' }}
 
-      >
-        <Add />
-      </Fab>
+          >
+            <Add />
+          </Fab>
+        )
+    }
       {
         !isLoggedIn && (
           <div
@@ -154,6 +160,8 @@ const App = () => {
           <Route path='/' element={<Homepage />} />
           <Route path='/home' exact element={<Homepage />} />
           <Route path='/:username' exact element={<Profile />} />
+          <Route path='/messages' exact element={<Messages />} />
+          <Route path='/notifications' exact element={<Notifications />} />
           <Route path='/:username/status/:postId' element={<SingleTweet />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

@@ -152,13 +152,14 @@ const SingleTweet = () => {
                                     >
                                         <HeartBroken />
                                     </IconButton>
-                                    <IconButton sx={{ ...iconButtonStyles }} color='inherit'>
-                                        <CommentBank />
-                                    </IconButton>
+                                  
                                     <IconButton sx={iconButtonStyles} color='inherit'>
                                         <RedoRounded />
                                     </IconButton>
 
+                                    <IconButton sx={{ ...iconButtonStyles }} color='inherit'>
+                                        <Bookmark  />
+                                    </IconButton>
 
                                 </div>
                                 {
@@ -192,9 +193,6 @@ const SingleTweet = () => {
                                                     <div>
                                                         <IconButton color='info'>
                                                             <Photo />
-                                                        </IconButton>
-                                                        <IconButton color='info'>
-                                                            <GifBoxOutlined />
                                                         </IconButton>
 
                                                         <IconButton
