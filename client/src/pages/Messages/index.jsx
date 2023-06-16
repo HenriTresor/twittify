@@ -3,7 +3,10 @@ import ComingSoon from '../../components/ComingSoon'
 
 const Messages = () => {
   return (
-      <div>
+    <div
+    className='body-container'
+    >
+      <h4>Message page</h4>
           <ComingSoon />
     </div>
   )

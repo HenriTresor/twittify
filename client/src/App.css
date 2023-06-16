@@ -26,6 +26,7 @@ button{
     text-align: left !important;
     height: auto;
     flex-grow: 2;
+    width: 30%;
     border-left: 1px solid grey;
     border-right: 1px solid grey;
     padding-bottom: 10em;

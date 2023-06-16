@@ -11,7 +11,7 @@ import {
 } from '@mui/icons-material'
 import { Avatar, Typography, IconButton } from '@mui/material'
 import { AppData } from '../../context/AppContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Loading from '../Loading'
 
@@ -20,6 +20,7 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
     const { isLoggedIn, user } = useSelector(state => state.auth)
     const { windowSize } = useContext(AppData)
     const [isToolTipOpen, setIsToolTipOpen] = useState(false)
+    const navigate = useNavigate()
 
     if (windowSize) {
         return (
@@ -42,10 +43,14 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                 {
                                     isLoggedIn && (
                                         <>
-                                            <li>
+                                            <li
+                                            onClick={()=>navigate('/notifications')}
+                                            >
                                                 <Notifications />
                                                 <span>Notifications</span> </li>
-                                            <li>
+                                            <li
+                                            
+                                                onClick={() => navigate('/messages')}>
                                                 <MessageRounded />
                                                 <span>Messages</span> </li>
                                             <li>

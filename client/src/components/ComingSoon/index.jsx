@@ -3,7 +3,12 @@ import './ComingSoon.css'
 
 const ComingSoon = () => {
   return (
-    <div>ComingSoon</div>
+    <div
+      className='coming-soon-container'
+    >
+
+      <p>This page is under development</p>
+    </div>
   )
 }
 
