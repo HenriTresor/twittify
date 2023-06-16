@@ -142,7 +142,9 @@ const App = () => {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>
-      <RightAside gettingProfile={gettingProfile} />
+      <RightAside gettingProfile={gettingProfile}
+        setIsOpen={setIsOpen} setWhichModal={setWhichModal}
+      />
       <RegModal isOpen={isOpen} setIsOpen={setIsOpen} setWhichModal={setWhichModal}>
         {
           whichModal === 'login'

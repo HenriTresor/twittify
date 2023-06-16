@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux'
 import { buttonStyles } from './buttonStyles'
 import { findIfFollows } from '../../utils/function'
 
-const RightAside = ({ gettingProfile }) => {
+const RightAside = ({ gettingProfile, setIsOpen ,setWhichOpen }) => {
 
     const { isLoggedIn, user: currentUser } = useSelector(state => state.auth)
     // const [people, setPeople] = useState([])
@@ -64,7 +64,12 @@ const RightAside = ({ gettingProfile }) => {
                                     <Typography variant='body2' color={'GrayText'} fontSize={12}>
                                         Signup now to get your own personalized timeline!
                                     </Typography>
-                                    <button style={buttonStyles}>
+                                        <button style={buttonStyles}
+                                            onClick={() => {
+                                                setIsOpen(true)
+                                                setWhichOpen('signup')
+                                        }}
+                                        >
                                         Create account
                                     </button>
                                     <Typography color={'GrayText'}>
