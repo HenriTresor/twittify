@@ -179,14 +179,20 @@ const Profile = () => {
             <div
                 className='user-activities-container'
             >
-                <Typography>
-                    {user?.fullName}&apos;s Recent Tweets
-                </Typography>
                 {
-                    tweetsLoading ? <Loading /> : userTweets?.map((tweet) => (
-                        <Post {...tweet} key={tweet?._id} />
-                    ))
-                }
+                    user && (
+                        <>
+                            <Typography>
+                                {user?.fullName + '\'s recent tweets'}
+                            </Typography>
+                            {
+                                tweetsLoading ? <Loading /> : userTweets?.map((tweet) => (
+                                    <Post {...tweet} key={tweet?._id} />
+                                ))
+                            }
+                        </>
+                    )
+               }
             </div>
         </div>
     )

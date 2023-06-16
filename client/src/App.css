@@ -80,5 +80,7 @@ a:hover
     .bottom-nav-container{
         display: none;
     }
+       #fab{
+        display: none;
+    }
 }
-

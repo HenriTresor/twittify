@@ -81,3 +81,9 @@ textarea::-webkit-scrollbar{
  }
 
  }
+
+ @media screen and (max-width:350px) {
+    .new-tweet-container{
+        display: none;
+    }
+ }

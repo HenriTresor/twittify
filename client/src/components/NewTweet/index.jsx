@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Avatar, IconButton, TextField, CircularProgress } from '@mui/material'
+import { Avatar, IconButton, TextField, CircularProgress, Fab } from '@mui/material'
 import {
     Photo, GifBoxOutlined, Poll,
     EmojiEmotions,
-    CalendarToday, LocationOn, ArrowRight
+    CalendarToday, LocationOn, ArrowRight, Add
 } from '@mui/icons-material'
 import '../../NewTweet.css'
 import axios from 'axios'
@@ -52,64 +52,66 @@ const NewTweet = ({setIsOpen}) => {
         }
     }
     return (
-        <div
-            className='new-tweet-container'
-        >
-            {
-                isEmojiPickerOpen && (
-                    <div className='emoji-picker'>
-                        <EmojiPicker
-                            lazyLoadEmojis={true}
-                            theme='dark'
-                            previewConfig={{
-                                showPreview: true
-                            }}
-                            emojiStyle='facebook'
-                            onEmojiClick={(e) => setPost_content(prev => ({ ...prev, post_text: prev.post_text + e.emoji }))}
-                        />
-                    </div>
-                )
-            }
-            <select name="audience" onChange={(e) => setAudience(e.target.value)} id="">
-                <option value="everyone">everyone</option>
-                <option value="circle">circle</option>
-            </select>
-            <div>
-
-                <Avatar />
-
-                <textarea
-                    value={post_content.post_text}
-                    placeholder='What is happening?!'
-                    onChange={(e) => setPost_content({ ...post_content, post_text: e.target.value })}
-                    type="text"></textarea>
-            </div>
-            <div>
+        <>
+            <div
+                className='new-tweet-container'
+            >
+                {
+                    isEmojiPickerOpen && (
+                        <div className='emoji-picker'>
+                            <EmojiPicker
+                                lazyLoadEmojis={true}
+                                theme='dark'
+                                previewConfig={{
+                                    showPreview: true
+                                }}
+                                emojiStyle='facebook'
+                                onEmojiClick={(e) => setPost_content(prev => ({ ...prev, post_text: prev.post_text + e.emoji }))}
+                            />
+                        </div>
+                    )
+                }
+                <select name="audience" onChange={(e) => setAudience(e.target.value)} id="">
+                    <option value="everyone">everyone</option>
+                    <option value="circle">circle</option>
+                </select>
                 <div>
-                    <IconButton color='info'>
-                        <Photo />
-                    </IconButton>
-                    <IconButton color='info'>
-                        <GifBoxOutlined />
-                    </IconButton>
-                    <IconButton color='info'>
-                        <Poll />
-                    </IconButton>
-                    <IconButton color='info'
-                        onClick={() => setIsEmojiPickerOpen(!isEmojiPickerOpen)}
-                    >
-                        <EmojiEmotions />
-                    </IconButton>
+
+                    <Avatar />
+
+                    <textarea
+                        value={post_content.post_text}
+                        placeholder='What is happening?!'
+                        onChange={(e) => setPost_content({ ...post_content, post_text: e.target.value })}
+                        type="text"></textarea>
                 </div>
+                <div>
+                    <div>
+                        <IconButton color='info'>
+                            <Photo />
+                        </IconButton>
+                        <IconButton color='info'>
+                            <GifBoxOutlined />
+                        </IconButton>
+                        <IconButton color='info'>
+                            <Poll />
+                        </IconButton>
+                        <IconButton color='info'
+                            onClick={() => setIsEmojiPickerOpen(!isEmojiPickerOpen)}
+                        >
+                            <EmojiEmotions />
+                        </IconButton>
+                    </div>
 
-                <button disabled={isPosting} onClick={() => createPost()}>
-                    {
-                        isPosting ? 'tweeting...' : 'tweet'
-                    }
-                </button>
+                    <button disabled={isPosting} onClick={() => createPost()}>
+                        {
+                            isPosting ? 'tweeting...' : 'tweet'
+                        }
+                    </button>
 
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

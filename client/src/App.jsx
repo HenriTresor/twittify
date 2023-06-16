@@ -8,7 +8,7 @@ import BottomNav from './components/BottomNav'
 import Loading from './components/Loading'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import { Typography } from '@mui/material'
+import { Fab, Typography } from '@mui/material'
 import RegModal from './components/Modal'
 import Login from './components/Modal/Login'
 import Signup from './components/Modal/Signup'
@@ -17,6 +17,7 @@ import { login, logout } from './redux/Slices/AuthSlice'
 import { useDispatch } from 'react-redux'
 import NewTweet from './components/NewTweet'
 import Profile from './pages/profile'
+import { Add } from '@mui/icons-material'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -75,6 +76,21 @@ const App = () => {
 
   return (
     <div className='container'>
+      <Fab
+        id='fab'
+        onClick={() => {
+          setIsOpen(true)
+          setWhichModal('new-tweet')
+        }}
+        placeholder='gg'
+        color='info'
+        size=''
+        variant='circular'
+        sx={{ position: 'fixed', bottom: '6em', right: '1em' }}
+
+      >
+        <Add />
+      </Fab>
       {
         !isLoggedIn && (
           <div
