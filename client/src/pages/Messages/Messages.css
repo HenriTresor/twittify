@@ -1,0 +1,42 @@
+*{
+    overflow: hidden;
+}
+
+.chat-container{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.chat-container > div{
+    border-left: 1px solid grey;
+    height: 100dvh;
+    /* padding: 1em;     */
+    overflow-y: auto;
+    /* margin: 0 auto; */
+}
+
+.chat-container .contact-list-container{
+    flex-grow: 0.1;
+    width: 40%;
+    /* position: fixed; */
+}
+
+.chat-container .chat-box{
+    flex-grow: 1;
+    right: 0;
+    padding: 2em;
+    height: 100%;
+    width: 39%;
+    display: grid;
+    place-content: center;
+    /* place-items: center; */
+}
+
+.chat-container .contact-list{
+    padding: 2em;
+}
+.chat-container p{
+    margin: 3em 0;
+    color: grey;
+}
