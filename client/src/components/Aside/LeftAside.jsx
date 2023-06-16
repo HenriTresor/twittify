@@ -1,5 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Aside.css'
+import Tooltip from '../Tooltip'
+
 import {
 
     Home, Explore,
@@ -17,12 +19,14 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
 
     const { isLoggedIn, user } = useSelector(state => state.auth)
     const { windowSize } = useContext(AppData)
+    const [isToolTipOpen, setIsToolTipOpen] = useState(false)
 
     if (windowSize) {
         return (
             <div
                 className='left-aside aside'
             >
+                {isToolTipOpen && <Tooltip />}
                     {
                     gettingProfile ? <Loading /> : (
                         <>
@@ -83,6 +87,9 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                 isLoggedIn && (
                                     gettingProfile ? <Loading /> : (
                                         <div
+                                            onClick={() => {
+                                                setIsToolTipOpen(!isToolTipOpen);
+                                            }}
                                             className='user-profile'
                                         >
 

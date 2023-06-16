@@ -10,6 +10,10 @@ html{
     color: white;
 }
 
+button{
+    cursor: pointer;
+}
+
 .container{
     display: flex;
     justify-content: center;

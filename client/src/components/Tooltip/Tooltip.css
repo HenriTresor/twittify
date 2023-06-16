@@ -1,0 +1,33 @@
+.tooltip-container{
+    position: fixed;
+    background: black;
+    box-shadow: 0px 0px 20px grey;
+    bottom: 7em;
+    left: 5em;
+    width: auto;
+    width: 200px;
+    border-radius: 10px;
+    padding: 1em;
+    animation: tooltip .3s ease-in-out;
+}
+@keyframes tooltip {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.tooltip-container button{
+    padding: 0.5em 1em;
+    width: 100%;
+    background: none;
+    color: red;
+    border: 1px solid red;
+}
+
+.tooltip-container button:hover{
+    background: rgba(255, 0, 0, 0.155);
+    color: red;
+}
