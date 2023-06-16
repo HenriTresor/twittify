@@ -39,9 +39,6 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                         <span>Home</span>
                                     </li>
                                 </Link>
-                                <li>
-                                    <Explore />
-                                    <span>Explore</span></li>
                                 {
                                     isLoggedIn && (
                                         <>
