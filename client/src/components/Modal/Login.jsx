@@ -109,6 +109,7 @@ const Login = ({ setWhichModal, setIsOpen }) => {
             onChange={(e) => handleChange(e)}
             label='email address'
             name="email"
+            type="email"
             value={inputValues.email}
           />
         </div>
@@ -119,6 +120,7 @@ const Login = ({ setWhichModal, setIsOpen }) => {
             onChange={(e) => handleChange(e)}
             sx={{ color: 'white' }}
             name="password"
+            type='password'
             value={inputValues.password}
             label='password'
           />
