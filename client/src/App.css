@@ -42,11 +42,12 @@ html{
 
 .EmojiPickerReact{
     position: absolute !important;
-    /* z-index:  !important; */
     top: 13em;
     right: 0;
     height: 350px !important;
     z-index: 2;
+    width: 100%;
+    /* bottom: 0; */
 }
 
 a,

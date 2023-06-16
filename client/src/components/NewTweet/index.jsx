@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux'
 import EmojiPicker from 'emoji-picker-react'
 import { Select, MenuItem, FormControl } from '@mui/material'
 
-const NewTweet = ({setIsOpen}) => {
+const NewTweet = ({ setIsOpen }) => {
 
     const { user } = useSelector(state => state.auth)
     let [post_content, setPost_content] = useState({
@@ -48,7 +48,7 @@ const NewTweet = ({setIsOpen}) => {
         } catch (error) {
             setIsPosting(false)
             alert('error: ' + error.response.data.message)
-          
+
         }
     }
     return (
@@ -90,17 +90,11 @@ const NewTweet = ({setIsOpen}) => {
                         <IconButton color='info'>
                             <Photo />
                         </IconButton>
-                        <IconButton color='info'>
-                            <GifBoxOutlined />
-                        </IconButton>
-                        <IconButton color='info'>
-                            <Poll />
-                        </IconButton>
-                        <IconButton color='info'
+                        {/* <IconButton color='info'
                             onClick={() => setIsEmojiPickerOpen(!isEmojiPickerOpen)}
                         >
                             <EmojiEmotions />
-                        </IconButton>
+                        </IconButton> */}
                     </div>
 
                     <button disabled={isPosting} onClick={() => createPost()}>
