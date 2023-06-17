@@ -76,7 +76,7 @@ const getUser = async (req, res, next) => {
             .select('-password')
             .populate('followers')
             .populate('followees')
-       
+
         if (!user) return res.status(404).json({ status: false, message: 'user was not found' });
         return res.status(200).json({ status: true, user })
 
@@ -135,6 +135,25 @@ export const handleFollowUser = async (req, res, next) => {
     } catch (error) {
         console.log('error following user', error.message);
         next(errorResponse(500, 'unexpected error occurred'));
+    }
+}
+
+export const getUsersByQuery = async (req, res, next) => {
+    try {
+
+        let { name } = req.query
+
+        if (name !== '') {
+            let users = await User.find({}).select('-password')
+            let filteredUsers = users?.filter(user => user?.username.toLowerCase()?.match(name.toLowerCase()) || user?.fullName.toLowerCase()?.match(name.toLowerCase()))
+            res.status(200).json({
+                status: true,
+                users: filteredUsers
+            })
+        }
+    } catch (error) {
+        console.log('error getting users from query', error.message);
+        next(errorResponse(500, 'unexpected error'))
     }
 }
 export {

@@ -6,7 +6,7 @@ let likeTweet = async (body) => {
         let res = await axios.put(`${serverLink}/api/v1/tweets/like`, body)
         return res
     } catch (error) {
-      
+
         return {
             error: error.response.data.message || error.message
         }
@@ -85,6 +85,18 @@ export const followUser = async (body) => {
         return res.data
     } catch (error) {
         console.log('erro following user', error)
+        return {
+            error: error.response.data.message || error.message
+        }
+    }
+}
+
+export const getUsersByQuery = async (q) => {
+    try {
+
+        const res = await axios.get(`${serverLink}/api/v1/users/query?name=${q}`)
+        return res.data
+    } catch (error) {
         return {
             error: error.response.data.message || error.message
         }

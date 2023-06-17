@@ -11,6 +11,7 @@ const RegModal = ({ isOpen, children, setIsOpen }) => {
     return ReactDOM.createPortal(
         <div className='modal'>
             <button
+            style={{...buttonStyles, width:'50px', padding:'0.5em '}}
             onClick={()=>setIsOpen(false)}
             >
                 <Close />

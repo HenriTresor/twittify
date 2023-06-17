@@ -15,7 +15,7 @@
 .modal > div{
     /* position: relative; */
     width: auto;
-    display: grid;
+    /* display: grid; */
     overflow: hidden;
     word-wrap: break-word;
     word-break: break-all;
@@ -25,7 +25,7 @@
     /* max-width: 45dvw; */
     min-width: 45dvw;
     border-radius: 10px;
-    place-content: center;
+    /* place-content: center; */
     box-shadow:  0px 0px 30px rgba(128, 128, 128, 0.298);
     animation: modal .5s ease-out forwards;
 }
@@ -40,10 +40,11 @@
 }
 
 .modal> button{
-    background: none;
-    color: white;
-    border: none;
+    background: white;
+    color: black;
     cursor: pointer;
+    border: none;
+    border-radius: 10px;
 }
 
 .modal .input_container  * {

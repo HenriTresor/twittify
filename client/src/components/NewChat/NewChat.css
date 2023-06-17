@@ -1,0 +1,30 @@
+.new-chat-container {
+    width: 100% !important;
+    height:80dvh;
+}
+
+.new-chat-container .single-tweet-header{
+    justify-content: space-between;
+    width: 100%;
+    /* border-bottom: none; */
+}
+
+.new-chat-container .search-container{
+    width: 100%;
+    display: flex;
+    padding: 0.2em 1em;
+    border-bottom: 1px solid grey;
+    /* border-radius: 10px; */
+    align-items: center;
+}
+
+.new-chat-container .search-container input{
+    width: 100%;
+    background: none;
+    outline: none;
+    padding: 1em;
+    color: white;
+    font-weight: bolder;
+    font-size: 1.2em;
+    border: none;
+}

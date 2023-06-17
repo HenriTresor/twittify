@@ -1,0 +1,19 @@
+.contact-container{
+    display: flex;
+    padding: 1em;
+    gap: 1em;
+    align-items: center;
+    margin-top: 0.3em;
+    border-radius: 10px;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+    width: 100%;
+}
+.contact-container p{
+    color: grey;
+    margin-top: 0.3em;
+}
+
+.contact-container:hover{
+    background: rgba(128, 128, 128, 0.181);
+}
