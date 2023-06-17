@@ -1,11 +1,11 @@
-*{
-    overflow: hidden;
-}
 
 .chat-container{
     display: flex;
     justify-content: start;
     align-items: start;
+}
+.body-container *{
+    overflow: hidden !important;
 }
 
 .chat-container > div{

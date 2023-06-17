@@ -18,6 +18,7 @@ import { useDispatch } from 'react-redux'
 import NewTweet from './components/NewTweet'
 import Profile from './pages/profile'
 import { Add } from '@mui/icons-material'
+import NewChat from './components/NewChat'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -160,7 +161,7 @@ const App = () => {
           <Route path='/' element={<Homepage />} />
           <Route path='/home' exact element={<Homepage />} />
           <Route path='/:username' exact element={<Profile />} />
-          <Route path='/messages' exact element={<Messages />} />
+          <Route path='/messages' exact element={<Messages setIsOpen={setIsOpen} setWhichModal={setWhichModal} />} />
           <Route path='/notifications' exact element={<Notifications />} />
           <Route path='/:username/status/:postId' element={<SingleTweet />} />
           <Route path='*' element={<NotFound />} />
@@ -178,6 +179,7 @@ const App = () => {
           whichModal === 'login'
             ? <Login setWhichModal={setWhichModal} setIsOpen={setIsOpen} />
             : whichModal === 'signup' ? <Signup setWhichModal={setWhichModal} setIsOpen={setIsOpen} />
+              : whichModal === 'new-chat' ? <NewChat />
               : whichModal === 'new-tweet' ? <NewTweet setIsOpen={setIsOpen} /> : ''
         }
       </RegModal>
