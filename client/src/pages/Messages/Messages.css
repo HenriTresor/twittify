@@ -41,3 +41,22 @@
     color: grey;
 }
 
+
+
+.contact-list-container .contact-container{
+    display: flex;
+    /* gap: 0; */
+    /* border: 1px solid grey; */
+    padding: 0.3em 1em;
+    align-items: center;
+    /* justify-content: center; */
+}
+.contact-list-container .contact-container div{
+    display: flex;
+    gap: 0.0.2em;
+    align-items: center;
+    padding: 0em;
+}
+.contact-list-container .contact-container p{
+    margin: 1em;
+}

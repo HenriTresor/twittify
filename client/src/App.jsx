@@ -24,7 +24,7 @@ const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
 const SingleTweet = lazy(() => import('./pages/SingleTweet'))
 const Messages = lazy(() => import('./pages/Messages'))
-const Notifications = lazy(()=>import('./pages/Notifications'))
+const Notifications = lazy(() => import('./pages/Notifications'))
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:4000', // Replace with your backend server URL
@@ -41,18 +41,19 @@ const buttonStyles = {
   margin: '0 0.4em',
   borderRadius: '1em',
   border: 'none',
-  cursor:'pointer'
+  cursor: 'pointer'
 }
 
 const App = () => {
 
-  const [isOpen, setIsOpen ] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [whichModal, setWhichModal] = useState('login')
   const { isLoggedIn } = useSelector(state => state.auth)
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [gettingProfile, setGettingProfile] = useState(false)
+  const [selectedChat, setSelectedChat] = useState({})
 
   useEffect(() => {
     if (pathname === '/') {
@@ -61,7 +62,7 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-   let isCancelled = true
+    let isCancelled = true
     if (isCancelled) {
       const func = async () => {
         setGettingProfile(true)
@@ -74,8 +75,8 @@ const App = () => {
       }
       func()
     }
-   return () => isCancelled = false
-  },[])
+    return () => isCancelled = false
+  }, [])
 
   return (
     <div className='container'>
@@ -97,7 +98,7 @@ const App = () => {
             <Add />
           </Fab>
         )
-    }
+      }
       {
         !isLoggedIn && (
           <div
@@ -111,8 +112,8 @@ const App = () => {
               alignItems: 'center',
               justifyContent: 'space-evenly',
               padding: '0.7em', zIndex: '99999', alignContent: 'center',
-              borderTopLeftRadius:'10px',
-              borderTopRightRadius:'10px',
+              borderTopLeftRadius: '10px',
+              borderTopRightRadius: '10px',
             }}
           >
             <div>
@@ -123,7 +124,7 @@ const App = () => {
                 People on Twitter are the first to know
               </Typography>
             </div>
-            <div> 
+            <div>
               <button
                 onClick={() => {
                   setIsOpen(true)
@@ -133,7 +134,7 @@ const App = () => {
                   ...buttonStyles,
                   background: 'none',
                   border: '1px solid white',
-                  color:'white', marginBottom:22
+                  color: 'white', marginBottom: 22
                 }}>
                 login
               </button>
@@ -151,7 +152,7 @@ const App = () => {
         )
       }
       <BottomNav />
-    <LeftAside
+      <LeftAside
         setWhichModal={setWhichModal}
         gettingProfile={gettingProfile}
         setIsOpen={setIsOpen}
@@ -161,26 +162,35 @@ const App = () => {
           <Route path='/' element={<Homepage />} />
           <Route path='/home' exact element={<Homepage />} />
           <Route path='/:username' exact element={<Profile />} />
-          <Route path='/messages' exact element={<Messages setIsOpen={setIsOpen} setWhichModal={setWhichModal} />} />
+          <Route path='/messages' exact element={<Messages
+            setIsOpen={setIsOpen}
+            setWhichModal={setWhichModal}
+            selectedChat={selectedChat}
+            setSelectedChat={setSelectedChat}
+          />} />
           <Route path='/notifications' exact element={<Notifications />} />
           <Route path='/:username/status/:postId' element={<SingleTweet />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>
       {
-        pathname !== '/messages'  && (
+        pathname !== '/messages' && (
           <RightAside gettingProfile={gettingProfile}
             setIsOpen={setIsOpen} setWhichModal={setWhichModal}
           />
         )
-     }
+      }
       <RegModal isOpen={isOpen} setIsOpen={setIsOpen} setWhichModal={setWhichModal}>
         {
           whichModal === 'login'
             ? <Login setWhichModal={setWhichModal} setIsOpen={setIsOpen} />
             : whichModal === 'signup' ? <Signup setWhichModal={setWhichModal} setIsOpen={setIsOpen} />
-              : whichModal === 'new-chat' ? <NewChat />
-              : whichModal === 'new-tweet' ? <NewTweet setIsOpen={setIsOpen} /> : ''
+              : whichModal === 'new-chat' ? <NewChat
+                setIsOpen={setIsOpen}
+                selectedChat={selectedChat}
+                setSelectedChat={setSelectedChat}
+              />
+                : whichModal === 'new-tweet' ? <NewTweet setIsOpen={setIsOpen} /> : ''
         }
       </RegModal>
     </div>

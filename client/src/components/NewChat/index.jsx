@@ -7,13 +7,13 @@ import serverLink from '../../utils/server.link'
 import { getUsersByQuery } from '../../utils/function'
 import Contact from '../Contact'
 import Loading from '../Loading'
+import propTypes from 'prop-types'
 
-const NewChat = () => {
+const NewChat = ({ selectedChat, setSelectedChat, setIsOpen }) => {
 
     const [loading, setLoading] = useState(false)
     const [query, setQuery] = useState('')
     const [result, setResult] = useState([])
-    const [selectedChat, setSelectedChat] = useState({})
     const getResults = async (q) => {
         setLoading(true)
         const data = await getUsersByQuery(q)
@@ -31,12 +31,7 @@ const NewChat = () => {
         <div className='new-chat-container'>
             <div className="single-tweet-header">
                 <h3>New message</h3>
-                <button
-                    disabled={!selectedChat._id}
-                    style={{ ...buttonStyles, width: '100px', padding: '0.6em' }}
-                >
-                    next
-                </button>
+              
             </div>
             <div className='search-container'>
                 <Search />
@@ -48,19 +43,26 @@ const NewChat = () => {
 
             <div className="search-results">
                 {
-                  
+
                     !loading ? result?.map((res) => (
-                       <>
+                        <>
                             <Contact {...res} key={res._id}
-                                onClick={() => setSelectedChat(res)}
+                                onClick={() => {
+                                    setSelectedChat(res)
+                                    setIsOpen(false)
+                                }}
                             />
-                           
+
                         </>
                     )) : <Loading />
                 }
             </div>
         </div>
     )
+}
+NewChat.propTypes = {
+    selectedChat: propTypes.object,
+    setSelectedChat: propTypes.func,
 }
 
 export default NewChat
