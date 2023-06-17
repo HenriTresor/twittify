@@ -4,10 +4,10 @@
     justify-content: start;
     align-items: start;
 }
-.body-container *{
-    overflow: hidden !important;
+div.body-container.chat-container{
+    overflow: hidden;
+    padding: 0em;
 }
-
 .chat-container > div{
     border-left: 1px solid grey;
     height: 100dvh;
@@ -20,6 +20,7 @@
     flex-grow: 0.1;
     width: 40%;
     /* position: fixed; */
+    overflow-y: auto;
 }
 
 .chat-container .chat-box{
@@ -28,11 +29,37 @@
     padding: 2em;
     height: 100%;
     width: 39%;
-    display: grid;
-    place-content: center;
-    /* place-items: center; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
 }
-
+.chat-box .chat-box-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chat-box .chat-box-body{
+    flex-grow: 1;
+    overflow-y: auto;
+}
+.chat-box .chat-box-footer{
+    border-top: 1px solid grey;
+    padding: 1em;
+}
+.chat-box .chat-box-footer input{
+    flex-grow: 1;
+    color: white;
+    font-weight: bolder;
+    padding: 0.6em 1em;
+    background: none;
+    border: none;
+    outline: none;
+}
+.chat-box .chat-box-footer > div{
+    display: flex;
+    border-radius: 10px;
+    background: rgba(128, 128, 128, 0.251);
+}
 .chat-container .contact-list{
     padding: 2em;
 }

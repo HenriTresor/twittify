@@ -2,7 +2,7 @@ import React from 'react'
 import ComingSoon from '../../components/ComingSoon'
 import './Messages.css'
 import { useLocation } from 'react-router-dom'
-import { MessageRounded, Info } from '@mui/icons-material'
+import { MessageRounded, InfoOutlined, Send } from '@mui/icons-material'
 import { Avatar, IconButton } from '@mui/material'
 import { buttonStyles, iconButtonStyles } from '../../components/Aside/buttonStyles'
 import Contact from '../../components/Contact'
@@ -35,7 +35,7 @@ const Messages = ({ setIsOpen, setWhichModal, selectedChat, setSelectedChat }) =
         {
           !selectedChat?._id ? (
             <>
-             
+
               <div className='contact-list'>
                 <h1>Welcome to your inbox!</h1>
                 <p>Drop a line, share Tweets and more with private conversations between you and others on Twitter. </p>
@@ -50,14 +50,20 @@ const Messages = ({ setIsOpen, setWhichModal, selectedChat, setSelectedChat }) =
                 </button>
               </div>
             </>
-          ) : <div className='contact-container'>
-              <Avatar />
-              <div> 
-                <h4>{selectedChat?.fullName}</h4>
-                <p>{ '@'+selectedChat?.username }</p>
+          ) : (
+            <>
+              <div
+                onClick={() => setSelectedChat(selectedChat)}
+                className='contact-container'>
+                <Avatar />
+                <div>
+                  <h4>{selectedChat?.fullName}</h4>
+                  <p>{'@' + selectedChat?.username}</p>
+                </div>
               </div>
-            </div>
-       }
+            </>
+          )
+        }
       </div>
       <div className='chat-box'>
         {
@@ -76,16 +82,35 @@ const Messages = ({ setIsOpen, setWhichModal, selectedChat, setSelectedChat }) =
               </button>
             </>
           ) : (
-              <>
-                <div className="chat-box-header">
+            <>
+              <div className="chat-box-header">
+                <div
+                  style={{ display: 'flex', gap: '0.4em', alignItems:'center' }}
+                >
+                  <Avatar />
                   <h4> {selectedChat.fullName}</h4>
-                  <IconButton color='inherit'>
-                    <Info />
+                </div>
+                <IconButton color='inherit'>
+                  <InfoOutlined />
+                </IconButton>
+              </div>
+              <div className="chat-box-body">
+
+              </div>
+              <div className="chat-box-footer">
+                <div>
+                  <input
+                      type="text"
+                      placeholder={`say hi to @${selectedChat?.username}`}
+                  />
+                  <IconButton color='info'>
+                    <Send />
                   </IconButton>
                 </div>
-              </>
+              </div>
+            </>
           )
-      }
+        }
       </div>
     </div>
   )
