@@ -16,6 +16,12 @@ config()
 
 const app = express()
 app.use(cookieParser())
+app.use(session({
+    name: 'my-session',
+    secret: 'my-secret'
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(cors({
     origin: '*',
     credentials:true
@@ -26,13 +32,6 @@ const mongoURI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/twitter'
 
 
 app.use(express.json())
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false, // don't save session if unmodified
-    saveUninitialized: false
-}));
-passport.use(passport.authenticate('session'))
-
 connectDB(mongoURI)
     .then(() => {
         console.log('connected to db')

@@ -5,6 +5,7 @@ import { config } from "dotenv";
 import cors from "cors";
 import { getUserProfile, loginUser } from "../controllers/Auth.controller.js";
 import verifyToken from "../middlewares/verifyToken.js";
+import User from "../models/User.model.js";
 
 config()
 
@@ -21,15 +22,23 @@ passport.use(
     new GoogleStrategy({
         clientID: GOOGLE_CLIENT_ID,
         clientSecret: GOOGLE_CLIENT_SECRET,
+        scope: ['profile', 'email'],
         callbackURL: '/api/v1/auth/google/callback'
-    }, async (accessToken, refreshToken, profile, done) => {
-        try {
+    }, async (accessToken, refreshToken, profile, cb) => {
+        let user = await User.findOne({ googleId: profile.id })
+        if (user) return cb(null, user)
+        user = new User({
+            googleId: profile._json.sub,
+            avatar:profile._json.picture,
+            fullName: profile._json.name,
+            email: '',
+            username: profile._json.name.toLowerCase()?.split(' ').join('_'),
+            
 
-            done(null, profile)
-        } catch (error) {
-            done(null, error)
-            console.log('error with google auth', error.message)
-        }
+        })
+
+        await user.save()
+        cb(null, user)
     })
 )
 
@@ -40,16 +49,27 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((user, done) => {
     done(null, user)
 })
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }), (req, res) => {
-    res.header('Access-Control-Allow-Origin', client_uri)
-})
-
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 router.get('/google/callback', passport.authenticate('google', {
     successRedirect: client_uri,
-    failureRedirect: '/api/v1/auth/google'
+    failureRedirect: '/api/auth/google/failed'
 }))
+router.get('/google/success', (req, res) => {
+    if (req.user) {
 
-router.get('/profile', verifyToken,getUserProfile)
+        res.status(200).json({
+            status: true,
+            user: req.user
+        })
+        return
+    }
+    res.status(401).json({
+        status: false,
+        message: 'you are not authenticated'
+    })
+})
+
+router.get('/profile', verifyToken, getUserProfile)
 
 router.post('/login', loginUser)
 export default router
