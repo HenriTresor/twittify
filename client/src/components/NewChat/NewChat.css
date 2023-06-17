@@ -1,4 +1,5 @@
 .new-chat-container {
+    overflow-y: scroll;
     width: 100% !important;
     height:80dvh;
 }
@@ -27,4 +28,8 @@
     font-weight: bolder;
     font-size: 1.2em;
     border: none;
+}
+
+.new-chat-container .search-results{
+    overflow-y: scroll;
 }

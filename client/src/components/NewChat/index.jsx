@@ -6,16 +6,18 @@ import axios from 'axios'
 import serverLink from '../../utils/server.link'
 import { getUsersByQuery } from '../../utils/function'
 import Contact from '../Contact'
+import Loading from '../Loading'
 
 const NewChat = () => {
 
+    const [loading, setLoading] = useState(false)
     const [query, setQuery] = useState('')
     const [result, setResult] = useState([])
-    useEffect(()=>{
-        console.log(selectedChat)
-    },[selectedChat])
+    const [selectedChat, setSelectedChat] = useState({})
     const getResults = async (q) => {
+        setLoading(true)
         const data = await getUsersByQuery(q)
+        setLoading(false)
         setResult(data.users)
     }
     useEffect(() => {
@@ -39,17 +41,22 @@ const NewChat = () => {
             <div className='search-container'>
                 <Search />
                 <input type="search"
+                    autoComplete='off'
                     placeholder='Search people'
                     name="query" id="query" onChange={(e) => setQuery(e.target.value)} />
             </div>
 
             <div className="search-results">
                 {
-                    result?.map((res) => (
-                        <Contact {...res} key={res._id}
-                            onClick={() => setSelectedChat(res)}
-                        />
-                    ))
+                  
+                    !loading ? result?.map((res) => (
+                       <>
+                            <Contact {...res} key={res._id}
+                                onClick={() => setSelectedChat(res)}
+                            />
+                           
+                        </>
+                    )) : <Loading />
                 }
             </div>
         </div>

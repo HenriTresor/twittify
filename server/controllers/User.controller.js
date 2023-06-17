@@ -150,7 +150,9 @@ export const getUsersByQuery = async (req, res, next) => {
                 status: true,
                 users: filteredUsers
             })
+            return
         }
+        res.status(200).json({ users: [] })
     } catch (error) {
         console.log('error getting users from query', error.message);
         next(errorResponse(500, 'unexpected error'))
