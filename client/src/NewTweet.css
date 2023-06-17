@@ -35,14 +35,15 @@ select{
     width: 100%;
     background: none;
     color: white;
-    border: none;
     outline:none;
+    border: none;
     margin-left: 1em;
-    padding: 0.2em;
+    padding: 0.2em 1em;
     font-weight: 500;
     resize: vertical;
     font-size: 1.2em;
     letter-spacing: 1.2px;
+    border-bottom: 1px solid grey;
 }
 .new-tweet-container textarea::-webkit-resizer{
     /* display: none; */

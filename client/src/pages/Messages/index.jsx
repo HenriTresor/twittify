@@ -68,7 +68,7 @@ const Messages = ({ setIsOpen, setWhichModal, selectedChat, setSelectedChat }) =
       <div className='chat-box'>
         {
           !selectedChat?._id ? (
-            <>
+            <div>
               <h1>Select a message</h1>
               <p>Choose from your existing conversations, start a new one <br />, or just keep swimming.</p>
               <button
@@ -80,7 +80,7 @@ const Messages = ({ setIsOpen, setWhichModal, selectedChat, setSelectedChat }) =
               >
                 Write a message
               </button>
-            </>
+            </div>
           ) : (
             <>
               <div className="chat-box-header">

@@ -27,7 +27,7 @@ div.body-container.chat-container{
     flex-grow: 1;
     right: 0;
     padding: 2em;
-    height: 100%;
+    height: 100dvh;
     width: 39%;
     display: flex;
     flex-direction: column;

@@ -47,16 +47,20 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                 {
                                     isLoggedIn && (
                                         <>
-                                            <li
-                                                onClick={() => navigate('/notifications')}
-                                            >
-                                                <Notifications />
-                                                <span>Notifications</span> </li>
-                                            <li
+                                            <Link to={'/notifications'}>
+                                                <li
+                                                    onClick={() => navigate('/notifications')}
+                                                >
+                                                    <Notifications />
+                                                    <span>Notifications</span> </li>
+                                            </Link>
+                                            <Link to={'/messages'}> 
+                                                <li
 
-                                                onClick={() => navigate('/messages')}>
-                                                <MessageRounded />
-                                                <span>Messages</span> </li>
+                                                    onClick={() => navigate('/messages')}>
+                                                    <MessageRounded />
+                                                    <span>Messages</span> </li>
+                                            </Link>
                                             <li>
                                                 <BookmarkRounded />
                                                 <span>bookmarks</span> </li>

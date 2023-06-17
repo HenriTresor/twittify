@@ -3,7 +3,7 @@ import React, { Suspense, lazy, useEffect, useState } from 'react'
 import './App.css'
 import LeftAside from './components/Aside/LeftAside'
 import RightAside from './components/Aside/RightAside'
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
+import { Route, Routes, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import BottomNav from './components/BottomNav'
 import Loading from './components/Loading'
 import axios from 'axios'
@@ -19,6 +19,7 @@ import NewTweet from './components/NewTweet'
 import Profile from './pages/profile'
 import { Add } from '@mui/icons-material'
 import NewChat from './components/NewChat'
+import serverLink from './utils/server.link'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -54,6 +55,22 @@ const App = () => {
   const dispatch = useDispatch()
   const [gettingProfile, setGettingProfile] = useState(false)
   const [selectedChat, setSelectedChat] = useState({})
+
+
+  // const getGoogleProfile = async () => {
+  //  try {
+  //    const res = await axios.get(`${serverLink}/api/v1/auth/google/success`, { withCredentials: true })
+  //    console.log('goole', res)
+  //    if (res.status) {
+  //      dispatch(login({ user: res.user }))
+  //    }
+  //  } catch (error) {
+  //   console.log('error getting profile', error)
+  //  }
+  // }
+  // useEffect(() => {
+  //   getGoogleProfile()
+  // }, [])
 
   useEffect(() => {
     if (pathname === '/') {

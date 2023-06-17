@@ -84,7 +84,11 @@ const Login = ({ setWhichModal, setIsOpen }) => {
       <Typography variant='h6' letterSpacing={1} fontWeight={'bold'}>
         Signin to Twitter
       </Typography>
-      <button style={{
+      <button
+        onClick={() => {
+          window.open(`${serverLink}/api/v1/auth/google`)
+        }}
+        style={{
         ...buttonStyles,
         padding: '0.2em', display: 'flex', alignItems: 'center', justifyContent: "center", gap: '1em'
       }}> <Google /> Sign in with Google</button>
