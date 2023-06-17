@@ -2,12 +2,10 @@
 import ReactDOM from 'react-dom'
 import './Tooltip.css'
 
-const Tooltip = () => {
+const Tooltip = ({children}) => {
   return ReactDOM.createPortal(
     <div className='tooltip-container'>
-      <button>
-        logout
-      </button>
+     {children}
     </div>, document.getElementById('tooltip'))
 }
 

@@ -27,8 +27,12 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
             <div
                 className='left-aside aside'
             >
-                {isToolTipOpen && <Tooltip />}
-                    {
+                {isToolTipOpen && <Tooltip >
+                    <button>
+                        logout
+                    </button>
+                </Tooltip>}
+                {
                     gettingProfile ? <Loading /> : (
                         <>
                             <ul className='nav-items'>
@@ -44,19 +48,19 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                     isLoggedIn && (
                                         <>
                                             <li
-                                            onClick={()=>navigate('/notifications')}
+                                                onClick={() => navigate('/notifications')}
                                             >
                                                 <Notifications />
                                                 <span>Notifications</span> </li>
                                             <li
-                                            
+
                                                 onClick={() => navigate('/messages')}>
                                                 <MessageRounded />
                                                 <span>Messages</span> </li>
                                             <li>
                                                 <BookmarkRounded />
                                                 <span>bookmarks</span> </li>
-                                          
+
                                             <Link to={`/${user?.username}`}>
                                                 <li>
                                                     <PersonRounded />
@@ -69,7 +73,7 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                                 onClick={() => {
                                                     setIsOpen(true)
                                                     setWhichModal('new-tweet')
-                                            }}
+                                                }}
                                                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1em' }}>
                                                 <Add />
 
@@ -113,7 +117,7 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                             }
                         </>
                     )
-               }
+                }
             </div>
         )
     }

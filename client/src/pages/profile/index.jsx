@@ -58,7 +58,7 @@ const Profile = () => {
             getTweets()
         }
         return () => isCancelled = false
-    }, [user])
+    }, [user?._id])
     return (
         <div
             className='body-container'
