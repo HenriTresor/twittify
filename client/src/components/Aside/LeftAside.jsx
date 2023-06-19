@@ -12,23 +12,35 @@ import {
 import { Avatar, Typography, IconButton } from '@mui/material'
 import { AppData } from '../../context/AppContext'
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Loading from '../Loading'
+import { logout } from '../../redux/Slices/AuthSlice'
 
 const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
 
+    const dispatch = useDispatch()
     const { isLoggedIn, user } = useSelector(state => state.auth)
     const { windowSize } = useContext(AppData)
     const [isToolTipOpen, setIsToolTipOpen] = useState(false)
     const navigate = useNavigate()
 
+    const logoutUser = () => {
+        if (isLoggedIn) {
+            dispatch(logout())
+            document.cookie = 'access_token='
+            navigate(`/home`)
+            setIsToolTipOpen(false)
+    }
+}
     if (windowSize) {
         return (
             <div
                 className='left-aside aside'
             >
                 {isToolTipOpen && <Tooltip >
-                    <button>
+                    <button
+                        onClick={logoutUser}
+                    >
                         logout
                     </button>
                 </Tooltip>}
@@ -54,7 +66,7 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                                     <Notifications />
                                                     <span>Notifications</span> </li>
                                             </Link>
-                                            <Link to={'/messages'}> 
+                                            <Link to={'/messages'}>
                                                 <li
 
                                                     onClick={() => navigate('/messages')}>

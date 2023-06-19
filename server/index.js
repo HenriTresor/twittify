@@ -14,6 +14,7 @@ import cookieParser from 'cookie-parser'
 config()
 
 
+const client_uri = 'http://localhost:5173'
 const app = express()
 app.use(cookieParser())
 app.use(session({
@@ -23,8 +24,8 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(cors({
-    origin: '*',
-    credentials:true
+    origin: `${client_uri}`, 
+    credentials: true
 }))
 const server = http.createServer(app)
 const PORT = process.env.PORT || 4000

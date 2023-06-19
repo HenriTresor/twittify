@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux'
 import { buttonStyles } from './buttonStyles'
 import { findIfFollows } from '../../utils/function'
 
-const RightAside = ({ gettingProfile, setIsOpen ,setWhichOpen }) => {
+const RightAside = ({ gettingProfile, setIsOpen, setWhichOpen }) => {
 
     const { isLoggedIn, user: currentUser } = useSelector(state => state.auth)
     // const [people, setPeople] = useState([])
@@ -23,7 +23,10 @@ const RightAside = ({ gettingProfile, setIsOpen ,setWhichOpen }) => {
             className='aside right-aside'
         >
             {
-                gettingProfile ? <Loading /> : (
+                gettingProfile ? <Loading />
+                    
+                    : error.status ? <Error />
+                        : (
                     <>
                         <div
                             className='search-box'
@@ -46,7 +49,7 @@ const RightAside = ({ gettingProfile, setIsOpen ,setWhichOpen }) => {
 
                                         {
                                             isLoading ? <Loading />
-                                                : error.status === null ? <Error />
+                                                : error.status ? <Error />
                                                     : data?.users?.length === 0 ? 'no new users'
                                                         : data?.users?.map(user => (
                                                             user?._id !== currentUser?._id && !findIfFollows(currentUser, user) ?
@@ -64,12 +67,12 @@ const RightAside = ({ gettingProfile, setIsOpen ,setWhichOpen }) => {
                                     <Typography variant='body2' color={'GrayText'} fontSize={12}>
                                         Signup now to get your own personalized timeline!
                                     </Typography>
-                                        <button style={buttonStyles}
-                                            onClick={() => {
-                                                setIsOpen(true)
-                                                setWhichOpen('signup')
+                                    <button style={buttonStyles}
+                                        onClick={() => {
+                                            setIsOpen(true)
+                                            setWhichOpen('signup')
                                         }}
-                                        >
+                                    >
                                         Create account
                                     </button>
                                     <Typography color={'GrayText'}>
