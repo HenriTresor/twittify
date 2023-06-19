@@ -18,19 +18,20 @@ button{
     display: flex;
     justify-content: center;
     /* border: 2px solid white; */
-    /* width: 50%; */
-    margin: 0 auto
-    /* align-items: center; */
+    width: 95%;
+    margin: 0 auto;
+    /* align-items: start; */
 }
 .body-container{
     text-align: left !important;
     height: auto;
-    flex-grow: 2;
+    flex-grow: 2;    
     width: 30%;
     border-left: 1px solid grey;
     border-right: 1px solid grey;
     padding-bottom: 10em;
 }
+
 
 .single-tweet-header{
     display: flex;
