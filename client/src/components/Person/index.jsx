@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 
 const Person = ({ fullName, username, avatar, _id }) => {
 
-    const { user: currentUser } = useSelector(state => state.auth)
+    const { user: currentUser, isLoggedIn } = useSelector(state => state.auth)
     const navigate = useNavigate()
     const [followed, setFollowed] = useState(false)
     const { windowSize } = React.useContext(AppData)
@@ -21,7 +21,7 @@ const Person = ({ fullName, username, avatar, _id }) => {
                 }}
                 style={{ display: 'flex', cursor: 'pointer', alignItems: 'center', gap: 2 }}>
                 <Avatar sizes='small' src={avatar} />
-                <div>
+                <div style={{marginLeft:'1.2em'}}>
                     <Typography variant='body2'>
                         {fullName}
                     </Typography>
@@ -36,7 +36,7 @@ const Person = ({ fullName, username, avatar, _id }) => {
                     <IconButton>
                         <Add />
                     </IconButton>
-                ) : (
+                ) : isLoggedIn ?  (
 
                         <button
                             style={{
@@ -56,7 +56,7 @@ const Person = ({ fullName, username, avatar, _id }) => {
                             followed ? 'following!' : 'follow'
                         }
                     </button>
-                )
+                ) : null
             }
         </div>
     )
