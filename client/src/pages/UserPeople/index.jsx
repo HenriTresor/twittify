@@ -9,6 +9,7 @@ import useFetch from '../../hooks/useFetch'
 import serverLink from '../../utils/server.link'
 import Loading from '../../components/Loading'
 import Error from '../../components/Error'
+import Person from '../../components/Person'
 
 const UserPeople = () => {
 
@@ -44,14 +45,20 @@ const UserPeople = () => {
                     currentTab === 'followers' ? (
                         isLoading ? <Loading />
                             : error.status ? <Error />
+                                   : data?.user?.followers?.length === 0 ? <div className='none'>{username} has no followers</div> 
                                 : (
-                                    <h1>followers</h1>
+                                    data?.user?.followers?.map(user => (
+                                        <Person {...user} key={ user?._id} />
+                                    ))
                             )
                     ) : (
                             isLoading ? <Loading />
                                 : error.status ? <Error />
+                                    : data?.user?.followees?.length === 0 ? <div className='none'>{username} has no followees</div>
                                     : (
-                                <h1>following</h1>
+                                        data?.user?.followees?.map(user => (
+                                            <Person {...user} key={user?._id} />
+                                        ))
                         )
                     )
                 }

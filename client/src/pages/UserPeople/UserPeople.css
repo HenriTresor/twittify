@@ -1,0 +1,6 @@
+.none{
+    padding: 1em;
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
