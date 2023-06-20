@@ -20,6 +20,7 @@ import Profile from './pages/profile'
 import { Add } from '@mui/icons-material'
 import NewChat from './components/NewChat'
 import serverLink from './utils/server.link'
+import UserPeople from './pages/UserPeople'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -185,8 +186,7 @@ const App = () => {
           <Route path='/home' exact element={<Homepage />} />
           <Route path='/:username'>
             <Route index element={<Profile />} />
-            <Route path='following' element={<h1>following</h1>} />
-            <Route path='followers' element={<h3> followers</h3>} />
+            <Route path='people' element={ <UserPeople />} />
           </Route>
           <Route path='/messages' exact element={<Messages
             setIsOpen={setIsOpen}
