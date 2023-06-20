@@ -5,12 +5,16 @@ import { Twitter } from '@mui/icons-material'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
-
+import useFetch from '../../hooks/useFetch'
+import serverLink from '../../utils/server.link'
+import Loading from '../../components/Loading'
+import Error from '../../components/Error'
 
 const UserPeople = () => {
 
-    const { username} = useParams()
+    const { username } = useParams()
     const [currentTab, setCurrentTab] = useState('followers')
+    const { isLoading, error, data } = useFetch(`${serverLink}/api/v1/users/${username}`)
     return (
         <div
             className='body-container'
@@ -27,7 +31,7 @@ const UserPeople = () => {
                 </div>
                 <div style={{ display: 'flex', marginTop: '2em' }}>
                     <button
-                    onClick={()=>setCurrentTab('followers')}
+                        onClick={() => setCurrentTab('followers')}
                     >Followers</button>
                     <button
                         onClick={() => setCurrentTab('following')}
@@ -38,9 +42,17 @@ const UserPeople = () => {
             <div>
                 {
                     currentTab === 'followers' ? (
-                    <h4>followers</h4>
+                        isLoading ? <Loading />
+                            : error.status ? <Error />
+                                : (
+                                    <h1>followers</h1>
+                            )
                     ) : (
-                            <h4>following</h4>
+                            isLoading ? <Loading />
+                                : error.status ? <Error />
+                                    : (
+                                <h1>following</h1>
+                        )
                     )
                 }
             </div>
