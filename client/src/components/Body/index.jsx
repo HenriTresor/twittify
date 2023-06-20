@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Body.css'
 import {
-    Typography, 
+    Typography,
 } from '@mui/material'
 
 import {
@@ -15,11 +15,11 @@ import Loading from '../Loading'
 import Error from '../Error'
 import { useSelector } from 'react-redux'
 
-const Index = () => {
+const Body = () => {
     const [tweets, setTweets] = useState([])
     const { data, isLoading } = useFetch(`${serverLink}/api/v1/tweets`)
     const { isLoggedIn } = useSelector(state => state.auth)
-    
+
 
     useEffect(() => {
         setTweets(data?.tweets)
@@ -29,7 +29,7 @@ const Index = () => {
             className='body-container'
         >
             <div className='tabs-container'>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginLeft:'2em' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginLeft: '2em' }}>
                     <Typography color={'#1d9bf0'}>
                         <Twitter />
                     </Typography>
@@ -40,7 +40,7 @@ const Index = () => {
                 {
                     isLoggedIn && (
                         <>
-                           
+
                             <div style={{ display: 'flex', marginTop: '2em' }}>
                                 <button>For you</button>
                                 <button>Following</button>
@@ -51,31 +51,6 @@ const Index = () => {
             </div>
 
             {isLoggedIn && <NewTweet />}
-            {/* <Post
-                author={'henri tresor'}
-                author_uname={'tresor_1'}
-                posted_on={Date.now()}
-                _id={'48484848484884'}
-                post_content={{ post_text: 'Nice to be back!' }}
-            />
-            <Post
-                author={'henri tresor'}
-                author_uname={'tresor_1'}
-                posted_on={Date.now()}
-                post_content={{ post_text: 'Nice to be back!' }}
-            />
-            <Post
-                author={'henri tresor'}
-                author_uname={'tresor_1'}
-                posted_on={Date.now()}
-                post_content={{ post_text: 'Nice to be back!' }}
-            />
-            <Post
-                author={'henri tresor'}
-                author_uname={'tresor_1'}
-                posted_on={Date.now()}
-                post_content={{ post_text: 'Nice to be back!' }}
-            /> */}
 
             {
                 !isLoading ? (
@@ -93,4 +68,5 @@ const Index = () => {
     )
 }
 
-export default React.memo(Index)
+// eslint-disable-next-line react-refresh/only-export-components
+export default React.memo(Body)

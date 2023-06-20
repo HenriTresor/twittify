@@ -1,10 +1,10 @@
-import User from "../models/User.model.js";
-import errorResponse from "../utils/errorResponse.js";
-import UserValidObject from "../validators/User.joi.js";
-import createToken from "../utils/createToken.js";
 import { hash } from "bcrypt";
-import _ from 'lodash'
+import _ from 'lodash';
+import User from "../models/User.model.js";
+import createToken from "../utils/createToken.js";
+import errorResponse from "../utils/errorResponse.js";
 import { checkUser } from "../utils/functions.js";
+import UserValidObject from "../validators/User.joi.js";
 
 const createUser = async (req, res, next) => {
     try {
@@ -162,4 +162,5 @@ export {
     createUser,
     getAllUsers,
     getUser
-}
+};
+
