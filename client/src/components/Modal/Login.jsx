@@ -90,13 +90,13 @@ const Login = ({ setWhichModal, setIsOpen }) => {
         }}
         style={{
         ...buttonStyles,
-        padding: '0.2em', display: 'flex', alignItems: 'center', justifyContent: "center", gap: '1em'
+        padding: '0.2em', display: 'flex', alignItems: 'center', justifyContent: "center", gap: '1em', width:'40%',margin:'1em auto'
       }}> <Google /> Sign in with Google</button>
 
       <div style={{
         display: "flex",
         alignItems: 'center',
-        justifyContent: "center",
+        justifyContent: "center",width:'100%'
       }}>
         <hr style={{ width: '100px' }} />
         <Typography sx={{ m: '0 0.2em' }}>

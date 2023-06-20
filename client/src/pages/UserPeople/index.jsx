@@ -1,8 +1,6 @@
-// import React from 'react'
 import { Typography } from '@mui/material'
 import './UserPeople.css'
 import { Twitter } from '@mui/icons-material'
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import useFetch from '../../hooks/useFetch'

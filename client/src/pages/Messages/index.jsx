@@ -6,9 +6,16 @@ import { MessageRounded, InfoOutlined, Send } from '@mui/icons-material'
 import { Avatar, IconButton } from '@mui/material'
 import { buttonStyles, iconButtonStyles } from '../../components/Aside/buttonStyles'
 import Contact from '../../components/Contact'
+import { useSelector } from 'react-redux'
+import Error from '../../components/Error'
 
 const Messages = ({ setIsOpen, setWhichModal, selectedChat, setSelectedChat }) => {
   const { pathname } = useLocation()
+  const { isLoggedIn} = useSelector(state => state.auth)
+
+  if (!isLoggedIn) {
+    return <Error />
+  }
   return (
     <div
       style={{
