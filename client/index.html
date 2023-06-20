@@ -4,15 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Twitter clone</title>
+    <style>
+      #noscript {
+        width: 100%;
+        height: 100dvh;
+        display: grid;
+        text-align: center;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+        place-content: center;
+      }
+    </style>
   </head>
-  <body >
+  <body>
     <div id="root"></div>
     <div id="reg-modal"></div>
     <div id="tooltip"></div>
     <noscript>
-      <div >
-         <h1>JavaScript is disabled in your browser.</h1>
-    <p>enable it to continue.</p>  
+      <div id="noscript">
+        <h1>JavaScript is disabled in your browser.</h1>
+        <p>enable it to continue.</p>
       </div>
     </noscript>
     <script type="module" src="/src/main.jsx"></script>
