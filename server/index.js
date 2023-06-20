@@ -17,7 +17,7 @@ config()
 const client_uri = 'http://localhost:5173'
 const app = express()
 app.use(cookieParser())
-app.use(session({
+app.use(session({ 
     name: 'my-session',
     secret: 'my-secret'
 }))
