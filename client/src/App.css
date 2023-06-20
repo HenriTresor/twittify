@@ -120,3 +120,8 @@ a:hover
 .tabs-container button:hover{
     background: #1d9cf01e;
 }
+
+
+.tabs-container button.active{
+    background: #1d9cf01e;
+}

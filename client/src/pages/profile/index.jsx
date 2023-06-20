@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './profile.css'
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import serverLink from '../../utils/server.link'
 import Loading from '../../components/Loading'
@@ -163,12 +163,16 @@ const Profile = () => {
                                                 <CalendarMonth /> Joined {moment(user.createdAt).format('MMMM YYYY')}
                                             </Typography>
                                             <div style={{ display: 'flex', marginTop: '1em', alignItems: 'center', gap: '1em' }}>
-                                                <Typography fontSize={15}>
-                                                    {user?.followers?.length} followers
-                                                </Typography>
-                                                <Typography fontSize={15}>
-                                                    {user && user?.followees?.length} following
-                                                </Typography>
+                                                <Link to={`/${user?.username}/people`}>
+                                                    <Typography fontSize={15}>
+                                                        {user?.followers?.length} followers
+                                                    </Typography>
+                                                </Link>
+                                                <Link to={`/${user?.username}/people`}>
+                                                    <Typography fontSize={15}>
+                                                        {user && user?.followees?.length} following
+                                                    </Typography>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

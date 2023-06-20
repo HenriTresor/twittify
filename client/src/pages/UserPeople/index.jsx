@@ -32,11 +32,13 @@ const UserPeople = () => {
                 </div>
                 <div style={{ display: 'flex', marginTop: '2em' }}>
                     <button
+                        className={`${currentTab === 'followers' && 'active'}`}
                         onClick={() => setCurrentTab('followers')}
-                    >Followers</button>
+                    >Followers {`(${data?.user?.followers?.length || 0})`}</button>
                     <button
+                        className={`${currentTab === 'following' && 'active'}`}
                         onClick={() => setCurrentTab('following')}
-                    >Following</button>
+                    >Following {`(${data?.user?.followees?.length || 0})`}</button>
                 </div>
             </div>
 
@@ -45,21 +47,21 @@ const UserPeople = () => {
                     currentTab === 'followers' ? (
                         isLoading ? <Loading />
                             : error.status ? <Error />
-                                   : data?.user?.followers?.length === 0 ? <div className='none'>{username} has no followers</div> 
-                                : (
-                                    data?.user?.followers?.map(user => (
-                                        <Person {...user} key={ user?._id} />
-                                    ))
-                            )
+                                : data?.user?.followers?.length === 0 ? <div className='none'>{username} has no followers</div>
+                                    : (
+                                        data?.user?.followers?.map(user => (
+                                            <Person {...user} key={user?._id} />
+                                        ))
+                                    )
                     ) : (
-                            isLoading ? <Loading />
-                                : error.status ? <Error />
-                                    : data?.user?.followees?.length === 0 ? <div className='none'>{username} has no followees</div>
+                        isLoading ? <Loading />
+                            : error.status ? <Error />
+                                : data?.user?.followees?.length === 0 ? <div className='none'>{username} has no followees</div>
                                     : (
                                         data?.user?.followees?.map(user => (
                                             <Person {...user} key={user?._id} />
                                         ))
-                        )
+                                    )
                     )
                 }
             </div>
