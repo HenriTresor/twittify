@@ -20,7 +20,7 @@
     font-size: 1.1em;
     transition: all .5s;
     cursor: pointer;
-    border-radius: 5px;
+    /* border-radius: 5px;   */
 }
 .tabs-container button:hover{
     background: #1d9cf01e;
