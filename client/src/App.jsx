@@ -183,7 +183,11 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/home' exact element={<Homepage />} />
-          <Route path='/:username' exact element={<Profile />} />
+          <Route path='/:username'>
+            <Route index element={<Profile />} />
+            <Route path='following' element={<h1>following</h1>} />
+            <Route path='followers' element={<h3> followers</h3>} />
+          </Route>
           <Route path='/messages' exact element={<Messages
             setIsOpen={setIsOpen}
             setWhichModal={setWhichModal}
