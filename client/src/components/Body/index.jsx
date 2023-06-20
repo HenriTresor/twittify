@@ -29,7 +29,7 @@ const Index = () => {
             className='body-container'
         >
             <div className='tabs-container'>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginLeft:'2em' }}>
                     <Typography color={'#1d9bf0'}>
                         <Twitter />
                     </Typography>

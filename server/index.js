@@ -56,4 +56,4 @@ app.use(`${rootRoute}/tweets`, TweetRouter)
 app.all('*', (req, res) => {
     res.status(400).json({ message: 'resource not found', status: false })
 })
-app.use(errorHandler)
+app.use(()=>errorHandler())
