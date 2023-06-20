@@ -111,9 +111,9 @@ const Login = ({ setWhichModal, setIsOpen }) => {
             //   color='white'
             sx={{ color: 'white' }}
             onChange={(e) => handleChange(e)}
-            label='email address'
+            label='email address or username'
             name="email"
-            type="email"
+            type="text"
             value={inputValues.email}
           />
         </div>

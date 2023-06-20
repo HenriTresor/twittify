@@ -9,12 +9,17 @@ const loginUser = async (req, res, next) => {
     try {
 
         let { email, password } = req.body
-        if (!email || !password) return next(errorResponse(400, 'provide email address and password'))
+        if (!email || !password) return next(errorResponse(400, 'provide email address or username and password'))
 
         // check if the user exists
 
-        let user = await User.findOne({ email }).populate('followers').populate('followees')
-        if (!user) return next(errorResponse(404, `user with email ${email} was not found`))
+        let user = await User.findOne({
+            $or: [
+                { email },
+                { username: email }
+            ]
+        }).populate('followers').populate('followees')
+        if (!user) return next(errorResponse(404, `user ${email} was not found`))
 
         // compare passwords
 
