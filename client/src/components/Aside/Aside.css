@@ -52,7 +52,7 @@
  }
 
  .aside .nav-items li:hover{
-    background: rgba(255, 255, 255, 0.199);
+    background: #1d9cf01e;
  }
 
  .aside .nav-items button{
@@ -92,7 +92,7 @@
  .search-box{
     display: flex;
     width: 100%;
-    background: rgba(128, 128, 128, 0.249);
+    background: #1d9cf01e;
     padding: 0.8em;
     border-radius: 30px;
     align-items: center;
@@ -146,7 +146,7 @@
  }
 .box{
     margin: 1.54em auto;
-    background: rgba(128, 128, 128, 0.17);
+    background: #1d9cf01e;
     padding: 1em;
     border-radius: 20px;
  }

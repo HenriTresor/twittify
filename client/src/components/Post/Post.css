@@ -1,7 +1,7 @@
 .post-container{
     margin-top: 1em;
-    border-top: 1px solid rgba(255, 255, 255, 0.449);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.449);
+    border-top: 1px solid #1d9cf048;
+    border-bottom: 1px solid #1d9cf04b;
     padding: 1em;
     cursor: pointer;
     width: 100%;

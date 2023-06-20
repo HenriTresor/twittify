@@ -1,12 +1,12 @@
 
 .tabs-container{
-    padding: 1em;
+    padding: 1em 0 0 0;
     background: rgba(0, 0, 0, 0.116);
     backdrop-filter: blur(15px);
     width: 100%;
     position: sticky;
     top: 0;
-    border: 1px solid grey;
+    border: 1px solid #1d9cf01e;
     z-index: 9;
 }
 .tabs-container button{
@@ -22,6 +22,6 @@
     cursor: pointer;
     border-radius: 5px;
 }
-.tabs-container button:active{
-    background: #d9d9d966;
+.tabs-container button:hover{
+    background: #1d9cf01e;
 }
