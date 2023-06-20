@@ -23,7 +23,7 @@ const RightAside = ({ gettingProfile, setIsOpen, setWhichOpen }) => {
             className='aside right-aside'
         >
             {
-                gettingProfile ? <Loading />
+                isLoading  ? <Loading />
                     
                     : error.status ? <Error />
                         : (

@@ -5,11 +5,11 @@
     padding: 1em;
     cursor: pointer;
     width: 100%;
-    transition: all .5s ease-in-out;
+    /* transition: all .5s ease-in-out; */
 }
 
 .post-container:hover{
-    background: rgba(128, 128, 128, 0.091);
+    background: #1d9cf005;
 }
 
 .post-header{

@@ -9,7 +9,11 @@ const Error = () => {
           <Typography variant='inherit' color='GrayText'>
               Something went wrong. Try reloading
           </Typography>
-          <button>
+      <button
+        onClick={() => {
+          location.reload()
+      }}
+      >
               <RedoRounded />
               Retry</button>
     </div>

@@ -82,13 +82,18 @@ const App = () => {
     let isCancelled = true
     if (isCancelled) {
       const func = async () => {
-        setGettingProfile(true)
-        const user = await getUserProfile()
-        setGettingProfile(false)
-        if (user.status) {
-          return dispatch(login({ user: user.user }))
+        try {
+          setGettingProfile(true)
+          const user = await getUserProfile()
+          setGettingProfile(false)
+          if (user.status) {
+            return dispatch(login({ user: user.user }))
+          }
+          dispatch(logout())
+        } catch (error) {
+          setGettingProfile(false)
+          console.log(error)
         }
-        dispatch(logout())
       }
       func()
     }
