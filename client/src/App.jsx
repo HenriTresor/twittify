@@ -58,21 +58,6 @@ const App = () => {
   const [selectedChat, setSelectedChat] = useState({})
 
 
-  // const getGoogleProfile = async () => {
-  //  try {
-  //    const res = await axios.get(`${serverLink}/api/v1/auth/google/success`, { withCredentials: true })
-  //  
-  //    if (res.status) {
-  //      dispatch(login({ user: res.user }))
-  //    }
-  //  } catch (error) {
-  //   console.log('error getting profile', error)
-  //  }
-  // }
-  // useEffect(() => {
-  //   getGoogleProfile()
-  // }, [])
-
   useEffect(() => {
     if (pathname === '/') {
       navigate('/home')
