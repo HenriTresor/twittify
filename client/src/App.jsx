@@ -61,7 +61,7 @@ const App = () => {
   // const getGoogleProfile = async () => {
   //  try {
   //    const res = await axios.get(`${serverLink}/api/v1/auth/google/success`, { withCredentials: true })
-  //    console.log('goole', res)
+  //  
   //    if (res.status) {
   //      dispatch(login({ user: res.user }))
   //    }
