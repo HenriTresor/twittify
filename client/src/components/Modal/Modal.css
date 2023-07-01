@@ -60,7 +60,7 @@
     outline: none;
 }
 @media screen and (max-width: 768px) {
-    .modal> div {
+    .modal > div {
         width: 100%;
     }
 }

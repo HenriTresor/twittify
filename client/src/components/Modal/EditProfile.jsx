@@ -1,7 +1,7 @@
 // import React from 'react'
 import ReactDOM from 'react-dom'
 import './Modal.css'
-import { Close, CameraEnhanceRounded } from '@mui/icons-material'
+import { Close } from '@mui/icons-material'
 import { buttonStyles } from '../Aside/buttonStyles'
 import propTypes from 'prop-types'
 import { Avatar, CircularProgress, IconButton, TextField, Typography } from '@mui/material'
@@ -13,10 +13,10 @@ import serverLink from '../../utils/server.link'
 import Loading from '../Loading'
 
 const styles = {
-    width: '45dvw'
+    // width: '45dvw'
 }
 
-const EditProfile = () => {
+const EditProfile = ({setIsOpen}) => {
     const { user } = useSelector(state => state.auth)
     const navigate = useNavigate()
     const [isUploading, setIsUploading] = useState(false)
@@ -58,7 +58,7 @@ const EditProfile = () => {
                 <div>
                     <IconButton color='inherit'
                         onClick={() => {
-                            navigate(-1)
+                            setIsOpen(false)
                         }}
                     >
                         <Close />
@@ -66,7 +66,7 @@ const EditProfile = () => {
                     <Typography
                         disabled={isUploading}
                         variant='h6' fontWeight={'bolder'}>
-                        Edit profile
+                        Edit
                     </Typography>
                 </div>
                 <button

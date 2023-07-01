@@ -3,6 +3,8 @@ import Tweet from '../models/Tweets.model.js'
 import errorResponse from '../utils/errorResponse.js'
 import { checkTweet, checkUser } from '../utils/functions.js'
 import { ObjectId } from 'mongoose'
+import { v2 as cloudinary } from 'cloudinary'
+import fs from 'fs'
 
 export const createTweet = async (req, res, next) => {
     try {
@@ -17,10 +19,24 @@ export const createTweet = async (req, res, next) => {
 
         let newTweet = new TweetsModel({
             author,
-            post_content,
+            post_content: { ...post_content },
             type,
             audience
         })
+        if (req.file) {
+            const imageUrl = await cloudinary.uploader.upload(req.file.path)
+            newTweet = new TweetsModel({
+                author,
+                post_content: {
+                    ...post_content, post_image: imageUrl.secure_url
+                }
+            })
+
+            fs.unlink(req.file.path, (error) => {
+                if (error) return console.log('error deleting file', error.message)
+                console.log("file deleted")
+            })
+        }
 
         await newTweet.save()
 
@@ -115,7 +131,7 @@ export const LikeTweet = async (req, res, next) => {
         // check user
         let user = await checkUser(likerId)
         if (!user) return next(errorResponse(404, 'user not found'))
-      
+
 
         // check tweet
 
@@ -144,7 +160,7 @@ export const LikeTweet = async (req, res, next) => {
             }
         })
 
-      
+
         res.status(201).json({ status: true, message: 'like added successfully' })
     } catch (error) {
         console.log("error liking tweet", error.message)

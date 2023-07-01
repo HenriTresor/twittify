@@ -175,7 +175,7 @@ export const updateUser = async (req, res, next) => {
             await User.findByIdAndUpdate(id, {
                 $set: { ...body, avatar: imageUrl.secure_url }
             })
-
+            
             res.status(201).json({
                 status: true,
                 message: 'user Updated successfully'

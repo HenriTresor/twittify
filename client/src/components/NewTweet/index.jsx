@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Avatar, IconButton, TextField, CircularProgress, Fab } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Avatar, IconButton, TextField, CircularProgress, Fab, Typography } from '@mui/material'
 import {
     Photo, GifBoxOutlined, Poll,
     EmojiEmotions,
@@ -22,6 +22,9 @@ const NewTweet = ({ setIsOpen }) => {
         post_text: '',
         post_image: '',
     })
+    useEffect(() => {
+        console.log('post_cotnent', post_content)
+    }, [post_content])
     const [audience, setAudience] = useState('everyone')
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
     const navigate = useNavigate()
@@ -37,7 +40,11 @@ const NewTweet = ({ setIsOpen }) => {
             }
 
 
-            const res = await axios.post(`${serverLink}/api/v1/tweets`, tweet)
+            const res = await axios.post(`${serverLink}/api/v1/tweets`, tweet, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
             setIsPosting(false)
             if (res.data.status) {
                 navigate(`/${res.data.newTweet.author?.username}/status/${res.data.newTweet._id}`)
@@ -78,7 +85,7 @@ const NewTweet = ({ setIsOpen }) => {
                 <div>
 
                     <Avatar
-                    src={`${user?.avatar}`}
+                        src={`${user?.avatar}`}
                     />
 
                     <textarea
@@ -89,9 +96,16 @@ const NewTweet = ({ setIsOpen }) => {
                 </div>
                 <div>
                     <div>
-                        <IconButton color='info'>
-                            <Photo />
-                        </IconButton>
+                        <label htmlFor="photo">
+                            {/* <IconButton color='info'> */}
+                            <Typography color={'#1d98f0'} sx={{ p: '0.6em', cursor: 'pointer' }}>
+                                <Photo />
+                            </Typography>
+                            {/* </IconButton> */}
+                        </label>
+                        <input type="file" name="photo" style={{ display: 'none' }} id="photo" onChange={(e) => {
+                            e.target.files[0].type?.split('/')[0] === 'image' ? setPost_content(prev => ({ ...prev, post_image: e.target.files[0] })) : alert('you have to choose a photo')
+                        }} />
                         {/* <IconButton color='info'
                             onClick={() => setIsEmojiPickerOpen(!isEmojiPickerOpen)}
                         >

@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import multer from 'multer'
 import {
     LikeTweet,
     createReply,
@@ -8,9 +9,10 @@ import {
     getTweetsByUser
 } from '../controllers/Tweets.controller.js'
 
+const upload = multer({ dest: './uploads' })
 const router = Router()
 
-router.post('/', createTweet)
+router.post('/', upload.single(`post_content[post_image]`), createTweet)
 router.get('/', getTweets)
 router.get('/:id', getTweet)
 router.put('/reply', createReply)

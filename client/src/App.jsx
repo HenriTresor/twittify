@@ -205,7 +205,9 @@ const App = () => {
                 selectedChat={selectedChat}
                 setSelectedChat={setSelectedChat}
               />
-                : whichModal === 'edit-profile' ? <EditProfile />
+                : whichModal === 'edit-profile' ? <EditProfile
+                  setIsOpen={setIsOpen}
+                />
                 : whichModal === 'new-tweet' ? <NewTweet setIsOpen={setIsOpen} /> : ''
         }
       </RegModal>
