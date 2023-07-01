@@ -10,6 +10,12 @@ html{
     color: white;
 }
 
+textarea::-webkit-resizer,
+textarea::-moz-resizer,
+textarea::-ms-resizer {
+  display: none;
+}
+
 button{
     cursor: pointer;
 }
