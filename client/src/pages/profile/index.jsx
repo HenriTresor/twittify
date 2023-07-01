@@ -64,23 +64,25 @@ const Profile = ({setWhichModal, setIsOpen}) => {
             className='body-container'
         >
             <div className="single-tweet-header">
-                <IconButton color='inherit'
-                    onClick={() => {
-                        navigate(-1)
-                    }}
-                >
-                    <ArrowBack />
-                </IconButton>
                 <div>
-                    <Typography variant='h6' fontWeight={'bolder'}>
-                        {user ? user?.fullName : 'Profile'}
-                    </Typography>
-                    <Typography color={'GrayText'}>
-                        {
+                    <IconButton color='inherit'
+                        onClick={() => {
+                            navigate(-1)
+                        }}
+                    >
+                        <ArrowBack />
+                    </IconButton>
+                    <div>
+                        <Typography variant='h6' fontWeight={'bolder'}>
+                            {user ? user?.fullName : 'Profile'}
+                        </Typography>
+                        <Typography color={'GrayText'}>
+                            {
 
-                            userTweets?.length !== undefined && (userTweets?.length === 1 && userTweets?.length + ' tweet' || userTweets?.length + ' tweets')
-                        }
-                    </Typography>
+                                userTweets?.length !== undefined && (userTweets?.length === 1 && userTweets?.length + ' tweet' || userTweets?.length + ' tweets')
+                            }
+                        </Typography>
+                    </div>
                 </div>
             </div>
             {

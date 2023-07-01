@@ -1,17 +1,19 @@
 // import React from 'react'
 import ReactDOM from 'react-dom'
 import './Modal.css'
-import {  Close } from '@mui/icons-material'
+import {  Close, CameraEnhanceRounded } from '@mui/icons-material'
 import { buttonStyles } from '../Aside/buttonStyles'
 import propTypes from 'prop-types'
-import { IconButton, Typography } from '@mui/material'
+import { Avatar, IconButton, TextField, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const styles = {
     width:'45dvw'
 }
 
 const EditProfile = () => {
+    const { user} = useSelector(state => state.auth)
     const navigate = useNavigate()
   return (
       <div style={styles}>
@@ -32,7 +34,31 @@ const EditProfile = () => {
                   Save
               </button>
           </div>
-    </div>
+          <div className='user-photos-container'>
+            
+              <div style={{display:'grid', placeContent:'center'}}>
+                      <Avatar
+                          src='d'
+                          sx={{ width: '100px', height: '100px' }}
+                          id='user-photo'
+                      />
+              </div>
+          </div>
+          <div>
+              <div className="input_container">
+                  <TextField
+                      label='Edit name'
+                      placeholder={`${user?.fullName}`}
+                  />
+              </div>
+              <div className="input_container">
+                  <TextField
+                      label='Edit bio'
+                      placeholder={`${user?.bio}`}
+                  />
+             </div>
+          </div>
+          </div>
   )
 }
 

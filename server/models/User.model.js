@@ -31,7 +31,8 @@ const UserSchema = new Schema(
             }
         ],
         bio: {
-            type: String
+            type: String,
+            default:''
         }
     },
     {

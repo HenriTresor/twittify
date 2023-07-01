@@ -158,6 +158,8 @@ export const getUsersByQuery = async (req, res, next) => {
         next(errorResponse(500, 'unexpected error'))
     }
 }
+
+export const updateUser =()
 export {
     createUser,
     getAllUsers,
