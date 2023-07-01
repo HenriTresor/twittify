@@ -49,7 +49,7 @@ const Signup = ({ setWhichModal, setIsOpen }) => {
       alert('error occured')
       return setError(prev => ({
         status: true,
-        message: error.response?.data.message || error.message
+        message: error.response.data.message || error.message
       }))
     }
   }
