@@ -164,13 +164,13 @@ export const updateUser = async (req, res, next) => {
 
         const { id } = req.params
 
-
+       
         let user = await checkUser(id)
         if (!user) return next(errorResponse(500, 'user was not found'))
 
-        await findByIdAndUpdate(id, {
-            $set: { ...req.body }
-        })
+        // await User.findByIdAndUpdate(id, {
+        //     $set: { ...req.body }
+        // })
 
         res.status(201).json({
             status: true,
