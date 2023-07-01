@@ -159,7 +159,28 @@ export const getUsersByQuery = async (req, res, next) => {
     }
 }
 
-export const updateUser =()
+export const updateUser = async (req, res, next) => {
+    try {
+
+        const { id } = req.params
+
+
+        let user = await checkUser(id)
+        if (!user) return next(errorResponse(500, 'user was not found'))
+
+        await findByIdAndUpdate(id, {
+            $set: { ...req.body }
+        })
+
+        res.status(201).json({
+            status: true,
+            message: 'user Updated successfully'
+        })
+    } catch (error) {
+        console.log('error updating user', error.message);
+        next(errorResponse(500, 'unexpected error'))
+    }
+}
 export {
     createUser,
     getAllUsers,
