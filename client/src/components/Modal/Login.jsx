@@ -66,9 +66,7 @@ const Login = ({ setWhichModal, setIsOpen }) => {
 
   return (
     <div>
-      {
-        isLoading && <LoginBlurry />
-      }
+
       <Snackbar
         sx={{
           zIndex: 9999999999999999n

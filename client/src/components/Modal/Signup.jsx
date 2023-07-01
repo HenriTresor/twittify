@@ -49,7 +49,7 @@ const Signup = ({ setWhichModal, setIsOpen }) => {
       alert('error occured')
       return setError(prev => ({
         status: true,
-        message: error.response?.data.message
+        message: error.response?.data.message || error.message
       }))
     }
   }
@@ -123,7 +123,7 @@ const Signup = ({ setWhichModal, setIsOpen }) => {
           disabled={isLoading}
             onClick={handleSubmit}
             style={buttonStyles}>
-            {isLoading ? <CircularProgress /> : " Create account"}
+            {isLoading ? <CircularProgress size={'1em'}/> : " Create account"}
           </button>
         </div>
         <Typography variant='p' fontSize={13} color={'GrayText'}>
