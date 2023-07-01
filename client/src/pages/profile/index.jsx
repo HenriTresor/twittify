@@ -99,7 +99,7 @@ const Profile = ({setWhichModal, setIsOpen}) => {
                                         <div>
                                             <Avatar
                                                 sx={{ width: '100%', height: '100%' }}
-                                                src='d'
+                                                src={`${user?.avatar}`}
                                                 sizes='large'
                                                 id='user-photo'
                                             />

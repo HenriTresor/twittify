@@ -5,6 +5,8 @@ import createToken from "../utils/createToken.js";
 import errorResponse from "../utils/errorResponse.js";
 import { checkUser } from "../utils/functions.js";
 import UserValidObject from "../validators/User.joi.js";
+import { v2 as cloudinary } from 'cloudinary'
+import fs from 'fs'
 
 const createUser = async (req, res, next) => {
     try {
@@ -163,15 +165,31 @@ export const updateUser = async (req, res, next) => {
     try {
 
         const { id } = req.params
-
-       
         let user = await checkUser(id)
         if (!user) return next(errorResponse(500, 'user was not found'))
+        let body = { ...req.body }
+        if (req.file) {
+            const imageUrl = await cloudinary.uploader.upload(req.file.path)
+            await User.findByIdAndUpdate(id, {
+                $set: { ...body, avatar: imageUrl.secure_url }
+            })
 
-        // await User.findByIdAndUpdate(id, {
-        //     $set: { ...req.body }
-        // })
+            res.status(201).json({
+                status: true,
+                message: 'user Updated successfully'
+            })
+            fs.unlink(req.file.path, (err) => {
+                if (err) {
+                    return console.log('error deleting file: ' + err.message)
+                }
+                console.log('file deleted successfully')
+            })
+            return
+        }
 
+        await User.findByIdAndUpdate(id, {
+            $set: { body }
+        })
         res.status(201).json({
             status: true,
             message: 'user Updated successfully'
