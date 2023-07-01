@@ -31,7 +31,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(cors({
-    origin: `${client_uri}, https://twittify-server-c00i.onrender.com`,
+    origin: `*`,
     credentials: true
 }))
 const server = http.createServer(app)
