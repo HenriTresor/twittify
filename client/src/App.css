@@ -130,3 +130,23 @@ a:hover
 .tabs-container button.active{
     background: #1d9cf01e;
 }
+
+.photo-container{
+    /* padding: 1em; */
+    background: #1d9cf01e;
+    margin-top: 1em;
+    height: 400px;
+    position: relative;
+    animation: fade 1s ease-in-out infinite forwards;
+}
+.photo-container img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+@keyframes fade {
+  
+}

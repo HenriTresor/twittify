@@ -71,9 +71,11 @@ const Post = ({
                     </Typography>
                     {
                         post_content?.post_image && (
-                            <img
-                                src={post_content?.post_image}
-                            />
+                            <div className='photo-container'>
+                                <img
+                                    src={post_content?.post_image}
+                                />
+                           </div>
                         )
                     }
                 </Link>
