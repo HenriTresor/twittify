@@ -21,6 +21,7 @@ import { Add } from '@mui/icons-material'
 import NewChat from './components/NewChat'
 import serverLink from './utils/server.link'
 import UserPeople from './pages/UserPeople'
+import EditProfile from './components/Modal/EditProfile'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -170,7 +171,10 @@ const App = () => {
           <Route path='/' element={<Homepage />} />
           <Route path='/home' exact element={<Homepage />} />
           <Route path='/:username'>
-            <Route index element={<Profile />} />
+            <Route index element={<Profile
+              setIsOpen={setIsOpen}
+              setWhichModal={setWhichModal}
+            />} />
             <Route path='people' element={ <UserPeople />} />
           </Route>
           <Route path='/messages' exact element={<Messages
@@ -201,6 +205,7 @@ const App = () => {
                 selectedChat={selectedChat}
                 setSelectedChat={setSelectedChat}
               />
+                : whichModal === 'edit-profile' ? <EditProfile />
                 : whichModal === 'new-tweet' ? <NewTweet setIsOpen={setIsOpen} /> : ''
         }
       </RegModal>

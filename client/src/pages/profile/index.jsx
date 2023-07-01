@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux'
 import { findIfFollows, followUser, getUser, getUserTweets } from '../../utils/function'
 import Post from '../../components/Post'
 
-const Profile = () => {
+const Profile = ({setWhichModal, setIsOpen}) => {
     const { user: currentUser } = useSelector(state => state.auth)
     const { username } = useParams()
     const [user, setUser] = useState(null)
@@ -108,6 +108,10 @@ const Profile = () => {
                                                     {
                                                         currentUser?._id === user?._id ? (
                                                             <button
+                                                                onClick={() => {
+                                                                    setIsOpen(true)
+                                                                    setWhichModal('edit-profile')
+                                                                }}
                                                                 style={{
                                                                     ...buttonStyles, width: '100px',
                                                                     background: 'none', color: 'white', outline: '1px solid white', padding: '0.7em'

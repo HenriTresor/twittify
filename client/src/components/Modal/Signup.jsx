@@ -67,29 +67,12 @@ const Signup = ({ setWhichModal, setIsOpen }) => {
         }))}
         autoHideDuration={7000}
       />
-      <Typography color={'#1d98f0'}>
+      <Typography color={'#1d98f0'} sx={{marginBottom:'1em'}}>
         <Twitter />
       </Typography>
       <Typography variant='h6' letterSpacing={1} fontWeight={'bold'}>
         Create your account on twitter!
       </Typography>
-      <button style={{
-        ...buttonStyles,
-        padding: '0.2em', display: 'flex',
-        alignItems: 'center', justifyContent: "center", gap: '1em'
-      }}> <Google />Sign up with Google</button>
-      <div style={{
-        display: "flex",
-        alignItems: 'center',
-        justifyContent: "center",
-      }}>
-        <hr style={{ width: '100px' }} />
-        <Typography sx={{ m: '0 0.2em' }}>
-          or
-        </Typography>
-        <hr style={{ width: '100px' }} />
-      </div>
-
       
       <div>
         {

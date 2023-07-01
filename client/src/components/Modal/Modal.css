@@ -14,8 +14,9 @@
 
 .modal > div{
     /* position: relative; */
-    width: auto;
+    /* width: 50%; */
     /* display: grid; */
+    text-align: center;
     overflow: hidden;
     word-wrap: break-word;
     word-break: break-all;
@@ -23,7 +24,7 @@
     background: black;
     padding: 1em 2em;
     /* max-width: 45dvw; */
-    min-width: 45dvw;
+    width: auto;  
     border-radius: 10px;
     /* place-content: center; */
     box-shadow:  0px 0px 30px rgba(128, 128, 128, 0.298);

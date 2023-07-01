@@ -78,32 +78,14 @@ const Login = ({ setWhichModal, setIsOpen }) => {
         onClose={() => setError(prev => ({ ...prev, status: false }))}
         autoHideDuration={7000}
       />
-      <Typography color={'#1d98f0'}>
+      <Typography color={'#1d98f0'} sx={{ marginBottom: '1em' }}>
         <Twitter />
       </Typography>
       <Typography variant='h6' letterSpacing={1} fontWeight={'bold'}>
         Signin to Twitter
       </Typography>
-      <button
-        onClick={() => {
-          window.open(`${serverLink}/api/v1/auth/google`)
-        }}
-        style={{
-        ...buttonStyles,
-        padding: '0.2em', display: 'flex', alignItems: 'center', justifyContent: "center", gap: '1em', width:'40%',margin:'1em auto'
-      }}> <Google /> Sign in with Google</button>
 
-      <div style={{
-        display: "flex",
-        alignItems: 'center',
-        justifyContent: "center",width:'100%'
-      }}>
-        <hr style={{ width: '100px' }} />
-        <Typography sx={{ m: '0 0.2em' }}>
-          or
-        </Typography>
-        <hr style={{ width: '100px' }} />
-      </div>
+
 
       <div>
         <div className="input_container">

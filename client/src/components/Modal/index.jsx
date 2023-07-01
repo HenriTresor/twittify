@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom'
 import './Modal.css'
 import { Close } from '@mui/icons-material'
 import { buttonStyles } from '../Aside/buttonStyles'
+import propTypes from 'prop-types'
+
+
 
 const RegModal = ({ isOpen, children, setIsOpen }) => {
     if (!isOpen) {
@@ -22,6 +25,10 @@ const RegModal = ({ isOpen, children, setIsOpen }) => {
     )
 }
 
-
+RegModal.propTypes = {
+    isOpen: propTypes.bool,
+    children: propTypes.element,
+    setIsOpen: propTypes.func,
+}
 
 export default RegModal
