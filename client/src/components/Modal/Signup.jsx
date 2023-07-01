@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 // import React from 'react'
-import { Typography, TextField, Snackbar } from "@mui/material"
+import { Typography, TextField, Snackbar, CircularProgress } from "@mui/material"
 import { buttonStyles } from "../Aside/buttonStyles"
 import { Google, Twitter } from "@mui/icons-material"
 import { useState } from "react"
@@ -120,9 +120,10 @@ const Signup = ({ setWhichModal, setIsOpen }) => {
 
         <div>
           <button
+          disabled={isLoading}
             onClick={handleSubmit}
             style={buttonStyles}>
-            Create account
+            {isLoading ? <CircularProgress /> : " Create account"}
           </button>
         </div>
         <Typography variant='p' fontSize={13} color={'GrayText'}>
