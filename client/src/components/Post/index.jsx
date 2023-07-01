@@ -37,7 +37,7 @@ const Post = ({
         if (isLoggedIn) {
             await likeTweet({ tweetId: _id, likerId: user?._id })
             findIfLiked(post, user) ? setPost(prev => ({ ...prev, post_likes: prev.post_likes?.filter(like => like?.username !== user?.username) }))
-                : setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] })) 
+                : setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] }))
             return
         }
         alert('you have to login first to react to this tweet')
@@ -51,7 +51,7 @@ const Post = ({
                     navigate(`/${author?.username || commentor?.username}`)
                 }}
                 className='post-header'>
-                <Avatar src={author?.avatar || commentor?.avatar}  />
+                <Avatar src={author?.avatar || commentor?.avatar} />
                 <Typography>
                     {author?.fullName || commentor?.fullName}
                     <Typography variant='body2' sx={{ ml: 1, display: 'flex', alignItems: 'center' }} color={'GrayText'}>
@@ -69,6 +69,13 @@ const Post = ({
                     <Typography sx={{ mt: 3 }}>
                         {post_content?.post_text || reply_content?.reply_text}
                     </Typography>
+                    {
+                        post_content?.post_image && (
+                            <img
+                                src={post_content?.post_image}
+                            />
+                        )
+                    }
                 </Link>
 
             </div>

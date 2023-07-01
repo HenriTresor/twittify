@@ -115,6 +115,14 @@ const SingleTweet = () => {
                                     <Typography >
                                         {post?.post_content?.post_text}
                                     </Typography>
+                                    {
+                                        post?.post_content?.post_image && (
+                                            <img
+                                                id='image'
+                                                src={post?.post_content?.post_image}
+                                            />
+                                        )
+                                    }
                                 </div>
 
                                 <div style={{ margin: '1em 0' }}>
