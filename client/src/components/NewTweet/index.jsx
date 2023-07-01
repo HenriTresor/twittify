@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Avatar, IconButton, TextField, CircularProgress, Fab, Typography } from '@mui/material'
+import { Avatar, IconButton, TextField, CircularProgress, Fab, Typography, Button } from '@mui/material'
 import {
     Photo, GifBoxOutlined, Poll,
     EmojiEmotions,
-    CalendarToday, LocationOn, ArrowRight, Add
+    CalendarToday, LocationOn, ArrowRight, Add, Close
 } from '@mui/icons-material'
 import '../../NewTweet.css'
 import axios from 'axios'
@@ -99,10 +99,20 @@ const NewTweet = ({ setIsOpen }) => {
                         <label htmlFor="photo">
                             {/* <IconButton color='info'> */}
                             <Typography color={'#1d98f0'} sx={{ p: '0.6em', cursor: 'pointer' }}>
-                                <Photo />
+                                {post_content?.post_image ? 'image added. change' : <Photo />}
                             </Typography>
+                           
                             {/* </IconButton> */}
                         </label>
+                        {
+                            post_content?.post_image && (
+                                <Button
+                                    onClick={() => setPost_content(prev => ({ ...prev, post_image: '' }))}
+                                    startIcon={<Close />}>
+                                    remove
+                                </Button>
+                            )
+                        }
                         <input type="file" name="photo" style={{ display: 'none' }} id="photo" onChange={(e) => {
                             e.target.files[0].type?.split('/')[0] === 'image' ? setPost_content(prev => ({ ...prev, post_image: e.target.files[0] })) : alert('you have to choose a photo')
                         }} />
