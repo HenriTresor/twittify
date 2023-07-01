@@ -7,7 +7,9 @@ const Contact = ({ fullName, avatar, username, onClick }) => {
         <div className='contact-container'
         onClick={onClick}
         >
-            <Avatar />
+            <Avatar
+            src={avatar}
+            />
             <div>
                 <h4>{fullName}</h4>
                 <p>{username}</p>

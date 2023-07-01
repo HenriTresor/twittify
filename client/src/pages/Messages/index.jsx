@@ -62,7 +62,10 @@ const Messages = ({ setIsOpen, setWhichModal, selectedChat, setSelectedChat }) =
               <div
                 onClick={() => setSelectedChat(selectedChat)}
                 className='contact-container'>
-                <Avatar />
+                  <Avatar
+                  
+                  src={`${selectedChat?.avatar}`}
+                  />
                 <div>
                   <h4>{selectedChat?.fullName}</h4>
                   <p>{'@' + selectedChat?.username}</p>
@@ -94,7 +97,9 @@ const Messages = ({ setIsOpen, setWhichModal, selectedChat, setSelectedChat }) =
                 <div
                   style={{ display: 'flex', gap: '0.4em', alignItems:'center' }}
                 >
-                  <Avatar />
+                    <Avatar
+                  src={`${selectedChat?.avatar}`}
+                    />
                   <h4> {selectedChat.fullName}</h4>
                 </div>
                 <IconButton color='inherit'>
