@@ -117,7 +117,7 @@ const Login = ({ setWhichModal, setIsOpen }) => {
             onClick={handleSubmit}
             disabled={isLoading}
             style={buttonStyles}>
-            {isLoading ? <CircularProgress /> : 'Sign in'}
+            {isLoading ? <CircularProgress size={'1em'}/> : 'Sign in'}
           </button>
         </div>
         <Typography variant='p' fontSize={13} color={'GrayText'}>
