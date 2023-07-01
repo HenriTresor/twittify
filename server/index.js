@@ -10,21 +10,28 @@ import { config } from 'dotenv'
 import passport from 'passport'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
+import { v2 as cloudinary } from 'cloudinary'
 
 config()
 
 
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET,
+});
+
 const client_uri = 'http://localhost:5173'
 const app = express()
 app.use(cookieParser())
-app.use(session({ 
+app.use(session({
     name: 'my-session',
     secret: 'my-secret'
 }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(cors({
-    origin: `${client_uri}`, 
+    origin: `${client_uri}`,
     credentials: true
 }))
 const server = http.createServer(app)
@@ -56,4 +63,4 @@ app.use(`${rootRoute}/tweets`, TweetRouter)
 app.all('*', (req, res) => {
     res.status(400).json({ message: 'resource not found', status: false })
 })
-app.use(()=>errorHandler())
+app.use(() => errorHandler())

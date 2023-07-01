@@ -1,65 +1,120 @@
 // import React from 'react'
 import ReactDOM from 'react-dom'
 import './Modal.css'
-import {  Close, CameraEnhanceRounded } from '@mui/icons-material'
+import { Close, CameraEnhanceRounded } from '@mui/icons-material'
 import { buttonStyles } from '../Aside/buttonStyles'
 import propTypes from 'prop-types'
 import { Avatar, IconButton, TextField, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import serverLink from '../../utils/server.link'
 
 const styles = {
-    width:'45dvw'
+    width: '45dvw'
 }
 
 const EditProfile = () => {
-    const { user} = useSelector(state => state.auth)
+    const { user } = useSelector(state => state.auth)
     const navigate = useNavigate()
-  return (
-      <div style={styles}>
-          <div className="single-tweet-header">
-              <div>
-                  <IconButton color='inherit'
-                      onClick={() => {
-                          navigate(-1)
-                      }}
-                  >
-                      <Close />
-                  </IconButton>
-                  <Typography variant='h6' fontWeight={'bolder'}>
-                      Edit profile
-                  </Typography>
-              </div>
-              <button style={{...buttonStyles, width:'auto '}}>
-                  Save
-              </button>
-          </div>
-          <div className='user-photos-container'>
-            
-              <div style={{display:'grid', placeContent:'center'}}>
-                      <Avatar
-                          src='d'
-                          sx={{ width: '100px', height: '100px' }}
-                          id='user-photo'
-                      />
-              </div>
-          </div>
-          <div>
-              <div className="input_container">
-                  <TextField
-                      label='Edit name'
-                      placeholder={`${user?.fullName}`}
-                  />
-              </div>
-              <div className="input_container">
-                  <TextField
-                      label='Edit bio'
-                      placeholder={`${user?.bio}`}
-                  />
-             </div>
-          </div>
-          </div>
-  )
+
+    const [body, setBody] = useState({
+        fullName: user?.fullName,
+        bio: user?.bio,
+        avatar: ''
+    })
+
+    useEffect(() => {
+        console.log('body', body)
+    }, [body])
+    const handleChange = (e) => {
+        setBody(prev => ({ ...prev, [e.target.name]: e.target.value }))
+    }
+    const handleUpdate = async () => {
+        const formData = new FormData()
+        formData.append('avatar', body.avatar)
+        formData.append('fullName', body.fullName)
+        formData.append('bio', body.bio)
+        try {
+            const res = await axios.put(`${serverLink}/api/v1/users/${user?._id}`, body,
+            {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+            const data = await res.data
+            alert(JSON.stringify(data))
+        } catch (error) {
+            alert('error', error.message)
+            console.log('error updating body', error)
+        }
+    }
+    return (
+        <div style={styles}>
+            <div className="single-tweet-header">
+                <div>
+                    <IconButton color='inherit'
+                        onClick={() => {
+                            navigate(-1)
+                        }}
+                    >
+                        <Close />
+                    </IconButton>
+                    <Typography variant='h6' fontWeight={'bolder'}>
+                        Edit profile
+                    </Typography>
+                </div>
+                <button
+                    onClick={() => handleUpdate()}
+                    style={{ ...buttonStyles, width: 'auto', borderRadius: '5px' }}>
+                    Save
+                </button>
+            </div>
+            <input
+                type="file"
+                name="avatar"
+                id="avatar"
+                hidden
+                onChange={(e) => {
+                    e.target.files[0].type?.split('/')[0] === 'image' ? setBody(prev => ({ ...prev, avatar: e.target.files[0] })) : alert('you have to choose an image file')
+                }}
+                style={{ display: 'none' }} />
+            <div className='user-photos-container'>
+
+                <div style={{ display: 'grid', placeContent: 'center' }}>
+                    <label htmlFor="avatar" style={{ cursor: 'pointer' }}>
+                        <Avatar
+                            src='d'
+                            sx={{ width: '100px', height: '100px' }}
+                            id='user-photo'
+
+                        />
+                    </label>
+                </div>
+            </div>
+            <div>
+                <div className="input_container">
+                    <TextField
+                        label='Edit name'
+                        placeholder={`${user?.fullName}`}
+                        name='fullName'
+                        onChange={(e) => handleChange(e)}
+                        value={body.fullName}
+                    />
+                </div>
+                <div className="input_container">
+                    <TextField
+                        label='Edit bio'
+                        placeholder={`${user?.bio}`}
+                        value={body.bio}
+                        name='bio'
+                        onChange={(e) => handleChange(e)}
+                    />
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default EditProfile
