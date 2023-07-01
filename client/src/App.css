@@ -36,7 +36,7 @@ button{
 .single-tweet-header{
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     gap:1em;
     padding: 1em;
     position: sticky;
@@ -46,6 +46,11 @@ button{
     border-bottom: 1px solid grey;
 }
 
+.single-tweet-header > div{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
 .EmojiPickerReact{
     position: absolute !important;
     top: 13em;

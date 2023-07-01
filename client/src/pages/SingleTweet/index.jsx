@@ -67,16 +67,18 @@ const SingleTweet = () => {
                 message={SnackbarMsg}
             />
             <div className="single-tweet-header">
-                <IconButton color='inherit'
-                    onClick={() => {
-                        navigate(-1)
-                    }}
-                >
-                    <ArrowBack />
-                </IconButton>
-                <Typography variant='h6' fontWeight={'bolder'}>
-                    Tweet
-                </Typography>
+                <div>
+                    <IconButton color='inherit'
+                        onClick={() => {
+                            navigate(-1)
+                        }}
+                    >
+                        <ArrowBack />
+                    </IconButton>
+                    <Typography variant='h6' fontWeight={'bolder'}>
+                        Tweet
+                    </Typography>
+              </div>
             </div>
             {
                 isLoading ? <Loading /> : error.status
