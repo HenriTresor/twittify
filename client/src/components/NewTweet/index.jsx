@@ -77,7 +77,9 @@ const NewTweet = ({ setIsOpen }) => {
                 </select>
                 <div>
 
-                    <Avatar />
+                    <Avatar
+                    src={`${user?.avatar}`}
+                    />
 
                     <textarea
                         value={post_content.post_text}

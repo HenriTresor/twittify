@@ -94,7 +94,9 @@ const SingleTweet = () => {
                                             navigate(`/${post?.author?.username}`)
                                         }}
                                         style={{ display: 'flex', cursor: 'pointer', alignItems: 'center', gap: '1.2em' }}>
-                                        <Avatar />
+                                        <Avatar
+                                        src={`${post?.author?.avatar}`}
+                                        />
                                         <div>
                                             <Typography>
                                                 {post?.author?.fullName}
@@ -184,7 +186,10 @@ const SingleTweet = () => {
                                                     )
                                                 }
                                                 <div>
-                                                    <Avatar />
+                                                    <Avatar
+                                                    
+                                                    src={`${user?.avatar}`}
+                                                    />
                                                     <textarea
                                                         value={reply_content.reply_text}
                                                         placeholder='Tweet Your reply!'

@@ -112,6 +112,7 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
 
                                             <div style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '1em' }}>
                                                 <Avatar
+                                                    src={`${user?.avatar}`}
                                                 />
                                                 <div>
                                                     <Typography >

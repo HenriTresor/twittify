@@ -9,6 +9,6 @@ router.get('/', getAllUsers)
 router.get('/query', getUsersByQuery)
 router.get('/:username', getUser)
 router.post('/', createUser)
-router.put('/:id', upload.single('avatar'), updateUser)
 router.put('/follow', handleFollowUser)
+router.put('/:id', upload.single('avatar'), updateUser)
 export default router

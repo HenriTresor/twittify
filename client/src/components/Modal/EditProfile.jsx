@@ -4,12 +4,13 @@ import './Modal.css'
 import { Close, CameraEnhanceRounded } from '@mui/icons-material'
 import { buttonStyles } from '../Aside/buttonStyles'
 import propTypes from 'prop-types'
-import { Avatar, IconButton, TextField, Typography } from '@mui/material'
+import { Avatar, CircularProgress, IconButton, TextField, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import serverLink from '../../utils/server.link'
+import Loading from '../Loading'
 
 const styles = {
     width: '45dvw'
@@ -18,7 +19,7 @@ const styles = {
 const EditProfile = () => {
     const { user } = useSelector(state => state.auth)
     const navigate = useNavigate()
-
+    const [isUploading, setIsUploading] = useState(false)
     const [body, setBody] = useState({
         fullName: user?.fullName,
         bio: user?.bio,
@@ -32,20 +33,21 @@ const EditProfile = () => {
         setBody(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
     const handleUpdate = async () => {
-        const formData = new FormData()
-        formData.append('avatar', body.avatar)
-        formData.append('fullName', body.fullName)
-        formData.append('bio', body.bio)
+        setIsUploading(true)
         try {
             const res = await axios.put(`${serverLink}/api/v1/users/${user?._id}`, body,
-            {
+                {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
             const data = await res.data
-            alert(JSON.stringify(data))
+            setIsUploading(false)
+            if (data.status) {
+                return location.reload()
+            }
         } catch (error) {
+            setIsUploading(false)
             alert('error', error.message)
             console.log('error updating body', error)
         }
@@ -61,14 +63,18 @@ const EditProfile = () => {
                     >
                         <Close />
                     </IconButton>
-                    <Typography variant='h6' fontWeight={'bolder'}>
+                    <Typography
+                        disabled={isUploading}
+                        variant='h6' fontWeight={'bolder'}>
                         Edit profile
                     </Typography>
                 </div>
                 <button
+                    disabled={isUploading}
+
                     onClick={() => handleUpdate()}
                     style={{ ...buttonStyles, width: 'auto', borderRadius: '5px' }}>
-                    Save
+                    {isUploading ? <CircularProgress /> : 'save'}
                 </button>
             </div>
             <input
@@ -85,7 +91,7 @@ const EditProfile = () => {
                 <div style={{ display: 'grid', placeContent: 'center' }}>
                     <label htmlFor="avatar" style={{ cursor: 'pointer' }}>
                         <Avatar
-                            src='d'
+                            src={`${user?.avatar}`}
                             sx={{ width: '100px', height: '100px' }}
                             id='user-photo'
 

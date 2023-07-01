@@ -92,6 +92,8 @@ const getUser = async (req, res, next) => {
 export const handleFollowUser = async (req, res, next) => {
     try {
 
+        console.log(req.body)
+
         let { followerId, followedId } = req.body
         if (!followedId || !followerId) return next(errorResponse(500, 'please provide follower id and followee id'))
 
@@ -188,7 +190,7 @@ export const updateUser = async (req, res, next) => {
         }
 
         await User.findByIdAndUpdate(id, {
-            $set: { body }
+            $set: { fullName: req.body.fullName, bio: req.body.bio }
         })
         res.status(201).json({
             status: true,

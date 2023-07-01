@@ -51,7 +51,7 @@ const Post = ({
                     navigate(`/${author?.username || commentor?.username}`)
                 }}
                 className='post-header'>
-                <Avatar src={author?.avatar} />
+                <Avatar src={author?.avatar || commentor?.avatar}  />
                 <Typography>
                     {author?.fullName || commentor?.fullName}
                     <Typography variant='body2' sx={{ ml: 1, display: 'flex', alignItems: 'center' }} color={'GrayText'}>
