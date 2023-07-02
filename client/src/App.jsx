@@ -102,6 +102,18 @@ const App = () => {
       })
     }
   }, [socket.current])
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on('new comment', (tweet, commentor, reply) => {
+
+        console.log('reply', reply)
+        const message = `${commentor?.fullName} commented on your tweet: ${reply?.reply_content.reply_text}`
+        dispatch(addNotification({ notifier: commentor, message, read: false }))
+        localStorage.setItem('notifications', JSON.stringify([...JSON.parse(localStorage.getItem('notifications')), { notifier: commentor, message, read: false }]))
+      })
+    }
+  }, [socket.current])
   useEffect(() => {
     let isCancelled = true
     if (isCancelled) {
@@ -221,7 +233,7 @@ const App = () => {
             setSelectedChat={setSelectedChat}
           />} />
           <Route path='/notifications' exact element={<Notifications />} />
-          <Route path='/:username/status/:postId' element={<SingleTweet />} />
+          <Route path='/:username/status/:postId' element={<SingleTweet socket={socket} />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>

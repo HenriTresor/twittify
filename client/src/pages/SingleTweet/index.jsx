@@ -21,7 +21,7 @@ const divStyles = {
     display: 'flex', justifyContent: 'start', gap: '1em', borderBottom: '1px solid gray', borderTop: '1px solid gray', width: '100%', padding: '1em'
 }
 
-const SingleTweet = () => {
+const SingleTweet = ({ socket }) => {
     const { user } = useSelector(state => state.auth)
     const navigate = useNavigate()
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
@@ -48,6 +48,11 @@ const SingleTweet = () => {
                 time: moment().format()
             }
             const res = await axios.put(`${serverLink}/api/v1/tweets/reply`, reply)
+            if (res.status) {
+                if (socket.current) {
+                    socket.current?.emit('add new comment', post, user, reply)
+                }
+            }
             setIsReplying(false)
             setSnackbarMsg(res.data.message)
         } catch (error) {

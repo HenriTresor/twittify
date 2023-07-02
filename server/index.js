@@ -88,6 +88,11 @@ io.on('connection', socket => {
         const author = onlineUsers.find(user => user._id === tweet?.author?._id)
         if (author) socket.to(author.socketId).emit('new like', tweet, liker)
     })
+
+    socket.on('add new comment', (tweet, commentor, reply) => {
+        const author = onlineUsers.find(user => user._id === tweet?.author?._id)
+        if (author) socket.to(author.socketId).emit('new comment', tweet, commentor, reply)
+    })
     socket.on('disconnect', () => {
         onlineUsers = onlineUsers.filter(user => user.socketId !== socket.id)
         console.log('disconnect:', socket.id)
