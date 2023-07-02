@@ -53,24 +53,28 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [whichModal, setWhichModal] = useState('login')
   const { isLoggedIn } = useSelector(state => state.auth)
+  const { notifications } = useSelector(state => state.Notifications)
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [gettingProfile, setGettingProfile] = useState(false)
   const [selectedChat, setSelectedChat] = useState({})
 
-  useEffect(() => {
-    !localStorage.getItem('notifications') && localStorage.setItem('notifications', JSON.stringify([]))
-  }, [])
-  useEffect(() => {
-    dispatch(addNotification(JSON.parse(localStorage.getItem('notifications'))))
-  }, [])
+  // useEffect(() => {
+  //   !localStorage.getItem('notifications') && localStorage.setItem('notifications', JSON.stringify([]))
+  // }, [])
+  // useEffect(() => {
+  //   dispatch(addNotification(JSON.parse(localStorage.getItem('notifications'))))
+  // }, [])
   useEffect(() => {
     if (pathname === '/') {
       navigate('/home')
     }
   }, [])
 
+  useEffect(() => {
+    dispatch(addNotification([{ notifier: 'tresor', message: 'tresor liked your tweet' }, { notifier: 'henri', message: 'henri started following you' }]))
+  }, [])
   useEffect(() => {
     let isCancelled = true
     if (isCancelled) {

@@ -19,7 +19,7 @@ import { logout } from '../../redux/Slices/AuthSlice'
 const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
 
     const dispatch = useDispatch()
-    const notifications = useSelector(state => state.Notifications)
+    const { notifications } = useSelector(state => state.Notifications)
     const { isLoggedIn, user } = useSelector(state => state.auth)
     const { windowSize } = useContext(AppData)
     const [isToolTipOpen, setIsToolTipOpen] = useState(false)
@@ -68,7 +68,7 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                                         <Notifications />
                                                     </Badge>
                                                     <span>Notifications</span>
-                                                
+
                                                 </li>
                                             </Link>
                                             <Link to={'/messages'}>
