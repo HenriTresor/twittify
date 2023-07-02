@@ -5,7 +5,7 @@ import NotificationsSlice from './Slices/NotificationsSlice'
 const store = configureStore({
     reducer: {
         auth: AuthSlice,
-        Notifications: NotificationsSlice
+        Notifications: NotificationsSlice,
     }
 })
 

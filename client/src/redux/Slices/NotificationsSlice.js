@@ -9,7 +9,8 @@ const NotificationSlice = createSlice({
     name: 'notifications',
     reducers: {
         addNotification: function (state, action) {
-            state.notifications = [...state.notifications, ...action.payload]
+            console.log('state', state, 'action', action)
+            state.notifications = [...state.notifications, action.payload]
         }
     }
 })

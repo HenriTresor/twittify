@@ -25,6 +25,7 @@ import EditProfile from './components/Modal/EditProfile'
 import { addNotification } from './redux/Slices/NotificationsSlice'
 import { io } from 'socket.io-client'
 
+
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
 const SingleTweet = lazy(() => import('./pages/SingleTweet'))
@@ -51,7 +52,7 @@ const buttonStyles = {
 
 const App = () => {
 
-  const [socket, setSocket] = useState(null)
+  let socket = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
   const [whichModal, setWhichModal] = useState('login')
   const { isLoggedIn, user } = useSelector(state => state.auth)
@@ -63,13 +64,21 @@ const App = () => {
   const [selectedChat, setSelectedChat] = useState({})
 
   useEffect(() => {
-    isLoggedIn && setSocket(io(`${serverLink}`))
-  }, [isLoggedIn])
+    if (isLoggedIn) {
+      socket.current = io(`${serverLink}`)
+    }
+  }, [isLoggedIn, user])
   useEffect(() => {
     !localStorage.getItem('notifications') && localStorage.setItem('notifications', JSON.stringify([]))
   }, [])
   useEffect(() => {
-    dispatch(addNotification(JSON.parse(localStorage.getItem('notifications'))))
+    const localNotifications = JSON.parse(localStorage.getItem('notifications'))
+    console.log('local notifications', localNotifications)
+    localNotifications !== [] && (
+      localNotifications.forEach((notification) => {
+        dispatch(addNotification({ ...notification }))
+      })
+    )
   }, [])
   useEffect(() => {
     if (pathname === '/') {
@@ -78,9 +87,21 @@ const App = () => {
   }, [])
   useEffect(() => {
     if (socket && isLoggedIn) {
-      socket.emit('add user', user)
+      socket.current.emit('add user', user)
     }
-  },[socket, user, isLoggedIn])
+  }, [socket, user, isLoggedIn])
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on('new like', (tweet, liker) => {
+        // console.log(tweet, liker)
+        const message = `${liker?.fullName} liked you tweet: ${tweet?.post_content?.post_text?.slice(0, 200)}`
+        dispatch(addNotification({ notifier: liker, message, read: false }))
+
+        localStorage.setItem('notifications', JSON.stringify([...JSON.parse(localStorage.getItem('notifications')), { notifier: liker, message, read: false }]))
+      })
+    }
+  }, [socket.current])
   useEffect(() => {
     let isCancelled = true
     if (isCancelled) {
@@ -184,8 +205,8 @@ const App = () => {
       />
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route path='/home' exact element={<Homepage />} />
+          <Route path='/' element={<Homepage socket={socket} />} />
+          <Route path='/home' exact element={<Homepage socket={socket} />} />
           <Route path='/:username'>
             <Route index element={<Profile
               setIsOpen={setIsOpen}

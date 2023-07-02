@@ -12,7 +12,7 @@ import { findIfLiked, likeTweet } from '../../utils/function'
 import { useSelector } from 'react-redux'
 import propTypes from 'prop-types'
 import { iconButtonStyles } from '../Aside/buttonStyles'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 const Post = ({
@@ -20,7 +20,7 @@ const Post = ({
     createdAt, post_content,
     post_comments, audience,
     post_likes, post_retweets, _id, reply_content,
-    time
+    time, socket
 }) => {
     const navigate = useNavigate()
     const [post, setPost] = useState({
@@ -32,13 +32,14 @@ const Post = ({
 
     })
     const { user, isLoggedIn } = useSelector(state => state.auth)
-
     const handleLiking = async () => {
         if (isLoggedIn) {
             await likeTweet({ tweetId: _id, likerId: user?._id })
             findIfLiked(post, user) ? setPost(prev => ({ ...prev, post_likes: prev.post_likes?.filter(like => like?.username !== user?.username) }))
-                : setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] }))
-            return
+                : socket.current?.emit('add new like', post, user) && setPost(prev => ({ ...prev, post_likes: [...prev.post_likes, user] })) 
+
+            return 
+
         }
         alert('you have to login first to react to this tweet')
     }
@@ -75,7 +76,7 @@ const Post = ({
                                 <img
                                     src={post_content?.post_image}
                                 />
-                           </div>
+                            </div>
                         )
                     }
                 </Link>

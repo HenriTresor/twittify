@@ -6,8 +6,8 @@ const Notification = ({ notifier, message }) => {
     return (
         <div className='notification-container'>
             <div>
-                <Avatar />
-                <h3>{notifier}</h3>
+                <Avatar src={ notifier?.avatar} />
+                <h3>{notifier?.fullName}</h3>
             </div>
             <div>
                 {message}

@@ -15,7 +15,7 @@ import Loading from '../Loading'
 import Error from '../Error'
 import { useSelector } from 'react-redux'
 
-const Body = () => {
+const Body = ({ socket }) => {
     const [tweets, setTweets] = useState([])
     const { data, isLoading } = useFetch(`${serverLink}/api/v1/tweets`)
     const { isLoggedIn } = useSelector(state => state.auth)
@@ -56,7 +56,7 @@ const Body = () => {
                 !isLoading ? (
                     tweets?.map(tweet => (
 
-                        <Post {...tweet} key={tweet?._id} />
+                        <Post {...tweet} key={tweet?._id} socket={socket} />
 
                     ))
                 ) : <Loading />

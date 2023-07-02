@@ -40,7 +40,7 @@ const Notifications = () => {
       <div className="notifications-container">
         {
           notifications?.map(notification => (
-            <Notification key={ notification.notifier} {...notification} />
+            <Notification key={ notification?.notifier} {...notification} />
           ))
         }
      </div>

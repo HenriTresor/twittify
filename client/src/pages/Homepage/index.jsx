@@ -1,12 +1,16 @@
-import React from 'react';
+// import React from 'react';
+import { useEffect } from 'react';
 import Body from '../../components/Body';
 
- const Homepage = () => {
+const Homepage = ({ socket }) => {
+
     return (
         <>
-            <Body />
+            <Body socket={socket} />
         </>
     );
 };
+
+
 
 export default Homepage
