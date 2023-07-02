@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { Suspense, lazy, useEffect, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useState, useRef } from 'react'
 import './App.css'
 import LeftAside from './components/Aside/LeftAside'
 import RightAside from './components/Aside/RightAside'
@@ -23,6 +23,7 @@ import serverLink from './utils/server.link'
 import UserPeople from './pages/UserPeople'
 import EditProfile from './components/Modal/EditProfile'
 import { addNotification } from './redux/Slices/NotificationsSlice'
+import { io } from 'socket.io-client'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -50,9 +51,10 @@ const buttonStyles = {
 
 const App = () => {
 
+  const [socket, setSocket] = useState(null)
   const [isOpen, setIsOpen] = useState(false)
   const [whichModal, setWhichModal] = useState('login')
-  const { isLoggedIn } = useSelector(state => state.auth)
+  const { isLoggedIn, user } = useSelector(state => state.auth)
   const { notifications } = useSelector(state => state.Notifications)
   const { pathname } = useLocation()
   const navigate = useNavigate()
@@ -60,21 +62,25 @@ const App = () => {
   const [gettingProfile, setGettingProfile] = useState(false)
   const [selectedChat, setSelectedChat] = useState({})
 
-  // useEffect(() => {
-  //   !localStorage.getItem('notifications') && localStorage.setItem('notifications', JSON.stringify([]))
-  // }, [])
-  // useEffect(() => {
-  //   dispatch(addNotification(JSON.parse(localStorage.getItem('notifications'))))
-  // }, [])
+  useEffect(() => {
+    isLoggedIn && setSocket(io(`${serverLink}`))
+  }, [isLoggedIn])
+  useEffect(() => {
+    !localStorage.getItem('notifications') && localStorage.setItem('notifications', JSON.stringify([]))
+  }, [])
+  useEffect(() => {
+    dispatch(addNotification(JSON.parse(localStorage.getItem('notifications'))))
+  }, [])
   useEffect(() => {
     if (pathname === '/') {
       navigate('/home')
     }
   }, [])
-
   useEffect(() => {
-    dispatch(addNotification([{ notifier: 'tresor', message: 'tresor liked your tweet' }, { notifier: 'henri', message: 'henri started following you' }]))
-  }, [])
+    if (socket && isLoggedIn) {
+      socket.emit('add user', user)
+    }
+  },[socket, user, isLoggedIn])
   useEffect(() => {
     let isCancelled = true
     if (isCancelled) {

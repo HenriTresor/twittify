@@ -13,17 +13,13 @@ const loginUser = async (req, res, next) => {
 
         // check if the user exists
 
-        let user = await User.findOne({
-            $or: [
-                { email },
-                { username: email }
-            ]
-        }).populate('followers').populate('followees')
+        let user = await User.findOne({email}).populate('followers').populate('followees')
+        console.log(user)
         if (!user) return next(errorResponse(404, `user ${email} was not found`))
 
         // compare passwords
 
-        const isPasswordMatch = await compare(password, user.password)
+        const isPasswordMatch = compare(password, user.password)
         if (!isPasswordMatch) return next(errorResponse(403, `invalid email address or password`))
 
         // create token and send it in cookies
@@ -40,6 +36,7 @@ const loginUser = async (req, res, next) => {
             user: _.omit(user, 'password'),
             access_token: token
         })
+
     } catch (error) {
         console.log("error logging in", error.message)
         next(errorResponse(500, 'unexpected error occurred'))

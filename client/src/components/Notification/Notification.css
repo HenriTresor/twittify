@@ -1,0 +1,23 @@
+.notification-container{
+    width: 100%;
+    border-bottom: 1px solid gray;
+    padding: 1em 2em;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 2em;
+    transition: .2s ease-in-out;
+}
+
+.notification-container:hover{
+    background: rgba(211, 211, 211, 0.051);
+}
+.notification-container div{
+    display: flex;
+    letter-spacing: 0.9px;
+    flex-direction: column;
+    gap: 1em;
+}
+.notification-container > div:nth-child(2){
+    color: grey;
+}

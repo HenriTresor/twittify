@@ -20,7 +20,8 @@
     "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0",
     "passport-google-oauth20": "^2.0.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "socket.io": "^4.7.1"
   },
   "scripts": {
     "dev": "nodemon index.js",
@@ -29,7 +30,7 @@
   "devDependencies": {
     "dotenv": "^16.1.4"
   },
-  "engines":{
-    "node":">=14.20.1"
+  "engines": {
+    "node": ">=14.20.1"
   }
 }

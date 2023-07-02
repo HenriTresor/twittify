@@ -11,6 +11,7 @@ import passport from 'passport'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import { v2 as cloudinary } from 'cloudinary'
+import { Server } from 'socket.io'
 
 config()
 
@@ -38,6 +39,12 @@ const server = http.createServer(app)
 const PORT = process.env.PORT || 4000
 const mongoURI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/twitter'
 
+const io = new Server(server, {
+    cors: {
+        origin: '*',
+        credentials: true
+    }
+})
 
 app.use(express.json())
 connectDB(mongoURI)
@@ -64,3 +71,24 @@ app.all('*', (req, res) => {
     res.status(400).json({ message: 'resource not found', status: false })
 })
 app.use(() => errorHandler())
+
+
+
+global.onlineUsers = []
+io.on('connection', socket => {
+    console.log('connection established:', socket.id)
+
+    socket.on('add user', (user) => {
+        onlineUsers = [...onlineUsers, { ...user, socketId: socket.id }]
+        console.log('user added')
+    })
+
+    socket.on('add new like', (tweet, liker) => {
+        const author = onlineUsers.find(user => user._id === tweet?.author?._id)
+        if (author) socket.to(author.socketId).emit('new like', (tweet, liker))
+    })
+    socket.on('disconnect', () => {
+        onlineUsers = onlineUsers.filter(user => user.socketId !== socket.id)
+        console.log('disconnect:', socket.id)
+    })
+})
