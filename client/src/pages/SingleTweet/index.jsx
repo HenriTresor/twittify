@@ -78,7 +78,7 @@ const SingleTweet = () => {
                     <Typography variant='h6' fontWeight={'bolder'}>
                         Tweet
                     </Typography>
-              </div>
+                </div>
             </div>
             {
                 isLoading ? <Loading /> : error.status
@@ -95,7 +95,7 @@ const SingleTweet = () => {
                                         }}
                                         style={{ display: 'flex', cursor: 'pointer', alignItems: 'center', gap: '1.2em' }}>
                                         <Avatar
-                                        src={`${post?.author?.avatar}`}
+                                            src={`${post?.author?.avatar}`}
                                         />
                                         <div>
                                             <Typography>
@@ -117,10 +117,11 @@ const SingleTweet = () => {
                                     </Typography>
                                     {
                                         post?.post_content?.post_image && (
-                                            <img
-                                                id='image'
-                                                src={post?.post_content?.post_image}
-                                            />
+                                            <div className='photo-container'>
+                                                <img
+                                                    src={post?.post_content?.post_image}
+                                                />
+                                            </div>
                                         )
                                     }
                                 </div>
@@ -164,13 +165,13 @@ const SingleTweet = () => {
                                     >
                                         <HeartBroken />
                                     </IconButton>
-                                  
+
                                     <IconButton sx={iconButtonStyles} color='inherit'>
                                         <RedoRounded />
                                     </IconButton>
 
                                     <IconButton sx={{ ...iconButtonStyles }} color='inherit'>
-                                        <Bookmark  />
+                                        <Bookmark />
                                     </IconButton>
 
                                 </div>
@@ -195,8 +196,8 @@ const SingleTweet = () => {
                                                 }
                                                 <div>
                                                     <Avatar
-                                                    
-                                                    src={`${user?.avatar}`}
+
+                                                        src={`${user?.avatar}`}
                                                     />
                                                     <textarea
                                                         value={reply_content.reply_text}
@@ -249,7 +250,7 @@ const SingleTweet = () => {
                                 ) :
 
                                     post?.post_comments?.map(comment => {
-                                  
+
                                         return <Post {...comment} key={comment?.time} />
                                     })
                             }

@@ -4,7 +4,7 @@ import './Modal.css'
 import { Close } from '@mui/icons-material'
 import { buttonStyles } from '../Aside/buttonStyles'
 import propTypes from 'prop-types'
-import { Avatar, CircularProgress, IconButton, TextField, Typography } from '@mui/material'
+import { Avatar, Button, Card, CircularProgress, IconButton, TextField, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
@@ -74,7 +74,7 @@ const EditProfile = ({setIsOpen}) => {
 
                     onClick={() => handleUpdate()}
                     style={{ ...buttonStyles, width: 'auto', borderRadius: '5px' }}>
-                    {isUploading ? <CircularProgress /> : 'save'}
+                    {isUploading ? <CircularProgress size='1.5em' color='inherit'/> : 'save'}
                 </button>
             </div>
             <input
@@ -86,19 +86,21 @@ const EditProfile = ({setIsOpen}) => {
                     e.target.files[0].type?.split('/')[0] === 'image' ? setBody(prev => ({ ...prev, avatar: e.target.files[0] })) : alert('you have to choose an image file')
                 }}
                 style={{ display: 'none' }} />
-            <div className='user-photos-container'>
+            <label htmlFor="avatar">
+                <Card sx={{ padding: '1em', background: body.avatar ? 'grey' : 'none' , color: 'inherit', border: '2px dashed grey', m: '1em 0', cursor: 'pointer' }}>
+                    {body?.avatar?.name?.slice(0,20) || "Update profile image"}
+                </Card>
+            </label>
 
-                <div style={{ display: 'grid', placeContent: 'center' }}>
-                    <label htmlFor="avatar" style={{ cursor: 'pointer' }}>
-                        <Avatar
-                            src={`${user?.avatar}`}
-                            sx={{ width: '100px', height: '100px' }}
-                            id='user-photo'
-
-                        />
-                    </label>
-                </div>
-            </div>
+            {
+                body.avatar && (
+                    <Button
+                    onClick={()=>setBody(prev => ({...prev, avatar:''}))}
+                        startIcon={<Close />}>
+                        remove
+                    </Button>
+                )
+                }
             <div>
                 <div className="input_container">
                     <TextField
