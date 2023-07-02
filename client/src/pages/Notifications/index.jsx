@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
-import ComingSoon from '../../components/ComingSoon'
+import  { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Error from '../../components/Error'
 import { IconButton, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { ArrowBack } from '@mui/icons-material'
+import Notification from '../../components/Notification'
 
 const Notifications = () => {
 
@@ -40,7 +40,7 @@ const Notifications = () => {
       <div className="notifications-container">
         {
           notifications?.map(notification => (
-            <h1>{ notification.notifier}</h1>
+            <Notification key={ notification.notifier} {...notification} />
           ))
         }
      </div>
