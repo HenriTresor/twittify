@@ -54,20 +54,22 @@ textarea::-webkit-scrollbar{
 .new-tweet-container >div> button{
 
     margin: 0 auto;
-    padding: 0.67em;
-    background: #1d9bf0;
+    padding: 0.5em 2em;
+    background: #1d98f0;
     color: white;
     border: none;
-    border-radius: 40px;
+    border-radius: 15px;
     font-weight: bold;
     font-size: 1em;
-    letter-spacing: 2px;
-    cursor: pointer;
+    /* letter-spacing: 2px; */
     float: right;
     position: absolute;
     right: 1.5em;
  }
-
+.new-tweet-container >div> button:disabled{
+    background: grey;
+    cursor:not-allowed;
+}
  @media screen and (max-width: 350px) {
     
 .new-tweet-container> div:nth-child(2){

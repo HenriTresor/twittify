@@ -22,9 +22,6 @@ const NewTweet = ({ setIsOpen }) => {
         post_text: '',
         post_image: '',
     })
-    useEffect(() => {
-        console.log('post_cotnent', post_content)
-    }, [post_content])
     const [audience, setAudience] = useState('everyone')
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
     const navigate = useNavigate()
@@ -101,7 +98,7 @@ const NewTweet = ({ setIsOpen }) => {
                             <Typography color={'#1d98f0'} sx={{ p: '0.6em', cursor: 'pointer' }}>
                                 {post_content?.post_image ? 'image added. change' : <Photo />}
                             </Typography>
-                           
+
                             {/* </IconButton> */}
                         </label>
                         {
@@ -123,9 +120,9 @@ const NewTweet = ({ setIsOpen }) => {
                         </IconButton> */}
                     </div>
 
-                    <button disabled={isPosting} onClick={() => createPost()}>
+                    <button disabled={isPosting || (!post_content.post_image && !post_content.post_text)} onClick={() => createPost()}>
                         {
-                            isPosting ? 'tweeting...' : 'tweet'
+                            isPosting ? <CircularProgress color='inherit' size='2em' /> : 'tweet'
                         }
                     </button>
 
