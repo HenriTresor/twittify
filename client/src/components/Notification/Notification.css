@@ -1,11 +1,11 @@
 .notification-container{
     width: 100%;
-    border-bottom: 1px solid gray;
-    padding: 1em 2em;
+    border-bottom: 0.001em solid gray;
+    padding: 1em;
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    gap: 2em;
+    gap: 1em;
     transition: .2s ease-in-out;
 }
 
@@ -15,6 +15,7 @@
 .notification-container div{
     display: flex;
     letter-spacing: 0.9px;
+    line-height: 1.6;
     flex-direction: column;
     gap: 1em;
 }
