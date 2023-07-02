@@ -117,7 +117,7 @@
     .aside{
       flex-grow: 0;
     }
-     .nav-items li span{
+     .nav-items li > span:nth-child(2){
         display: none;
     }
     .aside.left-aside button{

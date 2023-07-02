@@ -64,7 +64,7 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                                 <li
                                                     onClick={() => navigate('/notifications')}
                                                 >
-                                                    <Badge badgeContent={notifications.filter(Notification => !Notification.read)?.length} showZero color='info'>
+                                                    <Badge badgeContent={notifications.filter(Notification => !Notification.read)?.length} color='info'>
                                                         <Notifications />
                                                     </Badge>
                                                     <span>Notifications</span>
