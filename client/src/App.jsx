@@ -22,6 +22,7 @@ import NewChat from './components/NewChat'
 import serverLink from './utils/server.link'
 import UserPeople from './pages/UserPeople'
 import EditProfile from './components/Modal/EditProfile'
+import { addNotification } from './redux/Slices/NotificationsSlice'
 
 const Homepage = lazy(() => import('./pages/Homepage'))
 const NotFound = lazy(() => import('./pages/404/404'))
@@ -52,12 +53,12 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [whichModal, setWhichModal] = useState('login')
   const { isLoggedIn } = useSelector(state => state.auth)
+  const notifications = useSelector(state => state.Notifications)
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [gettingProfile, setGettingProfile] = useState(false)
   const [selectedChat, setSelectedChat] = useState({})
-
 
   useEffect(() => {
     if (pathname === '/') {
@@ -175,7 +176,7 @@ const App = () => {
               setIsOpen={setIsOpen}
               setWhichModal={setWhichModal}
             />} />
-            <Route path='people' element={ <UserPeople />} />
+            <Route path='people' element={<UserPeople />} />
           </Route>
           <Route path='/messages' exact element={<Messages
             setIsOpen={setIsOpen}
@@ -208,7 +209,7 @@ const App = () => {
                 : whichModal === 'edit-profile' ? <EditProfile
                   setIsOpen={setIsOpen}
                 />
-                : whichModal === 'new-tweet' ? <NewTweet setIsOpen={setIsOpen} /> : ''
+                  : whichModal === 'new-tweet' ? <NewTweet setIsOpen={setIsOpen} /> : ''
         }
       </RegModal>
     </div>

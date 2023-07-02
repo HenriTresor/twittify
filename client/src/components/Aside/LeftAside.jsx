@@ -9,7 +9,7 @@ import {
     ListRounded, BookmarkRounded, Add,
     Twitter, PersonRounded, MoreHoriz,
 } from '@mui/icons-material'
-import { Avatar, Typography, IconButton } from '@mui/material'
+import { Avatar, Typography, IconButton, Badge } from '@mui/material'
 import { AppData } from '../../context/AppContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -19,6 +19,7 @@ import { logout } from '../../redux/Slices/AuthSlice'
 const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
 
     const dispatch = useDispatch()
+    const notifications = useSelector(state => state.Notifications)
     const { isLoggedIn, user } = useSelector(state => state.auth)
     const { windowSize } = useContext(AppData)
     const [isToolTipOpen, setIsToolTipOpen] = useState(false)
@@ -30,8 +31,8 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
             document.cookie = 'access_token='
             navigate(`/home`)
             setIsToolTipOpen(false)
+        }
     }
-}
     if (windowSize) {
         return (
             <div
@@ -63,8 +64,12 @@ const LeftAside = ({ gettingProfile, setWhichModal, setIsOpen }) => {
                                                 <li
                                                     onClick={() => navigate('/notifications')}
                                                 >
-                                                    <Notifications />
-                                                    <span>Notifications</span> </li>
+                                                    <Badge badgeContent={notifications.length} showZero color='info'>
+                                                        <Notifications />
+                                                    </Badge>
+                                                    <span>Notifications</span>
+                                                
+                                                </li>
                                             </Link>
                                             <Link to={'/messages'}>
                                                 <li
