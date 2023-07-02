@@ -15,7 +15,7 @@ const BottomNav = () => {
                 color="info">
                 <Home />
             </IconButton>
-            <IconButton color="info">
+            <IconButton color="info" onClick={()=>navigate('/notifications')}>
                 <Notifications />
             </IconButton>
             <IconButton color="info">
