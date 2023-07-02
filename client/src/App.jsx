@@ -96,7 +96,7 @@ const App = () => {
       socket.current.on('new like', (tweet, liker) => {
         // console.log(tweet, liker)
         const message = `${liker?.fullName} liked you tweet: ${tweet?.post_content?.post_text?.slice(0, 200)}`
-        dispatch(addNotification({ notifier: liker, message, read: false }))
+        dispatch(addNotification({ notifier: liker, message, read: false, createdAt: new Date(Date.now()) }))
 
         localStorage.setItem('notifications', JSON.stringify([...JSON.parse(localStorage.getItem('notifications')), { notifier: liker, message, read: false }]))
       })
@@ -109,7 +109,7 @@ const App = () => {
 
         console.log('reply', reply)
         const message = `${commentor?.fullName} commented on your tweet: ${reply?.reply_content.reply_text}`
-        dispatch(addNotification({ notifier: commentor, message, read: false }))
+        dispatch(addNotification({ notifier: commentor, message, read: false, createdAt: new Date(Date.now()) }))
         localStorage.setItem('notifications', JSON.stringify([...JSON.parse(localStorage.getItem('notifications')), { notifier: commentor, message, read: false }]))
       })
     }
