@@ -73,7 +73,7 @@ const App = () => {
   }, [])
   useEffect(() => {
     const localNotifications = JSON.parse(localStorage.getItem('notifications'))
-    console.log('local notifications', localNotifications)
+
     localNotifications !== [] && (
       localNotifications.forEach((notification) => {
         dispatch(addNotification({ ...notification }))
